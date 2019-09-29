@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/theme</item>
+    </style>
+
+    <style name="HorizontalLine">
+        <item name="dividerLineBgColor">@color/white</item>
+        <item name="dividerLineColor">#ECECEC</item>
+        <item name="dividerPaddingLeft">12dp</item>
+        <item name="dividerPaddingRight">12dp</item>
+    </style>
+</resources>
