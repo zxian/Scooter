@@ -1,4 +1,4 @@
-# SafetyCommunity
+# Scooter
 android项目基础框架
 # 包括以下内容
 * 网络框架封装
