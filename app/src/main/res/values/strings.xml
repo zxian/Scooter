@@ -17,7 +17,32 @@
     <string name="register_agree">我已阅读并同意</string>
     <string name="register_agreement">《用户协议》</string>
 
+    <string name="register_stores_info">门店信息</string>
+    <string name="register_stores_name">门店名称</string>
+    <string name="register_stores_name_hint">请输入门店名称，不大于8个字</string>
+    <string name="register_stores_logo">门店LOGO</string>
+    <string name="register_stores_location">门店位置</string>
+    <string name="register_stores_location_hint">选择门店位置</string>
+    <string name="register_stores_address">详细地址</string>
+    <string name="register_stores_address_hint">请输入门店详细地址</string>
+    <string name="register_stores_introduce">门店介绍</string>
+    <string name="register_stores_introduce_hint">请输入门店介绍，至少输入10个字符，最多可能输入200个字符</string>
+    <string name="register_stores_qualification_info">资质信息</string>
+    <string name="register_stores_type">申请类型</string>
+    <string name="register_stores_type_hint">请选择申请类型</string>
+    <string name="register_stores_head_name">负责人姓名</string>
+    <string name="register_stores_head_name_hint">请输入负责人姓名</string>
+    <string name="register_stores_head_number">负责人身份证号</string>
+    <string name="register_stores_head_number_hint">请输入负责人身份证号码</string>
+    <string name="register_stores_number_picture_1">上传人像页</string>
+    <string name="register_stores_number_picture_2">上传国徽页</string>
+    <string name="register_stores_code">社会统一信用代码</string>
+    <string name="register_stores_picture">营业执照图片</string>
+    <string name="register_stores_apply">申请门店</string>
+
     <string name="search">搜索</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
+    <string name="input">请输入</string>
+
 </resources>

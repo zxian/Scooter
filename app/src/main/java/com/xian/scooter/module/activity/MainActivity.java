@@ -46,12 +46,6 @@ public class MainActivity extends BaseActivity {
     private InteractiveFragment interactiveFragment;
 
     @Override
-    protected void setStatusBar() {
-        StatusBarUtil.setRootViewFitsSystemWindows(this, false);
-    }
-
-
-    @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_main;
     }

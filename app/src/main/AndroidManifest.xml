@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.activity.RegisterActivity"></activity>
+        <activity android:name=".module.activity.RegisterStoresActivity"></activity>
+        <activity android:name=".module.activity.RegisterActivity" />
         <activity android:name=".module.activity.SearchActivity" />
         <activity android:name=".module.activity.MainActivity" />
         <activity android:name=".module.activity.LoginActivity">
@@ -42,7 +43,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
-            tools:node="replace"/>
+            tools:node="replace" />
 
         <receiver
             android:name=".jpush.receiver.MyReceiver"

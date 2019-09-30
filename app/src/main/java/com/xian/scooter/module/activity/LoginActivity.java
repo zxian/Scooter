@@ -54,8 +54,6 @@ public class LoginActivity extends BaseActivity {
         LoginPwdPar par = new LoginPwdPar();
         par.setUsername(mobile);
         par.setPassword(pwd);
-        par.setTerminalId(Config.TERMINALID);
-        par.setAppId(Config.APPID);
         ApiRequest.getInstance().post(HttpURL.SIGN_IN, par, new DefineCallback<UserInfoBean>() {
             @Override
             public void onMyResponse(SimpleResponse<UserInfoBean, HttpEntity> response) {
@@ -76,7 +74,7 @@ public class LoginActivity extends BaseActivity {
                         finish();
                     }
                 } else {
-                    ToastUtils.showToast(response.failed().getMsg());
+                    ToastUtils.showToast(response.failed().getMessage());
                 }
             }
         });

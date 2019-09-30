@@ -48,7 +48,7 @@ public class ApiRequest {
         if (!TextUtils.isEmpty(url) && url.startsWith("http")) {
             return url;
         } else {
-            return BuildConfig.BASEAPI_SERVER_URL + url;
+            return BuildConfig.BASEAPI_SERVER_URL +"/shopping"+ url;
         }
     }
 

@@ -26,12 +26,22 @@
         </attr>
     </declare-styleable>
 
-
-
     <declare-styleable name="Divider">
         <attr name="dividerLineColor" format="color" />
         <attr name="dividerLineBgColor" format="color" />
         <attr name="dividerPaddingLeft" format="dimension" />
         <attr name="dividerPaddingRight" format="dimension" />
     </declare-styleable>
+
+    <string-array name="item_res_img">
+        <item>@mipmap/ic_stores_coach</item>
+        <item>@mipmap/ic_stores_members</item>
+        <item>@mipmap/ic_stores_course</item>
+        <item>@mipmap/ic_stores_financial</item>
+        <item>@mipmap/ic_stores_order</item>
+        <item>@mipmap/ic_stores_interactive</item>
+        <item>@mipmap/ic_stores_information</item>
+        <item>@mipmap/ic_stores_message</item>
+    </string-array>
+
 </resources>

@@ -84,11 +84,11 @@ public class BaseApplication extends Application {
 
         JPushInterface.resumePush(this);
 //        建议添加tag标签，发送消息的之后就可以指定tag标签来发送了
-        Set<String> set = new HashSet<>();
-        set.add("tid_"+Config.TERMINALID);//名字任意，可多添加几个
-        JPushInterface.setTags(this, set, null);//设置标签
-        int userId = UserManager.getInstance().getUserId();
-        JPushInterface.setAlias(this, Config.TERMINALID+"_"+userId, null);
+//        Set<String> set = new HashSet<>();
+//        set.add("tid_"+Config.TERMINALID);//名字任意，可多添加几个
+//        JPushInterface.setTags(this, set, null);//设置标签
+//        int userId = UserManager.getInstance().getUserId();
+//        JPushInterface.setAlias(this, Config.TERMINALID+"_"+userId, null);
 
         initKalle();
 
@@ -109,9 +109,8 @@ public class BaseApplication extends Application {
         AppConfig.get().initFileDir();
         newBuilder = KalleConfig.newBuilder();
         KalleConfig kalleConfig = newBuilder
-                .addHeader("appId", Config.APPID + "")
-                .addHeader("tid", Config.TERMINALID + "")
-                .addHeader("at", UserManager.getInstance().getUserToken())
+                .addHeader("token", UserManager.getInstance().getUserToken())
+                .addHeader("sign",  "")
                 .workThreadExecutor(new WorkExecutor())
                 .mainThreadExecutor(new MainExecutor())
                 .connectionTimeout(3 * 1000, TimeUnit.MILLISECONDS)

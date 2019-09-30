@@ -65,28 +65,28 @@ public abstract class DefineCallback<S> extends Callback<S, HttpEntity> {
         // 发生异常了，回调到onResonse()中。
         HttpEntity httpEntity = new HttpEntity();
         if (e instanceof NetworkError) {
-            httpEntity.setMsg("网络未连接，请检查网络设置");
-            httpEntity.setCode(ConfigNetwork.NETWORK_ERROR_CODE);
+            httpEntity.setMessage("网络未连接，请检查网络设置");
+            httpEntity.setStatus(ConfigNetwork.NETWORK_ERROR_CODE);
         } else if (e instanceof URLError) {
-            httpEntity.setMsg("Url格式错误");
+            httpEntity.setMessage("Url格式错误");
         } else if (e instanceof HostError) {
-            httpEntity.setMsg("没有找到Url指定服务器");
+            httpEntity.setMessage("没有找到Url指定服务器");
         } else if (e instanceof ConnectTimeoutError) {
-            httpEntity.setMsg("连接服务器超时，请重试");
-            httpEntity.setCode(ConfigNetwork.NETWORK_ERROR_CODE);
+            httpEntity.setMessage("连接服务器超时，请重试");
+            httpEntity.setStatus(ConfigNetwork.NETWORK_ERROR_CODE);
         } else if (e instanceof WriteException) {
-            httpEntity.setMsg("发送数据错误，请检查网络");
-            httpEntity.setCode(ConfigNetwork.NETWORK_ERROR_CODE);
+            httpEntity.setMessage("发送数据错误，请检查网络");
+            httpEntity.setStatus(ConfigNetwork.NETWORK_ERROR_CODE);
         } else if (e instanceof ReadTimeoutError) {
-            httpEntity.setMsg("读取服务器数据超时，请检查网络");
-            httpEntity.setCode(ConfigNetwork.NETWORK_ERROR_CODE);
+            httpEntity.setMessage("读取服务器数据超时，请检查网络");
+            httpEntity.setStatus(ConfigNetwork.NETWORK_ERROR_CODE);
         } else if (e instanceof ParseError) {
-            httpEntity.setMsg("解析数据时发生异常");
+            httpEntity.setMessage("解析数据时发生异常");
         } else if (e instanceof ExecutionException) {
-            httpEntity.setMsg("网络未连接，请检查网络设置");
-            httpEntity.setCode(ConfigNetwork.NETWORK_ERROR_CODE);
+            httpEntity.setMessage("网络未连接，请检查网络设置");
+            httpEntity.setStatus(ConfigNetwork.NETWORK_ERROR_CODE);
         } else {
-            httpEntity.setMsg("发生未知异常，请稍后重试");
+            httpEntity.setMessage("发生未知异常，请稍后重试");
         }
         SimpleResponse<S, HttpEntity> response = SimpleResponse.<S, HttpEntity>newBuilder()
                 .failed(httpEntity)
@@ -110,10 +110,8 @@ public abstract class DefineCallback<S> extends Callback<S, HttpEntity> {
 
         if (response != null) {
             if (!response.isSucceed() && response.failed() != null) {
-                switch (response.failed().getCode()) {
-//                    case ConfigNetwork.TOKEN_LOSE_EFFICACY://token失效
+                switch (response.failed().getStatus()) {
                     case ConfigNetwork.TOKEN_INVALID://无效token
-//                    case ConfigNetwork.TOKEN_PAR_LOSE://token参数缺失
                         try {
                             List<BaseActivity> activityList = ActivityManager.getActivityList();
                             for (int i = 0; i < activityList.size(); i++) {

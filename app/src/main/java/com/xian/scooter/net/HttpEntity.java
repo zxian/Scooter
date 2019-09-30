@@ -10,19 +10,20 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 public class HttpEntity implements Parcelable {
 
-    @JSONField(name = "code")
-    private int code;//判断请求是否成功
-    @JSONField(name = "msg")
-    private String msg;//错误信息
+    @JSONField(name = "status")
+    private int status;//判断请求是否成功
+    @JSONField(name = "message")
+    private String message;//错误信息
     @JSONField(name = "data")
     private String data;//需要的数据
 
     public  HttpEntity(){
 
     }
+
     protected HttpEntity(Parcel in) {
-        code = in.readInt();
-        msg = in.readString();
+        status = in.readInt();
+        message = in.readString();
         data = in.readString();
     }
 
@@ -38,20 +39,20 @@ public class HttpEntity implements Parcelable {
         }
     };
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getData() {
@@ -69,8 +70,8 @@ public class HttpEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(code);
-        parcel.writeString(msg);
+        parcel.writeInt(status);
+        parcel.writeString(message);
         parcel.writeString(data);
     }
 }

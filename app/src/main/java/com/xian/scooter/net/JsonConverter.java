@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.LogUtils;
+import com.xian.scooter.contant.ConfigNetwork;
 import com.yanzhenjie.kalle.Response;
 import com.yanzhenjie.kalle.simple.Converter;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
@@ -34,11 +35,11 @@ public class JsonConverter implements Converter {
                 httpEntity = JSON.parseObject(serverJson, HttpEntity.class);
             } catch (Exception e) {
                 httpEntity = new HttpEntity();
-                httpEntity.setCode(100);
-                httpEntity.setMsg("服务器数据格式错误");
+                httpEntity.setStatus(100);
+                httpEntity.setMessage("服务器数据格式错误");
             }
 
-            if (httpEntity.getCode()==0) { // The server successfully processed the business.
+            if (httpEntity.getStatus()== ConfigNetwork.NETWORK_SUCCESS) { // The server successfully processed the business.
                 try {
                     if (succeed.toString().equals("class java.lang.String")) {
                             succeedData = (S) httpEntity.getData();
@@ -48,8 +49,8 @@ public class JsonConverter implements Converter {
                 } catch (Exception e) {
                     JSONObject jsonObject = new JSONObject(serverJson);
                     httpEntity = new HttpEntity();
-                    httpEntity.setCode(jsonObject.getInt("code"));
-                    httpEntity.setMsg(jsonObject.getString("msg"));
+                    httpEntity.setStatus(jsonObject.getInt("status"));
+                    httpEntity.setMessage(jsonObject.getString("message"));
                     httpEntity.setData("服务器数据格式错误");
                     failedData = (F) httpEntity;
                 }
@@ -57,24 +58,23 @@ public class JsonConverter implements Converter {
                 // The server failed to read the wrong information.
                 JSONObject jsonObject = new JSONObject(serverJson);
                 httpEntity = new HttpEntity();
-                httpEntity.setCode(jsonObject.getInt("code"));
-                httpEntity.setMsg(jsonObject.getString("msg"));
-                httpEntity.setData(jsonObject.getString("data"));
+                httpEntity.setStatus(jsonObject.getInt("status"));
+                httpEntity.setMessage(jsonObject.getString("message"));
                 failedData = (F) httpEntity;
             }
 
         } else if (code >= 400 && code < 500) {
             JSONObject jsonObject = new JSONObject(serverJson);
             httpEntity = new HttpEntity();
-            httpEntity.setCode(jsonObject.getInt("code"));
-            httpEntity.setMsg(jsonObject.getString("msg"));
+            httpEntity.setStatus(jsonObject.getInt("status"));
+            httpEntity.setMessage(jsonObject.getString("message"));
             httpEntity.setData("未知异常");
             failedData = (F) httpEntity;
         } else if (code >= 500) {
             JSONObject jsonObject = new JSONObject(serverJson);
             httpEntity = new HttpEntity();
-            httpEntity.setCode(jsonObject.getInt("code"));
-            httpEntity.setMsg(jsonObject.getString("msg"));
+            httpEntity.setStatus(jsonObject.getInt("status"));
+            httpEntity.setMessage(jsonObject.getString("message"));
             httpEntity.setData("服务器异常");
             failedData = (F) httpEntity;
         }
