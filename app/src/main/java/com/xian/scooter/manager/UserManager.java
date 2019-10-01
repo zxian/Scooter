@@ -56,15 +56,15 @@ public class UserManager {
     /**
      * 保存userId
      */
-    public void saveUserId(int userId) {
-        PreferenceUtils.get().putInt(ConfigPF.USER_ID_KEY, userId);
+    public void saveUserId(String userId) {
+        PreferenceUtils.get().putString(ConfigPF.USER_ID_KEY, userId);
     }
 
     /**
      * 获取userId
      */
-    public int getUserId() {
-        return PreferenceUtils.get().getInt(ConfigPF.USER_ID_KEY, 0);
+    public String getUserId() {
+        return PreferenceUtils.get().getString(ConfigPF.USER_ID_KEY);
     }
 
     /**
@@ -81,21 +81,21 @@ public class UserManager {
     /**
      * 保存用户信息
      */
-    public void putUserInfo(UserInfoBean userInfo) {
+    public void putUserInfo(UserInfoBean.UserBean  userInfo) {
         if (userInfo != null) {
             PreferenceUtils.get().putObject(ConfigPF.USER_INFO_KEY, userInfo);
         }
     }
 
     public interface UserInfoInterface {
-        void requestUserInfoBean(UserInfoBean bean);
+        void requestUserInfoBean(UserInfoBean.UserBean bean);
     }
 
     /**
      * 获取用户信息
      */
     public void getUserInfo(Context context, String content,UserInfoInterface userInterface) {
-        UserInfoBean userInfoBean = (UserInfoBean) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
+        UserInfoBean.UserBean userInfoBean = (UserInfoBean.UserBean ) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
         if (userInfoBean!=null&& content!=null){
             userInterface.requestUserInfoBean(userInfoBean);
         }else {
@@ -103,8 +103,8 @@ public class UserManager {
         }
     }
 
-    public UserInfoBean getUserInfo() {
-        return (UserInfoBean) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
+    public UserInfoBean.UserBean getUserInfo() {
+        return (UserInfoBean.UserBean) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
     }
 
     /**

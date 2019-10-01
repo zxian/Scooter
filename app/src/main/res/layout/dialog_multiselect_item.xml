@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_dialog_select_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textColor="@color/black_33"
+        android:textSize="15sp"
+        tools:text="区域" />
+
+    <ImageView
+        android:id="@+id/iv_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:src="@mipmap/ic_select" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_dialog_select_item"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/theme" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_dialog_select_item"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:background="@color/gray_ee" />
+</RelativeLayout>

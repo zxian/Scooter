@@ -54,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:singleLine="true"
                     android:background="@null"
                     android:gravity="end"
                     android:layout_marginStart="12dp"
@@ -108,6 +109,7 @@
                 android:paddingEnd="16dp">
 
                 <TextView
+                    android:id="@+id/register_stores_location"
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
@@ -115,20 +117,34 @@
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_location"
+                <EditText
+                    android:id="@+id/et_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@null"
+                    android:singleLine="true"
                     android:gravity="end"
                     android:layout_marginStart="12dp"
-                    android:drawablePadding="8dp"
-                    android:text="@string/register_stores_location_hint"
-                    android:drawableEnd="@mipmap/ic_into"
+                    android:layout_toEndOf="@+id/register_stores_location"
+                    android:hint="@string/register_stores_location_hint"
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_location"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:background="@null"-->
+                    <!--android:gravity="end"-->
+                    <!--android:layout_marginStart="12dp"-->
+                    <!--android:drawablePadding="8dp"-->
+                    <!--android:text="@string/register_stores_location_hint"-->
+                    <!--android:drawableEnd="@mipmap/ic_into"-->
+                    <!--android:textColor="@color/black_33"-->
+                    <!--android:textSize="14sp" />-->
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
@@ -159,6 +175,7 @@
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:gravity="end"
+                    android:singleLine="true"
                     android:layout_marginStart="12dp"
                     android:layout_toEndOf="@+id/register_stores_address"
                     android:hint="@string/register_stores_address_hint"
@@ -277,6 +294,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_toEndOf="@+id/register_stores_head_name"
                     android:hint="@string/register_stores_head_name_hint"
+                    android:singleLine="true"
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -312,6 +330,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_toEndOf="@+id/register_stores_head_number"
                     android:hint="@string/register_stores_head_number_hint"
+                    android:singleLine="true"
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -366,6 +385,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:layout_marginStart="12dp"
+                    android:singleLine="true"
                     android:layout_toEndOf="@+id/register_stores_code"
                     android:hint="@string/input"
                     android:textColor="@color/black_33"

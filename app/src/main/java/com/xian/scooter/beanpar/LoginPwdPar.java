@@ -1,21 +1,27 @@
 package com.xian.scooter.beanpar;
 
+import com.xian.scooter.app.BaseApplication;
+import com.xian.scooter.contant.Config;
+import com.xian.scooter.utils.SignUtils;
+
 /**
  * 密码登陆
  */
 public class LoginPwdPar {
 
-    private String username;
+    private String macType;
     private String password;
-    private int terminalId;
-    private int appId;
+    private String registrationId;
+    private String uniId;
+    private String uniType;
+    private String userAccount;
 
-    public String getUsername() {
-        return username;
+    public String getMacType() {
+        return macType;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMacType(String macType) {
+        this.macType = macType;
     }
 
     public String getPassword() {
@@ -26,19 +32,42 @@ public class LoginPwdPar {
         this.password = password;
     }
 
-    public int getTerminalId() {
-        return terminalId;
+    public String getRegistrationId() {
+        return registrationId;
     }
 
-    public void setTerminalId(int terminalId) {
-        this.terminalId = terminalId;
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
     }
 
-    public int getAppId() {
-        return appId;
+    public String getUniId() {
+        return uniId;
     }
 
-    public void setAppId(int appId) {
-        this.appId = appId;
+    public void setUniId(String uniId) {
+        this.uniId = uniId;
+    }
+
+    public String getUniType() {
+        return uniType;
+    }
+
+    public void setUniType(String uniType) {
+        this.uniType = uniType;
+    }
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+    public void setSign(){
+        String sign = "macType=" + macType + "&password=" + password +"&registrationId=" + registrationId +
+                "&uniId=" + uniId +  "&uniType=" + uniType +  "&userAccount=" + userAccount + "&key="+ Config.KEY;
+        BaseApplication.getInstance().getKalleConfig()
+                .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));
+
     }
 }

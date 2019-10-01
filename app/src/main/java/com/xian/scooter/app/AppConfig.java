@@ -69,8 +69,8 @@ public class AppConfig {
     public final String PATH_APP_CACHE_BODY;
 
     private AppConfig() {
-        this.mPreferences = BaseApplication.getInstance().getSharedPreferences("ElevatorPlatform", Context.MODE_PRIVATE);
-        this.PATH_APP_ROOT = FileUtils.getAppRootPath(BaseApplication.getInstance()).getAbsolutePath() + File.separator + "ElevatorPlatform";
+        this.mPreferences = BaseApplication.getInstance().getSharedPreferences("Scooter", Context.MODE_PRIVATE);
+        this.PATH_APP_ROOT = FileUtils.getAppRootPath(BaseApplication.getInstance()).getAbsolutePath() + File.separator + "Scooter";
         this.PATH_APP_DOWNLOAD = PATH_APP_ROOT + File.separator + "Download";
         this.PATH_APP_IMAGE = PATH_APP_ROOT + File.separator + "Images";
         this.PATH_APP_FILE = PATH_APP_ROOT + File.separator + "File";
