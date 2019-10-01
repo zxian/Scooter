@@ -1,5 +1,6 @@
 package com.xian.scooter.module.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xian.scooter.R;
 import com.xian.scooter.app.BaseApplication;
@@ -25,6 +27,9 @@ import com.xian.scooter.utils.TimerTaskUtil;
 import com.xian.scooter.utils.ToastUtils;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -102,7 +107,7 @@ public class RegisterActivity extends BaseActivity {
      * @param mobile 账号
      * @param pwd    密码
      * @param code   验证码
-     * @param source 来源，1、用户端，2、门店端，3:、教练
+     * @param source 来源，1、门店端，2、用户端，3:、教练
      */
     private void register(String mobile, String pwd, String code, String source) {
         RegisterPar par = new RegisterPar();
@@ -110,11 +115,12 @@ public class RegisterActivity extends BaseActivity {
         par.setPassword(pwd);
         par.setCode(code);
         par.setSource(source);
+        par.setSign();
         ApiRequest.getInstance().post(HttpURL.REGISTER, par, new DefineCallback<String>() {
             @Override
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
                 if (response.isSucceed()) {
-
+                    finish();
                 } else {
                     ToastUtils.showToast(response.failed().getMessage());
                 }
@@ -170,7 +176,7 @@ public class RegisterActivity extends BaseActivity {
                     ToastUtils.showToast("请阅读并勾选同意用户协议！");
                     return;
                 }
-                register(phone, pwd, code, "2");
+                register(phone, pwd, code, "1");
                 break;
             case R.id.tv_agreement:
                 break;

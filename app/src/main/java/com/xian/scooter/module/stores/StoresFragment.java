@@ -14,6 +14,7 @@ import com.bit.adapter.lvadapter.ViewHolderLv;
 import com.bit.commonView.CustomGridView;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseFragment;
+import com.xian.scooter.utils.SignUtils;
 import com.xian.scooter.utils.TitleBarView;
 
 import java.util.ArrayList;

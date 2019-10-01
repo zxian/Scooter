@@ -27,11 +27,12 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.activity.RegisterStoresActivity"></activity>
+        <activity android:name=".module.stores.CoachActivity"></activity>
+        <activity android:name=".module.activity.RegisterStoresActivity" />
         <activity android:name=".module.activity.RegisterActivity" />
         <activity android:name=".module.activity.SearchActivity" />
-        <activity android:name=".module.activity.MainActivity" />
-        <activity android:name=".module.activity.LoginActivity">
+        <activity android:name=".module.activity.LoginActivity" />
+        <activity android:name=".module.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

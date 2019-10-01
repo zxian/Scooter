@@ -211,7 +211,7 @@ public class ApiRequest {
     public <S, F> void post(String url, File file, Callback<S, F> callback) {
         try {
 
-            Kalle.post(getCompleteUrl(url)).file("filedata",file).perform(callback);
+            Kalle.post(getCompleteUrl(url)).file("file",file).perform(callback);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -227,7 +227,7 @@ public class ApiRequest {
     public <S, F> void post(String url, List<File> files, Callback<S, F> callback) {
         try {
 
-            Kalle.post(getCompleteUrl(url)).files("filedata",files).perform(callback);
+            Kalle.post(getCompleteUrl(url)).files("file",files).perform(callback);
         } catch (Exception e) {
             e.printStackTrace();
         }

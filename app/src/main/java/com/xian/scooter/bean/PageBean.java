@@ -9,11 +9,19 @@ import java.util.List;
  */
 
 public class PageBean<S> {
+        /**
+         * total : 0
+         * size : 10
+         * pages : 0
+         * current : 1
+         * records : []
+         */
+
         private int total;
-        private int pageNum;
-        private int pageSize;
         private int size;
-        private List<S> list;
+        private int pages;
+        private int current;
+        private List<S> records;
 
         public int getTotal() {
             return total;
@@ -21,22 +29,6 @@ public class PageBean<S> {
 
         public void setTotal(int total) {
             this.total = total;
-        }
-
-        public int getPageNum() {
-            return pageNum;
-        }
-
-        public void setPageNum(int pageNum) {
-            this.pageNum = pageNum;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
         }
 
         public int getSize() {
@@ -47,14 +39,27 @@ public class PageBean<S> {
             this.size = size;
         }
 
-
-        public List<S> getList() {
-            return list;
+        public int getPages() {
+            return pages;
         }
 
-        public void setList(List<S> list) {
-            this.list = list;
+        public void setPages(int pages) {
+            this.pages = pages;
         }
 
+        public int getCurrent() {
+            return current;
+        }
 
+        public void setCurrent(int current) {
+            this.current = current;
+        }
+
+        public List<?> getRecords() {
+            return records;
+        }
+
+        public void setRecords(List<S> records) {
+            this.records = records;
+        }
 }

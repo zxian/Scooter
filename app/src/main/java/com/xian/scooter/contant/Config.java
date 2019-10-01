@@ -10,6 +10,7 @@ public class Config {
 
     public static final String TEXT_SIZE = "text_size";
     public static final String BRIGHTNESS_SIZE = "brightness_size";
+    public static final String KEY = "0129acdeefgiknrtz";
 
     //搜索
     public static final String SEARCH_TYPE = "search_type";
