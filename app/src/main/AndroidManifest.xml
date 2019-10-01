@@ -27,7 +27,11 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.activity.RegisterStoresActivity"></activity>
+        <activity android:name=".module.stores.GivingActivity"></activity>
+        <activity android:name=".module.stores.WithdrawalActivity" />
+        <activity android:name=".module.activity.RegisteredAgreementActivity" />
+        <activity android:name=".module.stores.MembersActivity" />
+        <activity android:name=".module.activity.RegisterStoresActivity" />
         <activity android:name=".module.activity.RegisterActivity" />
         <activity android:name=".module.activity.SearchActivity" />
         <activity android:name=".module.activity.MainActivity" />

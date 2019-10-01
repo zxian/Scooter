@@ -75,7 +75,22 @@ public class StoresFragment extends BaseFragment {
         gvItem.setAdapter(itemAdapter);
         gvItem.setOnItemClickListener((parent, view1, position, id) -> {
             switch (position){
-
+                case 0://教练
+                    break;
+                case 1://会员
+                    break;
+                case 2://课程包
+                    break;
+                case 3://财务
+                    break;
+                case 4://订单
+                    break;
+                case 5://我的互动
+                    break;
+                case 6://门店信息
+                    break;
+                case 7://消息中心
+                    break;
             }
         });
     }

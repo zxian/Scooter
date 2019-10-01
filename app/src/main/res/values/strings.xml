@@ -44,5 +44,23 @@
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
     <string name="input">请输入</string>
+    <string name="select">请选择></string>
+
+    <string name="search_for_keywords">请输入搜索关键字</string>
+    <string name="withdrawal">提现</string>
+    <string name="withdrawal_to_pay_treasure">提现至支付宝</string>
+    <string name="withdrawal_all">全部提现</string>
+    <string name="withdrawal_the_amount_of">提现金额(元)</string>
+    <string name="alipay_account">请输入支付宝账号</string>
+    <string name="withdrawal_prompt">提现金额将在1-3个工作日内到账，请注意查收。</string>
+
+
+    <string name="course_name">课程名称</string>
+    <string name="course_phone">用户手机号码</string>
+    <string name="course_type">使用类型</string>
+    <string name="course_effective_period">有效期</string>
+    <string name="course_number">课程次数</string>
+    <string name="course_time">次</string>
+    <string name="course_giving">赠送</string>
 
 </resources>

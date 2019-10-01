@@ -1,5 +1,6 @@
 package com.xian.scooter.module.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -173,6 +174,8 @@ public class RegisterActivity extends BaseActivity {
                 register(phone, pwd, code, "2");
                 break;
             case R.id.tv_agreement:
+                Intent intent = new Intent(RegisterActivity.this,RegisteredAgreementActivity.class);
+                startActivity(intent);
                 break;
         }
     }

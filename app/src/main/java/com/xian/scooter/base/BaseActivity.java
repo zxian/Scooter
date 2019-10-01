@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.LogUtils;
 import butterknife.ButterKnife;
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class   BaseActivity extends AppCompatActivity {
 
     protected BaseActivity mActivity;
 

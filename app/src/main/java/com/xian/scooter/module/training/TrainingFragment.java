@@ -19,8 +19,7 @@ public class TrainingFragment extends BaseFragment {
 
 
     @Override
-    protected int getLayoutResourceId() {
-        return R.layout.fragment_training;
+    protected int getLayoutResourceId() { return R.layout.fragment_training;
     }
 
     @Override
