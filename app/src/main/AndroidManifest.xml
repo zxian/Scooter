@@ -27,9 +27,12 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".module.stores.CoachActivity"></activity>
-        <activity android:name=".module.stores.GivingActivity"/>
+        <activity android:name=".module.stores.FinancialActivity"></activity>
+        <activity android:name=".module.stores.PurchaseRecordsActivity" />
+        <activity android:name=".module.stores.NewCourseActivity" />
+        <activity android:name=".module.stores.CoursePackageActivity" />
+        <activity android:name=".module.stores.CoachActivity" />
+        <activity android:name=".module.stores.GivingActivity" />
         <activity android:name=".module.stores.WithdrawalActivity" />
         <activity android:name=".module.activity.RegisteredAgreementActivity" />
         <activity android:name=".module.stores.MembersActivity" />

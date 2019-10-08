@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.stores.MembersActivity">
+    tools:context=".module.stores.PurchaseRecordsActivity">
 
     <com.xian.scooter.utils.TitleBarView
         android:id="@+id/title_bar_view"
@@ -14,16 +14,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:gravity="center_vertical">
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginStart="15dp"
+            android:layout_weight="1"
             android:background="@drawable/horn_gray_f6_5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -55,7 +54,19 @@
                 android:padding="8dp"
                 android:src="@mipmap/ic_close"
                 android:visibility="gone" />
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/tv_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:src="@mipmap/ic_close"
+            android:textColor="@color/black_33"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView

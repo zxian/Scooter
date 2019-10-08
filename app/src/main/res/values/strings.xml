@@ -63,4 +63,26 @@
     <string name="course_time">次</string>
     <string name="course_giving">赠送</string>
 
+    <string name="course_package">新增课程包</string>
+    <string name="course_giving_package">赠送课程包</string>
+
+    <string name="course__package_name">课程包名</string>
+    <string name="course_yuan">元</string>
+    <string name="course_the_price">课程包价格</string>
+    <string name="course_new">新增</string>
+
+    <string name="event_car_racing">小车神-亚洲车王赛</string>
+    <string name="event_time">比赛时间：2019-05-05</string>
+    <string name="event_region">天河区</string>
+    <string name="event_amount">已收金额￥</string>
+    <string name="event_sign">报名中</string>
+    <string name="event_audit">审核中</string>
+    <string name="event_audit_failure">审核失败</string>
+    <string name="event_registration">报名结束</string>
+    <string name="event_cancel">取消中</string>
+    
+    <string name="financial_the_balance">账户余额(元)</string>
+
+
+
 </resources>
