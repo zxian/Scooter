@@ -43,8 +43,10 @@
     <string name="search">搜索</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
+    <string name="add">新增</string>
     <string name="input">请输入</string>
     <string name="select">请选择></string>
+    <string name="money_sign">¥</string>
 
     <string name="search_for_keywords">请输入搜索关键字</string>
     <string name="withdrawal">提现</string>

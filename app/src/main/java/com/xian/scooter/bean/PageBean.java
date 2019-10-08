@@ -55,7 +55,7 @@ public class PageBean<S> {
             this.current = current;
         }
 
-        public List<?> getRecords() {
+        public List<S> getRecords() {
             return records;
         }
 
