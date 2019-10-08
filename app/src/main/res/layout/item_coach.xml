@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/iv_picture"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:text="张三" />
+
+    <com.xian.scooter.view.flowlayout.TagFlowLayout
+        android:id="@+id/flow_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_toEndOf="@+id/iv_picture"
+        app:max_select="1" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/flow_layout"
+        android:layout_toEndOf="@+id/iv_picture"
+        android:layout_toStartOf="@+id/sw_select"
+        android:textColor="@color/gray_99"
+        android:textSize="14sp"
+        tools:text="1341111111" />
+
+    <Switch
+        android:id="@+id/sw_select"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:layout_centerVertical="true"
+        android:thumb="@drawable/switch_thumb"
+        android:track="@drawable/switch_track_selector" />
+</RelativeLayout>

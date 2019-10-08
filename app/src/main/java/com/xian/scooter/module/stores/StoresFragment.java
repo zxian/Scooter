@@ -1,5 +1,6 @@
 package com.xian.scooter.module.stores;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -77,6 +78,7 @@ public class StoresFragment extends BaseFragment {
         gvItem.setOnItemClickListener((parent, view1, position, id) -> {
             switch (position){
                 case 0://教练
+                    startActivity(new Intent(mActivity,CoachActivity.class));
                     break;
                 case 1://会员
                     break;

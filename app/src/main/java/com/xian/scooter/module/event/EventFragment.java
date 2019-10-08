@@ -12,6 +12,8 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseFragment;
 import com.xian.scooter.bean.EventBean;
+import com.xian.scooter.bean.PageBean;
+import com.xian.scooter.beanpar.EventPar;
 import com.xian.scooter.module.adapter.EventAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -55,6 +57,7 @@ public class EventFragment extends BaseFragment {
         titleBarView.setTvTitleText("赛事");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         initRecyclerView();
+        onMyRefresh();
     }
 
     private void initRecyclerView() {
@@ -70,7 +73,7 @@ public class EventFragment extends BaseFragment {
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
                     //网络请求获取列表数据
-//                    getTaskList(type, status, planId, PAGE_INDEX, PAGE_SIZE);
+                    getCompetitionList(PAGE_INDEX, PAGE_SIZE);
                 }else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
@@ -87,7 +90,7 @@ public class EventFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
 //                Intent intent = new Intent(mActivity, TaskDetailActivity.class);
-//                intent.putExtra("id", list.get(position).getId());
+//                intent.putExtra("id", adapter.getDatas().get(position).getId());
 //                startActivity(intent);
             }
         });
@@ -100,42 +103,38 @@ public class EventFragment extends BaseFragment {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
-//        getTaskList(type, status, planId, PAGE_INDEX, PAGE_SIZE);
+        getCompetitionList(PAGE_INDEX, PAGE_SIZE);
     }
 
 
     /**
-     * 根据计划分页查询任务
+     * 赛事列表
      *
-     * @param type     类型 1：日常巡检，2：专项排查
-     * @param status   (0：未开始，1：进行中，2：已完成)
-     * @param planId   计划ID
      * @param pageNum  页码
      * @param pageSize 查询数量
      */
-    private void getTaskList(int type, int status, long planId, int pageNum, int pageSize) {
-//        TaskPar par = new TaskPar();
-//
-//        par.setPageNum(pageNum);
-//        par.setPageSize(pageSize);
-//        ApiRequest.getInstance().post(HttpURL.TASK_LIST, par, new DefineCallback<EventBean>() {
-//            @Override
-//            public void onMyResponse(SimpleResponse<EventBean, HttpEntity> response) {
-//                if (response.isSucceed()) {
-//                    if (response.succeed() != null) {
-//                        TOTAL_COUNTER = response.succeed().getTotal();
-//                        List<TaskBean> list = response.succeed().getList();
-//                        addItems(list);
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onEnd() {
-//                recyclerView.refreshComplete(mCurrentCounter);
-//            }
-//        });
+    private void getCompetitionList( int pageNum, int pageSize) {
+        EventPar par = new EventPar();
+        par.setIs_app("0");//是否用户端查询：0、否，1、是
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_LIST.replace("{size}", pageSize+"")
+                .replace("{current}", pageNum+""), par, new DefineCallback<PageBean<EventBean>>() {
+            @Override
+            public void onMyResponse(SimpleResponse<PageBean<EventBean>, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    if (response.succeed() != null) {
+                        TOTAL_COUNTER = response.succeed().getTotal();
+                        List<EventBean> list = response.succeed().getRecords();
+                        addItems(list);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onEnd() {
+                recyclerView.refreshComplete(mCurrentCounter);
+            }
+        });
     }
     /**
      * 添加数据到列表
