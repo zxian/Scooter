@@ -14,5 +14,6 @@ public class HttpURL {
 
     //赛事
     public static String COMPETITION_LIST = "/competition/page/{size}/{current}";
+    public static String COMPETITION_DETAILS = "/competition/byId/{id}";
 
 }

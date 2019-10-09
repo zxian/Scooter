@@ -27,7 +27,11 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.stores.FinancialActivity"></activity>
+        <activity android:name=".module.event.EventAddSetupActivity"></activity>
+        <activity android:name=".module.event.EventAddInfoActivity" />
+        <activity android:name=".module.event.EventAddActivity" />
+        <activity android:name=".module.event.EventDetailsActivity" />
+        <activity android:name=".module.stores.FinancialActivity" />
         <activity android:name=".module.stores.PurchaseRecordsActivity" />
         <activity android:name=".module.stores.NewCourseActivity" />
         <activity android:name=".module.stores.CoursePackageActivity" />

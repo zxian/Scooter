@@ -22,4 +22,6 @@
     <color name="red_alter">#FFB2B2</color>
     <color name="red_delete">#FF6666</color>
     <color name="red_f6">#FF6666</color>
+
+    <color name="orange_f9">#ff9805</color>
 </resources>

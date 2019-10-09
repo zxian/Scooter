@@ -45,7 +45,7 @@
     <string name="sure">确定</string>
     <string name="add">新增</string>
     <string name="input">请输入</string>
-    <string name="select">请选择></string>
+    <string name="select">请选择</string>
     <string name="money_sign">¥</string>
 
     <string name="search_for_keywords">请输入搜索关键字</string>
@@ -73,18 +73,18 @@
     <string name="course_the_price">课程包价格</string>
     <string name="course_new">新增</string>
 
-    <string name="event_car_racing">小车神-亚洲车王赛</string>
-    <string name="event_time">比赛时间：2019-05-05</string>
-    <string name="event_region">天河区</string>
-    <string name="event_amount">已收金额￥</string>
-    <string name="event_sign">报名中</string>
-    <string name="event_audit">审核中</string>
-    <string name="event_audit_failure">审核失败</string>
-    <string name="event_registration">报名结束</string>
-    <string name="event_cancel">取消中</string>
-    
+
     <string name="financial_the_balance">账户余额(元)</string>
 
-
+    <string name="event_logo">赛事海报图</string>
+    <string name="event_name">赛事名称</string>
+    <string name="event_input">请填写</string>
+    <string name="event_time">比赛时间</string>
+    <string name="event_start_time">报名开始时间</string>
+    <string name="event_end_time">报名截止时间</string>
+    <string name="event_info">赛事介绍</string>
+    <string name="event_number">人员数量展示</string>
+    <string name="event_setup">赛事设置</string>
+    <string name="event_setup_hint">请进行设置</string>
 
 </resources>

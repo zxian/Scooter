@@ -1,8 +1,12 @@
 package com.xian.scooter.module.event;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -26,6 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class EventFragment extends BaseFragment {
 
@@ -33,6 +40,8 @@ public class EventFragment extends BaseFragment {
     TitleBarView titleBarView;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
+    @BindView(R.id.fab_add)
+    FloatingActionButton fabAdd;
 
     private static int TOTAL_COUNTER = 0;//服务器端一共多少条数据
     private static int PAGE_INDEX = 1;//当前第几页
@@ -74,7 +83,7 @@ public class EventFragment extends BaseFragment {
                     PAGE_INDEX++;
                     //网络请求获取列表数据
                     getCompetitionList(PAGE_INDEX, PAGE_SIZE);
-                }else {
+                } else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
             }
@@ -89,9 +98,9 @@ public class EventFragment extends BaseFragment {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(mActivity, TaskDetailActivity.class);
-//                intent.putExtra("id", adapter.getDatas().get(position).getId());
-//                startActivity(intent);
+                Intent intent = new Intent(mActivity, EventDetailsActivity.class);
+                intent.putExtra("id", adapter.getDatas().get(position).getId());
+                startActivity(intent);
             }
         });
     }
@@ -113,11 +122,11 @@ public class EventFragment extends BaseFragment {
      * @param pageNum  页码
      * @param pageSize 查询数量
      */
-    private void getCompetitionList( int pageNum, int pageSize) {
+    private void getCompetitionList(int pageNum, int pageSize) {
         EventPar par = new EventPar();
         par.setIs_app("0");//是否用户端查询：0、否，1、是
-        ApiRequest.getInstance().post(HttpURL.COMPETITION_LIST.replace("{size}", pageSize+"")
-                .replace("{current}", pageNum+""), par, new DefineCallback<PageBean<EventBean>>() {
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_LIST.replace("{size}", pageSize + "")
+                .replace("{current}", pageNum + ""), par, new DefineCallback<PageBean<EventBean>>() {
             @Override
             public void onMyResponse(SimpleResponse<PageBean<EventBean>, HttpEntity> response) {
                 if (response.isSucceed()) {
@@ -136,6 +145,7 @@ public class EventFragment extends BaseFragment {
             }
         });
     }
+
     /**
      * 添加数据到列表
      *
@@ -148,4 +158,8 @@ public class EventFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.fab_add)
+    public void onViewClicked() {
+        startActivity(new Intent(mActivity,EventAddActivity.class));
+    }
 }
