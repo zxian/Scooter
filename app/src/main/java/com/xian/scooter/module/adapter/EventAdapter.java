@@ -1,6 +1,7 @@
 package com.xian.scooter.module.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.EventBean;
+import com.xian.scooter.utils.ToastUtils;
 
 import java.lang.reflect.Member;
 import java.util.List;
@@ -48,25 +50,27 @@ public class EventAdapter extends CommonRvAdapter<EventBean> {
 
         TextView tvStatus = holder.getView(R.id.tv_status);
         String competition_state = eventBean.getCompetition_state();// competition_state 赛事状态：1、待审核，2、审核未通过，3、已通过，4、取消中，5、取消失败，6、已取消
-        switch (competition_state){
-            case "1":
-                tvStatus.setText("待审核");
-                break;
-            case "2":
-                tvStatus.setText("审核未通过");
-                break;
-            case "3":
-                tvStatus.setText("已通过");
-                break;
-            case "4":
-                tvStatus.setText("取消中");
-                break;
-            case "5":
-                tvStatus.setText("取消失败");
-                break;
-            case "6":
-                tvStatus.setText("已取消");
-                break;
+        if (!TextUtils.isEmpty(competition_state)) {
+            switch (competition_state) {
+                case "1":
+                    tvStatus.setText("待审核");
+                    break;
+                case "2":
+                    tvStatus.setText("审核未通过");
+                    break;
+                case "3":
+                    tvStatus.setText("已通过");
+                    break;
+                case "4":
+                    tvStatus.setText("取消中");
+                    break;
+                case "5":
+                    tvStatus.setText("取消失败");
+                    break;
+                case "6":
+                    tvStatus.setText("已取消");
+                    break;
+            }
         }
     }
 }

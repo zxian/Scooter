@@ -94,22 +94,24 @@ public class EventDetailsActivity extends BaseActivity {
 
                         String competition_state = eventDetailsBean.getCompetition_state();
                         //赛事状态：1、待审核，2、审核未通过，3、已通过，4、取消中，5、取消失败，6、已取消
-                        switch (competition_state){
-                            case "1":
-                                break;
-                            case "2":
-                                tvBtn1.setText("失败原因");
-                                break;
-                            case "3":
+                        if (!TextUtils.isEmpty(competition_state)) {
+                            switch (competition_state) {
+                                case "1":
+                                    break;
+                                case "2":
+                                    tvBtn1.setText("失败原因");
+                                    break;
+                                case "3":
 
-                                break;
-                            case "4":
-                                break;
-                            case "5":
-                                tvBtn1.setText("失败原因");
-                                break;
-                            case "6":
-                                break;
+                                    break;
+                                case "4":
+                                    break;
+                                case "5":
+                                    tvBtn1.setText("失败原因");
+                                    break;
+                                case "6":
+                                    break;
+                            }
                         }
                     }
                 }

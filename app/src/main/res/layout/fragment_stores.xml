@@ -41,7 +41,7 @@
             android:layout_toEndOf="@+id/iv_logo"
             android:textColor="@color/black"
             android:textSize="18sp"
-            tools:text="商店" />
+            android:text="商店" />
 
         <TextView
             android:id="@+id/tv_star"
@@ -68,7 +68,7 @@
             android:lines="1"
             android:textColor="@color/gray_99"
             android:textSize="14sp"
-            tools:text="商店介绍" />
+            android:text="商店介绍" />
 
         <View
             android:layout_width="match_parent"

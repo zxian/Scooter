@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,12 +24,20 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
+import com.xian.scooter.beanpar.CompetitionSavePar;
+import com.xian.scooter.beanpar.EventAddPar;
 import com.xian.scooter.contant.Config;
 import com.xian.scooter.module.activity.RegisterStoresActivity;
+import com.xian.scooter.net.ApiRequest;
+import com.xian.scooter.net.DefineCallback;
+import com.xian.scooter.net.HttpEntity;
+import com.xian.scooter.net.HttpURL;
 import com.xian.scooter.utils.PicSelectUtils;
 import com.xian.scooter.utils.TimeUtils;
 import com.xian.scooter.utils.TitleBarView;
+import com.xian.scooter.utils.ToastUtils;
 import com.xian.scooter.utils.UploadPicturesUtils;
+import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -54,6 +64,8 @@ public class EventAddActivity extends BaseActivity {
     TextView tvStartTime;
     @BindView(R.id.tv_end_time)
     TextView tvEndTime;
+    @BindView(R.id.et_address)
+    EditText etAddress;
     @BindView(R.id.tv_info)
     TextView tvInfo;
     @BindView(R.id.sw_select)
@@ -65,10 +77,10 @@ public class EventAddActivity extends BaseActivity {
 
     private static final int INFO_REQUEST_CODE = 100;
     private static final int SETUP_REQUEST_CODE = 200;
-    private long time;
-    private long startTime;
-    private long endTime;
-
+    private String time;
+    private String startTime;
+    private String endTime;
+    private String isDisplay="0";
 
     private MyHandler handler;
     private DialogFragmentBottom dialogBottom;
@@ -76,6 +88,7 @@ public class EventAddActivity extends BaseActivity {
     private List<String> pathList = new ArrayList<>();
     private String logoPath;
     private String content;
+    private List<CompetitionSavePar> competitionSaveList = new ArrayList<>();
 
     private static class MyHandler extends Handler {
         private WeakReference<EventAddActivity> mWeakReference;
@@ -112,6 +125,16 @@ public class EventAddActivity extends BaseActivity {
         titleBarView.setTvTitleText("申请赛事");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         handler = new MyHandler(EventAddActivity.this);
+        swSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    isDisplay="1";
+                }else {
+                    isDisplay="0";
+                }
+            }
+        });
     }
     /**
      * 文件上传
@@ -120,6 +143,48 @@ public class EventAddActivity extends BaseActivity {
      */
     private void fileUpload(File file) {
         UploadPicturesUtils.getInstance().updateImage(file, handler);
+    }
+
+    /**
+     * 新增OR编辑赛事类型设置信息
+     * @param address 举办地址
+     * @param name 赛事名称
+     * @param type 赛事类型：1、门店赛事 ，2、平台赛事
+     * @param endTime 结束报名时间
+     * @param finishTime 比赛时间
+     * @param isDisplay 显示人员数量：0，不显示，1、显示
+     * @param officialTime 比赛时间
+     * @param postersUrl 赛事海报图
+     * @param startTime 开始报名时间
+     * @param set 赛事设置,编辑时不传
+     */
+    private void getCompetitionSave(String address, String name, String type, String endTime,
+                                    String finishTime, String isDisplay, String officialTime,
+                                    String postersUrl, String startTime, List<CompetitionSavePar> set) {
+        EventAddPar par = new EventAddPar();
+        par.setAddress(address);
+        par.setCompetition_name(name);
+        par.setCompetition_type(type);
+        par.setEnd_time(endTime);
+        par.setFinish_time(finishTime);
+        par.setIs_display(isDisplay);
+        par.setOfficial_time(officialTime);
+        par.setPosters_url(postersUrl);
+        par.setStart_time(startTime);
+        par.setSubSets(set);
+
+        par.setSign();
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_SAVE, par, new DefineCallback<String>() {
+            @Override
+            public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    ToastUtils.showToast("提交成功！");
+                    finish();
+                }
+            }
+
+        });
+
     }
 
     @OnClick({R.id.iv_logo, R.id.tv_time, R.id.tv_start_time, R.id.tv_end_time, R.id.tv_info, R.id.tv_setup, R.id.tv_btn})
@@ -141,9 +206,22 @@ public class EventAddActivity extends BaseActivity {
                 startActivityForResult(new Intent(mActivity,EventAddInfoActivity.class),INFO_REQUEST_CODE);
                 break;
             case R.id.tv_setup:
-                startActivityForResult(new Intent(mActivity,EventAddSetupActivity.class),SETUP_REQUEST_CODE);
+                startActivityForResult(new Intent(mActivity,EventAddSetupAddActivity.class),SETUP_REQUEST_CODE);
                 break;
             case R.id.tv_btn:
+                String name = etName.getText().toString().trim();
+                String address = etAddress.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)) {
+                    ToastUtils.showToast("赛事名称不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(address)) {
+                    ToastUtils.showToast("赛事区域不能为空！");
+                    return;
+                }
+                getCompetitionSave( address, name,"1", endTime, time, isDisplay, time,
+                        logoPath, startTime, competitionSaveList);
                 break;
         }
     }
@@ -184,18 +262,18 @@ public class EventAddActivity extends BaseActivity {
                 toDay.get(Calendar.DAY_OF_MONTH), toDate.getHours(), minutes);
         picker.setWeightEnable(true);
         picker.setOnDateTimePickListener((DateTimePicker.OnYearMonthDayTimePickListener) (year, month, day, hour, minute) -> {
-            String date = year + "-" + month + "-" + day + " " + hour + "：" + minute;
+            String date = year + "-" + month + "-" + day + " " + hour + ":" + minute+":00";
             switch (timeType){
                 case 1://比赛时间
-                    time = TimeUtils.getStringToDateHM(date);
+                    time = date;
                     tvTime.setText(date);
                     break;
                 case 2://报名开始时间
-                    startTime = TimeUtils.getStringToDateHM(date);
+                    startTime = date;
                     tvStartTime.setText(date);
                     break;
                 case 3://报名结束时间
-                    endTime = TimeUtils.getStringToDateHM(date);
+                    endTime = date;
                     tvEndTime.setText(date);
                     break;
             }
@@ -269,6 +347,13 @@ public class EventAddActivity extends BaseActivity {
                     if (resultCode==RESULT_OK){
                         content = data.getStringExtra("content");
                         tvInfo.setText(content);
+                    }
+                    break;
+                case SETUP_REQUEST_CODE:
+                    if (resultCode==RESULT_OK){
+                        CompetitionSavePar competitionSave = (CompetitionSavePar) data.getSerializableExtra("CompetitionSavePar");
+                        competitionSaveList.add(competitionSave);
+                        tvSetup.setText("已设置");
                     }
                     break;
             }

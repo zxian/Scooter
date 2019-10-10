@@ -1,6 +1,8 @@
 package com.xian.scooter.module.stores;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
@@ -22,7 +24,10 @@ import com.xian.scooter.utils.TitleBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.xian.scooter.utils.UISizeUtils.dp2px;
 
@@ -201,4 +206,8 @@ public class CoachActivity extends BaseActivity {
 //        });
     }
 
+    @OnClick(R.id.tv_add)
+    public void onViewClicked() {
+        startActivity(new Intent(mActivity,CoachAddActivity.class));
+    }
 }

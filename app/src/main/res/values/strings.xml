@@ -47,6 +47,7 @@
     <string name="input">请输入</string>
     <string name="select">请选择</string>
     <string name="money_sign">¥</string>
+    <string name="submit">提交</string>
 
     <string name="search_for_keywords">请输入搜索关键字</string>
     <string name="withdrawal">提现</string>
@@ -56,6 +57,15 @@
     <string name="alipay_account">请输入支付宝账号</string>
     <string name="withdrawal_prompt">提现金额将在1-3个工作日内到账，请注意查收。</string>
 
+
+    <string name="coach_add_name">姓名</string>
+    <string name="coach_add_logo">头像</string>
+    <string name="coach_add_info">教练简介</string>
+    <string name="coach_add_label">教练标签</string>
+    <string name="coach_add_video">教练视频</string>
+    <string name="coach_add_phone">教练手机号码</string>
+    <string name="coach_add_pwd">密码</string>
+    <string name="coach_add_state">状态</string>
 
     <string name="course_name">课程名称</string>
     <string name="course_phone">用户手机号码</string>
@@ -83,8 +93,15 @@
     <string name="event_start_time">报名开始时间</string>
     <string name="event_end_time">报名截止时间</string>
     <string name="event_info">赛事介绍</string>
+    <string name="event_address">赛事区域</string>
     <string name="event_number">人员数量展示</string>
     <string name="event_setup">赛事设置</string>
     <string name="event_setup_hint">请进行设置</string>
+    <string name="event_setup_add">新增类型</string>
+    <string name="event_setup_type_name">名称</string>
+    <string name="event_setup_type_number">人数(人)</string>
+    <string name="event_setup_type_price">报名费用(元)</string>
+    <string name="event_setup_type_age_max">最大年龄(岁)</string>
+    <string name="event_setup_type_age_min">最小年龄(岁)</string>
 
 </resources>

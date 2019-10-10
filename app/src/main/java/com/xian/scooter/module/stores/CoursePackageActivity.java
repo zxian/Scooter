@@ -1,6 +1,8 @@
 package com.xian.scooter.module.stores;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.xian.scooter.R;
@@ -9,6 +11,7 @@ import com.xian.scooter.utils.TitleBarView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CoursePackageActivity extends BaseActivity {
 
@@ -31,4 +34,15 @@ public class CoursePackageActivity extends BaseActivity {
     }
 
 
+    @OnClick({R.id.tv_add, R.id.tv_give})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_add:
+                startActivity(new Intent(mActivity,NewCourseActivity.class));
+                break;
+            case R.id.tv_give:
+                startActivity(new Intent(mActivity,GivingActivity.class));
+                break;
+        }
+    }
 }

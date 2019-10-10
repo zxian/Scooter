@@ -6,7 +6,7 @@ package com.xian.scooter.contant;
 public class Config {
 
 
-    public static final int maxSel = 3;  //相册选择最大数量
+    public static final int maxSel = 1;  //相册选择最大数量
 
     public static final String TEXT_SIZE = "text_size";
     public static final String BRIGHTNESS_SIZE = "brightness_size";

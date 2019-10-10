@@ -81,10 +81,13 @@ public class StoresFragment extends BaseFragment {
                     startActivity(new Intent(mActivity,CoachActivity.class));
                     break;
                 case 1://会员
+                    startActivity(new Intent(mActivity,MembersActivity.class));
                     break;
                 case 2://课程包
+                    startActivity(new Intent(mActivity,CoursePackageActivity.class));
                     break;
                 case 3://财务
+                    startActivity(new Intent(mActivity,FinancialActivity.class));
                     break;
                 case 4://订单
                     break;
@@ -93,6 +96,7 @@ public class StoresFragment extends BaseFragment {
                 case 6://门店信息
                     break;
                 case 7://消息中心
+                    startActivity(new Intent(mActivity,MessageActivity.class));
                     break;
             }
         });

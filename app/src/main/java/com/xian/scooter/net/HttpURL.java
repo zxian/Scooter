@@ -15,5 +15,8 @@ public class HttpURL {
     //赛事
     public static String COMPETITION_LIST = "/competition/page/{size}/{current}";
     public static String COMPETITION_DETAILS = "/competition/byId/{id}";
+    public static String COMPETITION_SAVE = "/competition/saveOrUpdateCompetition";
+    public static String COMPETITION_SET_LIST = "/competitionSet/list/{competitionId}";
+    public static String COMPETITION_SET_SAVE = "/competitionSet/saveOrUpdateCompetitionSet";
 
 }

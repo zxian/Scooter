@@ -12,6 +12,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
+        android:src="@mipmap/ic_login_logo"
         android:scaleType="fitXY" />
 
     <TextView
@@ -23,7 +24,7 @@
         android:layout_toEndOf="@+id/iv_picture"
         android:textColor="@color/black"
         android:textSize="14sp"
-        tools:text="张三" />
+        android:text="张三" />
 
     <com.xian.scooter.view.flowlayout.TagFlowLayout
         android:id="@+id/flow_layout"
@@ -47,7 +48,7 @@
         android:layout_toStartOf="@+id/sw_select"
         android:textColor="@color/gray_99"
         android:textSize="14sp"
-        tools:text="1341111111" />
+        android:text="1341111111" />
 
     <Switch
         android:id="@+id/sw_select"

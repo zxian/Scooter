@@ -27,7 +27,10 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.event.EventAddSetupActivity"></activity>
+        <activity android:name=".module.event.EventAddSetupAddActivity"></activity>
+        <activity android:name=".module.stores.MessageActivity" />
+        <activity android:name=".module.stores.CoachAddActivity" />
+        <activity android:name=".module.event.EventAddSetupActivity" />
         <activity android:name=".module.event.EventAddInfoActivity" />
         <activity android:name=".module.event.EventAddActivity" />
         <activity android:name=".module.event.EventDetailsActivity" />
