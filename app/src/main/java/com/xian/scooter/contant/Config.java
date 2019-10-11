@@ -17,4 +17,5 @@ public class Config {
     public static final String SEARCH_ENTERPRISE = "search_enterprise";
     //友盟key
     public static final String UM_KEY = "5d5d02a73fc195c655000487";
+    public static final int MAX_LINES_200 = 200;//文字最大长度
 }

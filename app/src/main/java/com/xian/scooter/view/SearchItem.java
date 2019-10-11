@@ -15,6 +15,8 @@
  */
 package com.xian.scooter.view;
 
+import com.xian.scooter.view.searchview.FakeSearchAdapter;
+
 /**
  * Interface to make any model searchable by the {@link FakeSearchAdapter}
  *

@@ -23,10 +23,12 @@ import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
 import com.xian.scooter.net.HttpURL;
+import com.xian.scooter.utils.TimeUtils;
 import com.xian.scooter.utils.TitleBarView;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,6 +52,7 @@ public class EventFragment extends BaseFragment {
     private EventAdapter adapter;
     private List<EventBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
+    private long time;
 
     public static EventFragment newInstance() {
         return new EventFragment();
@@ -100,6 +103,7 @@ public class EventFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(mActivity, EventDetailsActivity.class);
                 intent.putExtra("id", adapter.getDatas().get(position).getId());
+                intent.putExtra("time",time);
                 startActivity(intent);
             }
         });
@@ -154,7 +158,10 @@ public class EventFragment extends BaseFragment {
     private void addItems(List<EventBean> list) {
         if (list.size() > 0 && adapter != null) {
             mCurrentCounter += list.size();
-            adapter.updataItem(list);
+            Date netTime = TimeUtils.getNetTime();
+            time = netTime.getTime();
+            adapter.updataItem(list, time);
+
         }
     }
 

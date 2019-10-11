@@ -60,6 +60,8 @@ public class EventAddActivity extends BaseActivity {
     EditText etName;
     @BindView(R.id.tv_time)
     TextView tvTime;
+    @BindView(R.id.tv_finish_time)
+    TextView tvFinishTime;
     @BindView(R.id.tv_start_time)
     TextView tvStartTime;
     @BindView(R.id.tv_end_time)
@@ -78,6 +80,7 @@ public class EventAddActivity extends BaseActivity {
     private static final int INFO_REQUEST_CODE = 100;
     private static final int SETUP_REQUEST_CODE = 200;
     private String time;
+    private String finishTime;
     private String startTime;
     private String endTime;
     private String isDisplay="0";
@@ -151,7 +154,7 @@ public class EventAddActivity extends BaseActivity {
      * @param name 赛事名称
      * @param type 赛事类型：1、门店赛事 ，2、平台赛事
      * @param endTime 结束报名时间
-     * @param finishTime 比赛时间
+     * @param finishTime 比赛结束时间
      * @param isDisplay 显示人员数量：0，不显示，1、显示
      * @param officialTime 比赛时间
      * @param postersUrl 赛事海报图
@@ -187,7 +190,7 @@ public class EventAddActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.iv_logo, R.id.tv_time, R.id.tv_start_time, R.id.tv_end_time, R.id.tv_info, R.id.tv_setup, R.id.tv_btn})
+    @OnClick({R.id.iv_logo, R.id.tv_time, R.id.tv_finish_time, R.id.tv_start_time, R.id.tv_end_time, R.id.tv_info, R.id.tv_setup, R.id.tv_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_logo:
@@ -196,11 +199,14 @@ public class EventAddActivity extends BaseActivity {
             case R.id.tv_time:
                 onMonthDayTimePicker(1);
                 break;
-            case R.id.tv_start_time:
+            case R.id.tv_finish_time:
                 onMonthDayTimePicker(2);
                 break;
-            case R.id.tv_end_time:
+            case R.id.tv_start_time:
                 onMonthDayTimePicker(3);
+                break;
+            case R.id.tv_end_time:
+                onMonthDayTimePicker(4);
                 break;
             case R.id.tv_info:
                 startActivityForResult(new Intent(mActivity,EventAddInfoActivity.class),INFO_REQUEST_CODE);
@@ -220,7 +226,7 @@ public class EventAddActivity extends BaseActivity {
                     ToastUtils.showToast("赛事区域不能为空！");
                     return;
                 }
-                getCompetitionSave( address, name,"1", endTime, time, isDisplay, time,
+                getCompetitionSave( address, name,"1", endTime, finishTime, isDisplay, time,
                         logoPath, startTime, competitionSaveList);
                 break;
         }
@@ -269,10 +275,14 @@ public class EventAddActivity extends BaseActivity {
                     tvTime.setText(date);
                     break;
                 case 2://报名开始时间
+                    finishTime = date;
+                    tvFinishTime.setText(date);
+                    break;
+                case 3://报名开始时间
                     startTime = date;
                     tvStartTime.setText(date);
                     break;
-                case 3://报名结束时间
+                case 4://报名结束时间
                     endTime = date;
                     tvEndTime.setText(date);
                     break;

@@ -31,6 +31,7 @@ public class EventBean {
     private String competition_name;
     private String posters_url;
     private String official_time;
+    private String finish_time;
     private String start_time;
     private String end_time;
     private String address;
@@ -81,6 +82,14 @@ public class EventBean {
 
     public void setOfficial_time(String official_time) {
         this.official_time = official_time;
+    }
+
+    public String getFinish_time() {
+        return finish_time;
+    }
+
+    public void setFinish_time(String finish_time) {
+        this.finish_time = finish_time;
     }
 
     public String getStart_time() {

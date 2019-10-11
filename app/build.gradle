@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-aspectjx'
-File signPropertiesFile = file('jks/securityCheck.properties')
+File signPropertiesFile = file('jks/scooter.properties')
 
 android {
     compileSdkVersion rootProject.ext.compile_sdk_version
@@ -68,11 +68,10 @@ android {
             }
         }
     }
-
     //渠道配置
     productFlavors {
         // 开发环境
-        bitDevelop {
+        xianDevelop {
             manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",//极光包名
                                     JPUSH_APPKEY : "f627660c5c4413338c49f79d", //JPush上注册的包名对应的AppKey.
                                     JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
@@ -82,7 +81,7 @@ android {
             buildConfigField "boolean", "IS_RELEASE_SERVER", RELEASE_SERVER_FALSE
         }
         // 测试环境
-        bitTest {
+        xianTest {
             manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",//极光包名
                                     JPUSH_APPKEY : "f627660c5c4413338c49f79d", //JPush上注册的包名对应的AppKey.
                                     JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
@@ -90,16 +89,6 @@ android {
             buildConfigField "String", "BASEAPI_SERVER_URL", TEST_BIT_BASEAPI_SERVER_URL
             buildConfigField "String", "MSG_BASEAPI_URL", TEST_MSG_BASEAPI_URL
             buildConfigField "boolean", "IS_RELEASE_SERVER", RELEASE_SERVER_FALSE
-        }
-
-        yingyongbao {
-            manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",//极光包名
-                                    JPUSH_APPKEY : "f627660c5c4413338c49f79d", //JPush上注册的包名对应的AppKey.
-                                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
-            ]
-            buildConfigField "String", "BASEAPI_SERVER_URL", RELEASE_BIT_BASEAPI_SERVER_URL
-            buildConfigField "String", "MSG_BASEAPI_URL", RELEASE_MSG_BASEAPI_URL
-            buildConfigField "boolean", "IS_RELEASE_SERVER", RELEASE_SERVER_TRUE
         }
     }
 

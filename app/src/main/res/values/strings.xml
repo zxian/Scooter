@@ -90,6 +90,7 @@
     <string name="event_name">赛事名称</string>
     <string name="event_input">请填写</string>
     <string name="event_time">比赛时间</string>
+    <string name="event_finish_time">比赛结束时间</string>
     <string name="event_start_time">报名开始时间</string>
     <string name="event_end_time">报名截止时间</string>
     <string name="event_info">赛事介绍</string>
@@ -103,5 +104,8 @@
     <string name="event_setup_type_price">报名费用(元)</string>
     <string name="event_setup_type_age_max">最大年龄(岁)</string>
     <string name="event_setup_type_age_min">最小年龄(岁)</string>
+    <string name="event_cancel_cause">取消原因</string>
+    <string name="event_cancel_cause_hint">请填写10个字以上的问题描述</string>
+    <string name="event_cancel_submit">提交申请</string>
 
 </resources>
