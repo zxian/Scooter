@@ -76,6 +76,8 @@ public class EventAdapter extends CommonRvAdapter<EventBean> {
                 default:
                     if (time >= start_time && time <= end_time) {
                         tvStatus.setText("报名中");
+//                        holder.setText(R.id.tv_money, eventBean.gettp());
+
                     } else {
                         tvStatus.setText("报名结束");
                     }

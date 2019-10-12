@@ -108,6 +108,9 @@ public class EventDetailsActivity extends BaseActivity {
                         String personnel_number = eventDetailsBean.getPersonnel_number();
                         String is_display = eventDetailsBean.getIs_display();//显示人员数量：0，不显示，1、显示
                         if ("1".equals(is_display)) {
+                            if (TextUtils.isEmpty(personnel_number)){
+                                personnel_number="0";
+                            }
                             tvNumber.setText("已报名：" +personnel_number+"人");
                         }
                         long start_time = TimeUtils.getStringToDate(eventDetailsBean.getStart_time(), "yyyy-MM-dd HH:mm:ss");//报名开始时间
