@@ -27,7 +27,9 @@
         android:roundIcon="@mipmap/ic_login_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.event.EventCancelActivity"></activity>
+        <activity android:name=".module.event.EventRecordDetailsActivity"></activity>
+        <activity android:name=".module.event.EventRecordActivity" />
+        <activity android:name=".module.event.EventCancelActivity" />
         <activity android:name=".module.event.EventAddSetupAddActivity" />
         <activity android:name=".module.stores.MessageActivity" />
         <activity android:name=".module.stores.CoachAddActivity" />

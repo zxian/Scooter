@@ -108,4 +108,25 @@
     <string name="event_cancel_cause_hint">请填写10个字以上的问题描述</string>
     <string name="event_cancel_submit">提交申请</string>
 
+    <string name="event_group">少年组</string>
+    <string name="event_area">广州市天河区</string>
+
+    <string name="event_sign_up_type">报名类型</string>
+    <string name="event_sign_up_user">报名用户</string>
+    <string name="event_user_nickname">用户昵称</string>
+    <string name="event_child_name">孩子姓名</string>
+    <string name="event_child_gender">孩子性别</string>
+    <string name="event_child_age">孩子年龄</string>
+    <string name="event_male">男</string>
+    <string name="event_phone">手机号码</string>
+    <string name="event_note">备注信息</string>
+    <string name="event_competition">参加少年组比赛</string>
+    <string name="event_clothes_size">衣服大小</string>
+    <string name="event_clothes_color">衣服颜色</string>
+    <string name="event_code">S码</string>
+    <string name="event_yellow">黄色</string>
+    <string name="event_black">黑色</string>
+    <string name="event_game_certification">比赛认证</string>
+    <string name="event_Sign_certification">签到认证</string>
+
 </resources>

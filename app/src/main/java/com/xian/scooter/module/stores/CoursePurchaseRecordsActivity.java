@@ -12,7 +12,7 @@ import com.xian.scooter.utils.TitleBarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PurchaseRecordsActivity extends BaseActivity {
+public class CoursePurchaseRecordsActivity extends BaseActivity {
 
 
     @BindView(R.id.title_bar_view)
