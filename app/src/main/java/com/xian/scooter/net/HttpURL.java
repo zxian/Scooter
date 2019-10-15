@@ -18,5 +18,6 @@ public class HttpURL {
     public static String COMPETITION_SAVE = "/competition/saveOrUpdateCompetition";
     public static String COMPETITION_SET_LIST = "/competitionSet/list/{competitionId}";
     public static String COMPETITION_SET_SAVE = "/competitionSet/saveOrUpdateCompetitionSet";
+    public static String COMPETITION_JOIN = "/competitionJoin/page/{size}/{current}";
 
 }

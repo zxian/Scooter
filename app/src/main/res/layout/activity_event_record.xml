@@ -58,15 +58,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/tv_right_text"
+            android:id="@+id/iv_right_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:src="@mipmap/ic_close"
-            android:textColor="@color/black_33"
-            android:textSize="15sp" />
+            android:src="@mipmap/ic_close" />
     </LinearLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView

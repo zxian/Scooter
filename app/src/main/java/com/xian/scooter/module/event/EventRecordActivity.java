@@ -2,6 +2,7 @@ package com.xian.scooter.module.event;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,8 +15,16 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.EventAddSetupBean;
+import com.xian.scooter.bean.EventRecordBean;
+import com.xian.scooter.bean.PageBean;
 import com.xian.scooter.module.adapter.EventAddSetupAdapter;
+import com.xian.scooter.module.adapter.EventRecordAdapter;
+import com.xian.scooter.net.ApiRequest;
+import com.xian.scooter.net.DefineCallback;
+import com.xian.scooter.net.HttpEntity;
+import com.xian.scooter.net.HttpURL;
 import com.xian.scooter.utils.TitleBarView;
+import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +40,8 @@ public class EventRecordActivity extends BaseActivity {
     EditText etSearch;
     @BindView(R.id.btn_clear_search)
     ImageView btnClearSearch;
-    @BindView(R.id.tv_right_text)
-    ImageView tvRightText;
+    @BindView(R.id.iv_right_text)
+    ImageView ivRightText;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
 
@@ -40,8 +49,8 @@ public class EventRecordActivity extends BaseActivity {
     private static int PAGE_INDEX = 1;//当前第几页
     private static final int PAGE_SIZE = 10;//每一页展示多少条数据
     private static int mCurrentCounter = 0;//已经获取到多少条数据了
-    private EventAddSetupAdapter adapter;
-    private List<EventAddSetupBean> list = new ArrayList<>();
+    private EventRecordAdapter adapter;
+    private List<EventRecordBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private String competitionId;
 
@@ -70,7 +79,7 @@ public class EventRecordActivity extends BaseActivity {
             public void onLoadMore() {
                 if (mCurrentCounter < TOTAL_COUNTER){
                     PAGE_INDEX++;
-
+                    getCompetitionJoin(PAGE_INDEX,PAGE_SIZE);
                 }else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
@@ -80,7 +89,7 @@ public class EventRecordActivity extends BaseActivity {
         recyclerView.setNestedScrollingEnabled(false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new EventAddSetupAdapter(mActivity,R.layout.item_event_record,list);
+        adapter = new EventRecordAdapter(mActivity,R.layout.item_event_record,list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mLRecyclerViewAdapter);
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -96,5 +105,41 @@ public class EventRecordActivity extends BaseActivity {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
+        getCompetitionJoin(PAGE_INDEX,PAGE_SIZE);
+    }
+
+    /**
+     *
+     * 获取用户报名记录分页数据
+     * @param size 每页显示数量
+     * @param current 当前页
+     */
+    private void getCompetitionJoin(int current ,int size) {
+            ApiRequest.getInstance().post(HttpURL.COMPETITION_JOIN.replace("{size}",
+                    size+"").replace("{current}", current+""), new DefineCallback<PageBean<EventRecordBean>>() {
+                @Override
+                public void onMyResponse(SimpleResponse<PageBean<EventRecordBean>, HttpEntity> response) {
+                    if (response.isSucceed()) {
+                        if (response.succeed() != null) {
+                            TOTAL_COUNTER = response.succeed().getTotal();
+                            List<EventRecordBean> list = response.succeed().getRecords();
+                            addItems(list);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onEnd() {
+                    recyclerView.refreshComplete(mCurrentCounter);
+                }
+            });
+
+    }
+    private void addItems(List<EventRecordBean> list){
+        if (list.size() > 0 && adapter != null){
+            mCurrentCounter += list.size();
+            adapter.updataItem(list);
+        }
     }
 }
