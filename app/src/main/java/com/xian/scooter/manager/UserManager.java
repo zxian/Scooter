@@ -91,17 +91,7 @@ public class UserManager {
         void requestUserInfoBean(UserInfoBean.UserBean bean);
     }
 
-    /**
-     * 获取用户信息
-     */
-    public void getUserInfo(Context context, String content,UserInfoInterface userInterface) {
-        UserInfoBean.UserBean userInfoBean = (UserInfoBean.UserBean ) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
-        if (userInfoBean!=null&& content!=null){
-            userInterface.requestUserInfoBean(userInfoBean);
-        }else {
-//            requestUserInfo(context,userInterface);
-        }
-    }
+
 
     public UserInfoBean.UserBean getUserInfo() {
         return (UserInfoBean.UserBean) PreferenceUtils.get().getObject(ConfigPF.USER_INFO_KEY);
@@ -144,43 +134,4 @@ public class UserManager {
 //        });
 //    }
 
-    /**
-     * 获取个人信息
-     */
-//    private void requestUserInfo(Context context,UserInfoInterface userInterface) {
-//        //缓存获取数据
-//        Map<String, String> map = new HashMap<>();
-//        NetworkDataCacheBean networkDataCacheBean = NetworkDataCacheBean.getCacheFromDB(ConfigCache.getInstance().getUserInfoKey(), map);
-//
-//        ApiRequest.getInstance().getUserInfo(new DefineCallback<UserInfoEntity>(context) {
-//            @Override
-//            public void onMyResponse(SimpleResponse<UserInfoEntity, HttpEntity> response) {
-//                if (response.isSucceed() && response.succeed() != null) {
-//                    UserInfoEntity userInfoEntity = response.succeed();
-//                    saveUserInfo(userInfoEntity, userInfo);
-//                    userInfo = getUserInfo();
-//                    userInterface.requestUserInfoBean(userInfo);
-//                    String resultJson = new Gson().toJson(response.succeed());
-//                    if (resultJson != null) {
-//                        new NetworkDataCacheBean(ConfigCache.getInstance().getUserInfoKey(), map, resultJson,
-//                                ConfigCacheTime.refresh_seconds_5, ConfigCacheTime.failure_day).save();
-//                    }
-//                } else {
-//                    if (networkDataCacheBean != null) {
-//                        try {
-//                            UserInfoEntity userInfoEntity = new Gson().fromJson(networkDataCacheBean.getJsonData(), UserInfoEntity.class);
-//                            if (userInfoEntity != null) {
-//                                saveUserInfo(userInfoEntity, userInfo);
-//                                userInfo = getUserInfo();
-//                                userInterface.requestUserInfoBean(userInfo);
-//                            }
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }
-//        });
-//
-//    }
 }

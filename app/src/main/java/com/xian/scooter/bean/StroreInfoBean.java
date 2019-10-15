@@ -1,6 +1,6 @@
 package com.xian.scooter.bean;
 
-public class StoreListBean {
+public class StroreInfoBean {
         /**
          * id : 3d6e70c0-8811-44cc-ae9b-2505cad09587
          * logo : http://zhouzhengxiang.oss-cn-shenzhen.aliyuncs.com/data/77771569923803844.png?Expires=1885283803&OSSAccessKeyId=LTAIqrVaCBf5RxNd&Signature=lfdsVi59KkDmiqMPXpy9K6bDuFw%3D
@@ -204,4 +204,5 @@ public class StoreListBean {
         public void setStatus(int status) {
             this.status = status;
         }
+
 }
