@@ -16,6 +16,13 @@
     <string name="register_pwd_confirm">请再次输入密码</string>
     <string name="register_agree">我已阅读并同意</string>
     <string name="register_agreement">《用户协议》</string>
+    
+    <string name="forgot_phone">请输入手机号码</string>
+    <string name="forgot_validation">验证码</string>
+    <string name="forgot_password">请输入密码</string>
+    <string name="forgot_repeat_password">请再次输入密码</string>
+    <string name="forgot_determine_password">确定密码</string>
+    <string name="forgot_reset_password">重置密码</string>
 
     <string name="register_stores_info">门店信息</string>
     <string name="register_stores_name">门店名称</string>

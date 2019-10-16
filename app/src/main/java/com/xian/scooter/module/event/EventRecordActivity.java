@@ -1,5 +1,6 @@
 package com.xian.scooter.module.event;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -95,7 +96,10 @@ public class EventRecordActivity extends BaseActivity {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(mActivity,EventRecordDetailsActivity.class);
+                String msg = adapter.getDatas().get(position).getId();
+                intent.putExtra("data",msg);
+                startActivity(intent);
             }
         });
 
