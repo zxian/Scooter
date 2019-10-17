@@ -41,12 +41,7 @@ public class CourseGivingActivity extends BaseActivity {
         titleBarView.setLeftOnClickListener(view -> finish());
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 
     @OnClick(R.id.tv_giving)
     public void onViewClicked() {

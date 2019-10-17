@@ -39,5 +39,6 @@ public class ForgotPasswordPar {
         BaseApplication.getInstance().getKalleConfig()
                 .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));
 
+
     }
 }

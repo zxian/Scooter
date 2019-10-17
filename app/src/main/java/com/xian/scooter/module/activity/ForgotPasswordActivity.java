@@ -97,7 +97,7 @@ public class ForgotPasswordActivity extends BaseActivity {
      * @param newPassword  新密码
      * @param hone  手机号码
      */
-    private void getSmss(String code,String newPassword,String hone) {
+    private void getCust(String code,String newPassword,String hone) {
 
         ForgotPasswordPar par = new ForgotPasswordPar();
         par.setPhone(hone);
@@ -167,7 +167,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                     ToastUtils.showToast("密码与再次输入密码不一致！");
                     return;
                 }
-                getSmss(code,password,phone1);
+                getCust(code,password,phone1);
                 break;
         }
 

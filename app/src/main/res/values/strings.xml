@@ -78,6 +78,7 @@
     <string name="course_phone">用户手机号码</string>
     <string name="course_type">使用类型</string>
     <string name="course_effective_period">有效期</string>
+    <string name="course_select">请选择></string>
     <string name="course_number">课程次数</string>
     <string name="course_time">次</string>
     <string name="course_giving">赠送</string>

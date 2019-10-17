@@ -23,4 +23,9 @@ public class HttpURL {
     public static String COMPETITION_JOIN = "/competitionJoin/page/{size}/{current}";
     public static String COMPETITION_JOIN_BYID= "/competitionJoin/byId/{id}";
 
+    //课程包
+    public static String PACKAGE_PAGE= "/package/page/{size}/{current}";
+    public static String PACKAGE_SAVEORUPDATE= "/package/saveOrUpdate";
+
+
 }

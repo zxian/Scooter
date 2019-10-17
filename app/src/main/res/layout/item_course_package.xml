@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_f6"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/horn_gray_f6_20dp"
+        android:background="@drawable/horn_white_bg_20dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -21,42 +23,56 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_course_name"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:textColor="@color/black_33"
-            android:text="6+1课程包"/>
+            tools:text="6+1课程包"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:id="@+id/tv_time"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
             android:textSize="14sp"
-            android:text="课程次数：7次"/>
+            tools:text="课程次数：7次"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:id="@+id/tv_time_limit"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:textSize="14sp"
             android:textColor="@color/red"
-            android:text="有效期：购买起60天"/>
+            tools:text="有效期：购买起60天"/>
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/blue_right_r5"
+            android:id="@+id/tv_price"
             android:textSize="25sp"
+            android:textColor="@color/white"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="￥60"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"/>
+            tools:text="￥60"/>
+ <LinearLayout
+     android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     android:gravity="center"
+     android:layout_weight="1">
+        <Switch
+            android:id="@+id/sw_select"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector" />
+    </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
