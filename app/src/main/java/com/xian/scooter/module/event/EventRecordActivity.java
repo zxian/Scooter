@@ -3,7 +3,9 @@ package com.xian.scooter.module.event;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,6 +66,22 @@ public class EventRecordActivity extends BaseActivity {
     protected void init() {
         titleBarView.setTvTitleText("报名记录");
         titleBarView.setLeftOnClickListener(view -> finish());
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String search = etSearch.getText().toString().trim();
+
+            }
+        });
         initRecyclerView();
         onMyRefresh();
     }

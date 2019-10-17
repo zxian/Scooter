@@ -20,9 +20,19 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.CoachBean;
+import com.xian.scooter.bean.EventBean;
+import com.xian.scooter.bean.PageBean;
+import com.xian.scooter.beanpar.EventPar;
+import com.xian.scooter.net.ApiRequest;
+import com.xian.scooter.net.DefineCallback;
+import com.xian.scooter.net.HttpEntity;
+import com.xian.scooter.net.HttpURL;
+import com.xian.scooter.utils.TimeUtils;
 import com.xian.scooter.utils.TitleBarView;
+import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,6 +60,12 @@ public class CoachActivity extends BaseActivity {
     private DialogCreate mDialogCreate;
     private CommonLvAdapter<CoachBean> mAdapter;
     private List<CoachBean> coachList = new ArrayList<>();
+    private String storeId;
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        storeId=intent.getStringExtra("storeId");
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -72,7 +88,7 @@ public class CoachActivity extends BaseActivity {
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
                     //网络请求获取列表数据
-                    getDocList(PAGE_INDEX, PAGE_SIZE);
+                    getCoachList(storeId,PAGE_INDEX, PAGE_SIZE);
                 } else {
                     refreshLayout.finishLoadMoreWithNoMoreData();//设置之后，将不会再触发加载事件
                 }
@@ -80,12 +96,6 @@ public class CoachActivity extends BaseActivity {
         });
         initListview();
         onMyRefresh();
-
-        coachList.add(new CoachBean());
-        coachList.add(new CoachBean());
-        coachList.add(new CoachBean());
-        mAdapter.notifyDataSetChanged();
-
     }
 
     private void initListview() {
@@ -175,37 +185,56 @@ public class CoachActivity extends BaseActivity {
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
         coachList.clear();
-        getDocList(PAGE_INDEX, PAGE_SIZE);
+        getCoachList(storeId,PAGE_INDEX, PAGE_SIZE);
     }
 
     /**
-     * 品牌资料文档列表
+     * 门店教练列表
+     *
+     * @param storeId  门店id
+     * @param pageNum  页码
+     * @param pageSize 查询数量
      */
-    private void getDocList(int page, int size) {
-//        //缓存获取数据
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("mine", true);
-//        map.put("page", page);
-//        map.put("size", size);
-//        ApiRequest.getInstance().getDocList(JSON.toJSONString(map), new DefineCallback<BrandInformationDocBean>(mActivity) {
-//            @Override
-//            public void onMyResponse(SimpleResponse<BrandInformationDocBean, HttpEntity> response) {
-//                if (response.isSucceed()) {
-//                }
-//            }
-//
-//            @Override
-//            public void onEnd() {
-//                super.onEnd();
-//                if (refreshLayout != null) {
-//                    refreshLayout.finishRefresh();
-//                    refreshLayout.finishLoadMore();
-//                    refreshLayout.setNoMoreData(false);//恢复上拉状态
-//                }
-//            }
-//        });
-    }
+    private void getCoachList(String storeId,int pageNum, int pageSize) {
+        ApiRequest.getInstance().get(HttpURL.COACH_LIST.replace("{storeId}", storeId)
+                .replace("{size}", pageSize + "")
+                .replace("{current}", pageNum + ""),new DefineCallback<PageBean<EventBean>>() {
+            @Override
+            public void onMyResponse(SimpleResponse<PageBean<EventBean>, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    if (response.succeed() != null) {
+                        TOTAL_COUNTER = response.succeed().getTotal();
+                        List<EventBean> list = response.succeed().getRecords();
+                        addItems(list);
+                    }
 
+                }
+            }
+
+            @Override
+            public void onEnd() {
+                super.onEnd();
+                if (refreshLayout != null) {
+                    refreshLayout.finishRefresh();
+                    refreshLayout.finishLoadMore();
+                    refreshLayout.setNoMoreData(false);//恢复上拉状态
+                }
+            }
+        });
+    }
+    /**
+     * 添加数据到列表
+     *
+     * @param list 数据列表
+     */
+    private void addItems(List<EventBean> list) {
+        if (list.size() > 0 && mAdapter != null) {
+//            mCurrentCounter += list.size();
+//            coachList.addAll(list)
+//            mAdapter.setmDatas(coachList);
+
+        }
+    }
     @OnClick(R.id.tv_add)
     public void onViewClicked() {
         startActivity(new Intent(mActivity,CoachAddActivity.class));

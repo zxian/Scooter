@@ -16,7 +16,7 @@
     <string name="register_pwd_confirm">请再次输入密码</string>
     <string name="register_agree">我已阅读并同意</string>
     <string name="register_agreement">《用户协议》</string>
-    
+
     <string name="forgot_phone">请输入手机号码</string>
     <string name="forgot_validation">验证码</string>
     <string name="forgot_password">请输入密码</string>
@@ -46,6 +46,15 @@
     <string name="register_stores_code">社会统一信用代码</string>
     <string name="register_stores_picture">营业执照图片</string>
     <string name="register_stores_apply">申请门店</string>
+
+    <string name="stores_info_name">门店名称</string>
+    <string name="stores_info_logo">门店LOGO</string>
+    <string name="stores_info_location">门店位置</string>
+    <string name="stores_info_address">门店地址</string>
+    <string name="stores_info_introduce">门店介绍</string>
+    <string name="stores_info_bg">门店背景图</string>
+    <string name="stores_info_phone">门店热线</string>
+    <string name="stores_info_pwd">登录密码</string>
 
     <string name="search">搜索</string>
     <string name="cancel">取消</string>
@@ -115,8 +124,6 @@
     <string name="event_cancel_cause_hint">请填写10个字以上的问题描述</string>
     <string name="event_cancel_submit">提交申请</string>
 
-    <string name="event_group">少年组</string>
-    <string name="event_area">广州市天河区</string>
 
     <string name="event_sign_up_type">报名类型</string>
     <string name="event_sign_up_user">报名用户</string>

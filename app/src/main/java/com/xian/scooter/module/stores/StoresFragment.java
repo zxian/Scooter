@@ -63,6 +63,7 @@ public class StoresFragment extends BaseFragment {
 
     public static List<Integer> list = new ArrayList<>();
     private CommonLvAdapter<Integer> itemAdapter;
+    private String storeId;
 
     public static StoresFragment newInstance() {
         return new StoresFragment();
@@ -97,7 +98,9 @@ public class StoresFragment extends BaseFragment {
         gvItem.setOnItemClickListener((parent, view1, position, id) -> {
             switch (position){
                 case 0://教练
-                    startActivity(new Intent(mActivity,CoachActivity.class));
+                    Intent intent = new Intent(mActivity, CoachActivity.class);
+                    intent.putExtra("storeId", storeId);
+                    startActivity(intent);
                     break;
                 case 1://会员
                     startActivity(new Intent(mActivity,MembersActivity.class));
@@ -113,6 +116,9 @@ public class StoresFragment extends BaseFragment {
                 case 5://我的互动
                     break;
                 case 6://门店信息
+                    intent = new Intent(mActivity, StoresInfoActivity.class);
+                    intent.putExtra("storeId", storeId);
+                    startActivity(intent);
                     break;
                 case 7://消息中心
                     startActivity(new Intent(mActivity,MessageActivity.class));
@@ -140,8 +146,8 @@ public class StoresFragment extends BaseFragment {
                     if (succeed!=null){
                         if (succeed.getRecords()!=null&&succeed.getRecords().size()>0){
                             List<StoreListBean> storeList = succeed.getRecords();
-                            String id = storeList.get(0).getId();
-                            getStoreByid(id);
+                            storeId = storeList.get(0).getId();
+                            getStoreByid(storeId);
                         }
                     }
                 } else {
