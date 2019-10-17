@@ -41,7 +41,7 @@ public class CoursePackageActivity extends BaseActivity {
                 startActivity(new Intent(mActivity,NewCourseActivity.class));
                 break;
             case R.id.tv_give:
-                startActivity(new Intent(mActivity,GivingActivity.class));
+                startActivity(new Intent(mActivity,CourseGivingActivity.class));
                 break;
         }
     }

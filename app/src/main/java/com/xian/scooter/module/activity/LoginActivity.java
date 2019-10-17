@@ -151,6 +151,7 @@ public class LoginActivity extends BaseActivity {
                 login(phone, pwd);
                 break;
             case R.id.tv_forget_pwd:
+                startActivity(new Intent(mActivity,ForgotPasswordActivity.class));
                 break;
             case R.id.iv_wechat:
                 break;

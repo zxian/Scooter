@@ -190,6 +190,7 @@ public class EventDetailsActivity extends BaseActivity {
                 mDialogCreate.showSingle();
                 break;
             case R.id.tv_btn_2:
+                startActivity(new Intent(mActivity,EventRecordActivity.class));
                 break;
             case R.id.tv_btn_3:
                 startActivity(new Intent(mActivity,EventCancelActivity.class));

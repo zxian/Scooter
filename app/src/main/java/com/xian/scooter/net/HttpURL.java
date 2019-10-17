@@ -7,10 +7,12 @@ public class HttpURL {
     public static String REGISTER = "/cust/register";
     public static String SMS = "/sms/message/{phoneNumber}/{source}";
     public static String FILE_UPLOAD = "/file/headImgUpload";
+    public static String CUST = "/cust/pwd";
 
     //门店
     public static String STORE_ADD = "/store/add";
     public static String STORE_LIST = "/store/page/{size}/{current}";
+    public static String STORE_BYID = "/store/byId/{storeId}";
 
     //赛事
     public static String COMPETITION_LIST = "/competition/page/{size}/{current}";
@@ -18,5 +20,7 @@ public class HttpURL {
     public static String COMPETITION_SAVE = "/competition/saveOrUpdateCompetition";
     public static String COMPETITION_SET_LIST = "/competitionSet/list/{competitionId}";
     public static String COMPETITION_SET_SAVE = "/competitionSet/saveOrUpdateCompetitionSet";
+    public static String COMPETITION_JOIN = "/competitionJoin/page/{size}/{current}";
+    public static String COMPETITION_JOIN_BYID= "/competitionJoin/byId/{id}";
 
 }

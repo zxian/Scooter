@@ -18,8 +18,8 @@
         <ImageView
             android:id="@+id/iv_picture"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/theme" />
+            android:scaleType="fitXY"
+            android:layout_height="150dp" />
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -29,8 +29,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="-40dp"
             android:background="@color/white"
-            android:padding="2dp"
-            android:src="@mipmap/ic_login_logo" />
+            android:padding="2dp"/>
 
         <TextView
             android:id="@+id/tv_name"
@@ -41,7 +40,7 @@
             android:layout_toEndOf="@+id/iv_logo"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="商店" />
+            tools:text="商店" />
 
         <TextView
             android:id="@+id/tv_star"
@@ -68,7 +67,7 @@
             android:lines="1"
             android:textColor="@color/gray_99"
             android:textSize="14sp"
-            android:text="商店介绍" />
+            tools:text="商店介绍" />
 
         <View
             android:layout_width="match_parent"
