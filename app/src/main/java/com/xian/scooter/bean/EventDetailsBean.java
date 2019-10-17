@@ -26,7 +26,7 @@ public class EventDetailsBean {
 
     private String id;
     private String competition_name;
-    private String personnel_number;
+    private int personnel_number;
     private String posters_url;
     private String official_time;
     private String start_time;
@@ -65,11 +65,11 @@ public class EventDetailsBean {
         this.competition_name = competition_name;
     }
 
-    public String getPersonnel_number() {
+    public int getPersonnel_number() {
         return personnel_number;
     }
 
-    public void setPersonnel_number(String personnel_number) {
+    public void setPersonnel_number(int personnel_number) {
         this.personnel_number = personnel_number;
     }
 

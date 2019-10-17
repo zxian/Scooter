@@ -43,6 +43,7 @@ public class StoreListBean {
         private String create_time;
         private String create_user_id;
         private String update_time;
+        private String phone;
         private int status;
 
         public String getId() {
@@ -197,7 +198,15 @@ public class StoreListBean {
             this.update_time = update_time;
         }
 
-        public int getStatus() {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getStatus() {
             return status;
         }
 

@@ -14,6 +14,9 @@ public class HttpURL {
     public static String STORE_LIST = "/store/page/{size}/{current}";
     public static String STORE_BYID = "/store/byId/{storeId}";
 
+    //教练
+    public static String COACH_LIST = "/cust/selectCustUserList/{storeId}/{current}/{size}";
+
     //赛事
     public static String COMPETITION_LIST = "/competition/page/{size}/{current}";
     public static String COMPETITION_DETAILS = "/competition/byId/{id}";
