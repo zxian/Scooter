@@ -82,6 +82,10 @@
     <string name="coach_add_phone">教练手机号码</string>
     <string name="coach_add_pwd">密码</string>
     <string name="coach_add_state">状态</string>
+    <string name="coach_label_title">选择适合你的标签</string>
+    <string name="coach_label_hint">请设置6个最符合的标签</string>
+    <string name="coach_label_add">+自定义添加</string>
+    <string name="coach_label_into_hint">请输入你想添加的的教练标签</string>
 
     <string name="course_name">课程名称</string>
     <string name="course_phone">用户手机号码</string>

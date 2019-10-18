@@ -42,9 +42,15 @@
         <item>@mipmap/ic_stores_interactive</item>
         <item>@mipmap/ic_stores_information</item>
         <item>@mipmap/ic_stores_message</item>
-    </string-array>\
+    </string-array>
     <string-array name="stores_type">
         <item>个人</item>
         <item>企业</item>
+    </string-array>
+    <string-array name="label_type">
+        <item>耐心</item>
+        <item>乐观</item>
+        <item>阳光</item>
+        <item>细心</item>
     </string-array>
 </resources>

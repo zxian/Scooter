@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -13,6 +15,9 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.bit.adapter.lvadapter.CommonLvAdapter;
 import com.bit.adapter.lvadapter.ViewHolderLv;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.kzz.dialoglibraries.dialog.DialogCreate;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -29,15 +34,20 @@ import com.xian.scooter.net.HttpEntity;
 import com.xian.scooter.net.HttpURL;
 import com.xian.scooter.utils.TimeUtils;
 import com.xian.scooter.utils.TitleBarView;
+import com.xian.scooter.view.flowlayout.FlowLayout;
+import com.xian.scooter.view.flowlayout.TagAdapter;
+import com.xian.scooter.view.flowlayout.TagFlowLayout;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.xian.scooter.utils.UISizeUtils.dp2px;
 
@@ -54,7 +64,7 @@ public class CoachActivity extends BaseActivity {
 
     private static int TOTAL_COUNTER = 0;
     private static int PAGE_INDEX = 1;
-    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_SIZE = 1000;
     private static int mCurrentCounter = 0;
 
     private DialogCreate mDialogCreate;
@@ -64,7 +74,7 @@ public class CoachActivity extends BaseActivity {
 
     @Override
     protected void handleIntent(Intent intent) {
-        storeId=intent.getStringExtra("storeId");
+        storeId = intent.getStringExtra("storeId");
     }
 
     @Override
@@ -88,7 +98,7 @@ public class CoachActivity extends BaseActivity {
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
                     //网络请求获取列表数据
-                    getCoachList(storeId,PAGE_INDEX, PAGE_SIZE);
+                    getCoachList(storeId, PAGE_INDEX, PAGE_SIZE);
                 } else {
                     refreshLayout.finishLoadMoreWithNoMoreData();//设置之后，将不会再触发加载事件
                 }
@@ -102,7 +112,47 @@ public class CoachActivity extends BaseActivity {
         mAdapter = new CommonLvAdapter<CoachBean>(this, R.layout.item_coach, coachList) {
             @Override
             protected void convert(final ViewHolderLv holder, CoachBean bean, final int position) {
-//                holder.setText(R.id.tv_name, bean.getName());
+                ImageView ivPicture = holder.getView(R.id.iv_picture);
+                RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
+                options.bitmapTransform(new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
+                Glide.with(mContext)
+                        .load(bean.getHead_mage_url())
+                        .apply(options)
+                        .into(ivPicture);
+
+                holder.setText(R.id.tv_name, bean.getName());
+                holder.setText(R.id.tv_phone,"电话号码："+ bean.getAccount());
+
+                List<String> labelList =new ArrayList<>();
+                String user_tag = bean.getUser_tag();
+                if (user_tag.indexOf('、')!=-1){
+                    String[] split = user_tag.split("、");
+                    labelList= Arrays.asList(split);
+                }
+                TagFlowLayout flowLayout = holder.getView(R.id.flow_layout);
+                TagAdapter<String> tagAdapter = new TagAdapter<String>(labelList) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, String s) {
+
+                        TextView tv = new TextView(CoachActivity.this);
+                        tv.setText(s);
+                        tv.setTextSize(12);
+                        tv.setTextColor(getResources().getColor(R.color.white));
+                        tv.setBackgroundResource(R.drawable.horn_theme_5dp);
+                        tv.setPadding(5, 2, 5, 2);
+                        return tv;
+                    }
+                };
+                flowLayout.setAdapter(tagAdapter);
+
+
+                Switch swSelect = holder.getView(R.id.sw_select);
+                String store_state = bean.getStore_state();
+                if ("1".equals(store_state)) {//1 启用 2 禁用
+                    swSelect.setChecked(true);
+                } else {
+                    swSelect.setChecked(false);
+                }
             }
         };
 
@@ -127,7 +177,7 @@ public class CoachActivity extends BaseActivity {
                 SwipeMenuItem item = new SwipeMenuItem(mActivity);
                 item.setWidth(dp2px(60));
                 item.setTitle("编辑");
-                item.setBackground(R.color.red_alter);
+                item.setBackground(R.drawable.horn_alter_20dp);
                 item.setTitleColor(mActivity.getResources().getColor(R.color.white));
                 item.setTitleSize(15);
                 menu.addMenuItem(item);
@@ -135,7 +185,7 @@ public class CoachActivity extends BaseActivity {
                 SwipeMenuItem itemDelete = new SwipeMenuItem(mActivity);
                 itemDelete.setWidth(dp2px(60));
                 itemDelete.setTitle("删除");
-                itemDelete.setBackground(R.color.red_delete);
+                itemDelete.setBackground(R.drawable.horn_delete_20dp);
                 itemDelete.setTitleColor(mActivity.getResources().getColor(R.color.white));
                 itemDelete.setTitleSize(15);
                 menu.addMenuItem(itemDelete);
@@ -185,7 +235,7 @@ public class CoachActivity extends BaseActivity {
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
         coachList.clear();
-        getCoachList(storeId,PAGE_INDEX, PAGE_SIZE);
+        getCoachList(storeId, PAGE_INDEX, PAGE_SIZE);
     }
 
     /**
@@ -195,16 +245,17 @@ public class CoachActivity extends BaseActivity {
      * @param pageNum  页码
      * @param pageSize 查询数量
      */
-    private void getCoachList(String storeId,int pageNum, int pageSize) {
+    private void getCoachList(String storeId, int pageNum, int pageSize) {
         ApiRequest.getInstance().get(HttpURL.COACH_LIST.replace("{storeId}", storeId)
                 .replace("{size}", pageSize + "")
-                .replace("{current}", pageNum + ""),new DefineCallback<PageBean<EventBean>>() {
+                .replace("{current}", pageNum + ""), new DefineCallback<List<CoachBean>>() {
             @Override
-            public void onMyResponse(SimpleResponse<PageBean<EventBean>, HttpEntity> response) {
+            public void onMyResponse(SimpleResponse<List<CoachBean>, HttpEntity> response) {
                 if (response.isSucceed()) {
                     if (response.succeed() != null) {
-                        TOTAL_COUNTER = response.succeed().getTotal();
-                        List<EventBean> list = response.succeed().getRecords();
+//                        TOTAL_COUNTER = response.succeed().getTotal();
+//                        List<CoachBean> list = response.succeed().getRecords();
+                        List<CoachBean> list = response.succeed();
                         addItems(list);
                     }
 
@@ -222,21 +273,25 @@ public class CoachActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * 添加数据到列表
      *
      * @param list 数据列表
      */
-    private void addItems(List<EventBean> list) {
+    private void addItems(List<CoachBean> list) {
         if (list.size() > 0 && mAdapter != null) {
-//            mCurrentCounter += list.size();
-//            coachList.addAll(list)
-//            mAdapter.setmDatas(coachList);
-
+            mCurrentCounter += list.size();
+            coachList.addAll(list);
+            mAdapter.setmDatas(coachList);
+            mAdapter.notifyDataSetChanged();
         }
     }
+
     @OnClick(R.id.tv_add)
     public void onViewClicked() {
-        startActivity(new Intent(mActivity,CoachAddActivity.class));
+        Intent intent = new Intent(mActivity, CoachAddActivity.class);
+        intent.putExtra("storeId", storeId);
+        startActivity(intent);
     }
 }

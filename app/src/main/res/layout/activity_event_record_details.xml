@@ -43,7 +43,7 @@
             android:gravity="right"
             android:textSize="14sp"
             android:textColor="@color/black_33"
-            android:text="@string/event_group"/>
+            android:text="111"/>
 
 
     </LinearLayout>

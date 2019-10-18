@@ -56,7 +56,6 @@
         android:gravity="center"
         android:textColor="@color/black_33"
         android:textSize="18dp"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <ImageView

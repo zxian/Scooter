@@ -22,12 +22,13 @@
     <application
         android:name=".app.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_login_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_login_logo"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.stores.StoresInfoActivity"></activity>
+        <activity android:name=".module.stores.CoachLabelActivity" />
+        <activity android:name=".module.stores.StoresInfoActivity" />
         <activity android:name=".module.activity.ForgotPasswordActivity" />
         <activity android:name=".module.event.EventRecordDetailsActivity" />
         <activity android:name=".module.event.EventRecordActivity" />
@@ -36,7 +37,7 @@
         <activity android:name=".module.stores.MessageActivity" />
         <activity android:name=".module.stores.CoachAddActivity" />
         <activity android:name=".module.event.EventAddSetupActivity" />
-        <activity android:name=".module.event.EventAddInfoActivity" />
+        <activity android:name=".module.event.AddInfoActivity" />
         <activity android:name=".module.event.EventAddActivity" />
         <activity android:name=".module.event.EventDetailsActivity" />
         <activity android:name=".module.stores.FinancialActivity" />
@@ -52,7 +53,8 @@
         <activity android:name=".module.activity.RegisterActivity" />
         <activity android:name=".module.activity.SearchActivity" />
         <activity android:name=".module.activity.LoginActivity" />
-        <activity android:name=".module.activity.MainActivity">
+        <activity android:name=".module.activity.MainActivity"/>
+        <activity android:name=".module.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

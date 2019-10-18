@@ -9,7 +9,7 @@ import com.xian.scooter.utils.TitleBarView;
 
 import butterknife.BindView;
 
-public class EventAddInfoActivity extends BaseActivity {
+public class AddInfoActivity extends BaseActivity {
 
     @BindView(R.id.title_bar_view)
     TitleBarView titleBarView;
@@ -17,7 +17,12 @@ public class EventAddInfoActivity extends BaseActivity {
     EditText etContent;
 
     private String content;
+    private String name;
 
+    @Override
+    protected void handleIntent(Intent intent) {
+        name = intent.getStringExtra("name");
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -26,7 +31,7 @@ public class EventAddInfoActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        titleBarView.setTvTitleText("赛事介绍");
+        titleBarView.setTvTitleText(name);
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         titleBarView.setRightText("完成");
         titleBarView.setRightOnClickListener(view -> {

@@ -183,6 +183,10 @@ public class EventAddActivity extends BaseActivity {
                 if (response.isSucceed()) {
                     ToastUtils.showToast("提交成功！");
                     finish();
+                }else {
+                    if (response.failed()!=null){
+                        ToastUtils.showToast(response.failed().getMessage());
+                    }
                 }
             }
 
@@ -209,7 +213,9 @@ public class EventAddActivity extends BaseActivity {
                 onMonthDayTimePicker(4);
                 break;
             case R.id.tv_info:
-                startActivityForResult(new Intent(mActivity,EventAddInfoActivity.class),INFO_REQUEST_CODE);
+                Intent intent = new Intent(mActivity, AddInfoActivity.class);
+                intent.putExtra("name","赛事介绍");
+                startActivityForResult(intent,INFO_REQUEST_CODE);
                 break;
             case R.id.tv_setup:
                 startActivityForResult(new Intent(mActivity,EventAddSetupAddActivity.class),SETUP_REQUEST_CODE);

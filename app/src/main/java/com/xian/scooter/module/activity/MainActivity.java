@@ -51,16 +51,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        String userToken = UserManager.getInstance().getUserToken();
-        if (TextUtils.isEmpty(userToken)){
-            finish();
-            startActivity(new Intent(mActivity,LoginActivity.class));
-        }
-    }
-
-    @Override
     protected void init() {
 
         mFragmentManager = getSupportFragmentManager();
