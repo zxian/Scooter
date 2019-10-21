@@ -148,4 +148,14 @@
     <string name="event_game_certification">比赛认证</string>
     <string name="event_Sign_certification">签到认证</string>
 
+    <string name="set_up_message">消息免打扰</string>
+    <string name="set_up_feedback">意见反馈</string>
+    <string name="set_up_problem">常见问题</string>
+    <string name="set_up_about">关于我们</string>
+    <string name="set_up_log_out">退出登录</string>
+
+    <string name="set_up_feedback_content">反馈内容</string>
+    <string name="srt_up_submit_feedback">提交反馈</string>
+    <string name="set_up_feedback_describe">请填写10个字以上的问题描述</string>
+
 </resources>

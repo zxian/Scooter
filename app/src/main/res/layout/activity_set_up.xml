@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".module.stores.SetUpActivity">
+
+    <com.xian.scooter.utils.TitleBarView
+        android:id="@+id/title_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_message"/>
+
+        <Switch
+            android:id="@+id/switch_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_feedback"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_feedback"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_feedback"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_into"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_problem"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_problem"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_problem"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_into"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_about"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_about"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_about"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_into"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/set_up_log_out"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="60dp"
+        android:paddingRight="125dp"
+        android:paddingLeft="125dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:gravity="center"
+        android:background="@drawable/horn_theme_20dp"/>
+
+
+</LinearLayout>
