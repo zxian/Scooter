@@ -53,4 +53,10 @@
         <item>阳光</item>
         <item>细心</item>
     </string-array>
+    <string-array name="financial_type">
+        <item>全部</item>
+        <item>赛事报名</item>
+        <item>课程购买</item>
+        <item>提现</item>
+    </string-array>
 </resources>

@@ -86,11 +86,10 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
             }
         });
 
-        recyclerView.setNestedScrollingEnabled(false);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter = new CoursePurchaseRecordsAdapter(mActivity,R.layout.item_record,list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
+        recyclerView.setAdapter(mLRecyclerViewAdapter);
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

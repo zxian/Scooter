@@ -1,13 +1,11 @@
 package com.xian.scooter.module.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bit.adapter.rvadapter.CommonRvAdapter;
 import com.bit.adapter.rvadapter.ViewHolderRv;
-import com.xian.scooter.base.BaseActivity;
+import com.xian.scooter.R;
 import com.xian.scooter.bean.CoursePurchaseRecordsBean;
 
 import java.util.List;
@@ -25,6 +23,10 @@ public class CoursePurchaseRecordsAdapter extends CommonRvAdapter<CoursePurchase
 
     @Override
     public void convert(ViewHolderRv holder, CoursePurchaseRecordsBean coursePurchaseRecordsBean, int position) {
+        ImageView ivLogo = holder.getView(R.id.iv_logo);
+//        Glide.with(mContext).load(coursePurchaseRecordsBean.get()).into(ivLogo);
+        holder.setText(R.id.tv_title,coursePurchaseRecordsBean.getPackage_name());
+        holder.setText(R.id.tv_time,coursePurchaseRecordsBean.getCreate_time());
 
     }
 

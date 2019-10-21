@@ -16,6 +16,7 @@ public class HttpURL {
 
     //教练
     public static String COACH_LIST = "/cust/selectCustUserList/{storeId}/{current}/{size}";
+    public static String CUST_LIST = "/cust/page/{size}/{current}";
     public static String CUST_ADD = "/cust/add";
     public static String CUST_EDIT = "/cust/edit";
 
@@ -27,6 +28,7 @@ public class HttpURL {
     public static String COMPETITION_SET_SAVE = "/competitionSet/saveOrUpdateCompetitionSet";
     public static String COMPETITION_JOIN = "/competitionJoin/page/{size}/{current}";
     public static String COMPETITION_JOIN_BYID= "/competitionJoin/byId/{id}";
+    public static String COMPETITION_UPDATE_STATE= "/competition/updateCompetitionState";
 
     //课程包
     public static String PACKAGE_PAGE= "/package/page/{size}/{current}";

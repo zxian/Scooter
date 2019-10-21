@@ -13,6 +13,9 @@ import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.EventBean;
 import com.xian.scooter.bean.EventDetailsBean;
 import com.xian.scooter.bean.PageBean;
+import com.xian.scooter.beanpar.EventPar;
+import com.xian.scooter.beanpar.EventStatePar;
+import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
@@ -23,6 +26,7 @@ import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -153,6 +157,7 @@ public class EventDetailsActivity extends BaseActivity {
 
         });
     }
+
     @OnClick({R.id.tv_btn_1, R.id.tv_btn_2, R.id.tv_btn_3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -193,7 +198,11 @@ public class EventDetailsActivity extends BaseActivity {
                 startActivity(new Intent(mActivity,EventRecordActivity.class));
                 break;
             case R.id.tv_btn_3:
-                startActivity(new Intent(mActivity,EventCancelActivity.class));
+                Intent intent = new Intent(mActivity, EventCancelActivity.class);
+                if (eventDetailsBean!=null) {
+                    intent.putExtra("id", eventDetailsBean.getId());
+                }
+                startActivity(intent);
                 break;
         }
     }

@@ -107,7 +107,9 @@ public class StoresFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case 1://会员
-                    startActivity(new Intent(mActivity,MembersActivity.class));
+                    intent = new Intent(mActivity, MembersActivity.class);
+                    intent.putExtra("storeId", storeId);
+                    startActivity(intent);
                     break;
                 case 2://课程包
                     startActivity(new Intent(mActivity,CoursePackageActivity.class));
