@@ -17,6 +17,7 @@ public class HttpURL {
     //教练
     public static String COACH_LIST = "/cust/selectCustUserList/{storeId}/{current}/{size}";
     public static String CUST_ADD = "/cust/add";
+    public static String CUST_EDIT = "/cust/edit";
 
     //赛事
     public static String COMPETITION_LIST = "/competition/page/{size}/{current}";

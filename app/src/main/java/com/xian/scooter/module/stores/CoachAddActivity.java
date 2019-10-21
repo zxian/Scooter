@@ -24,6 +24,7 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
+import com.xian.scooter.bean.CoachBean;
 import com.xian.scooter.beanpar.CompetitionSavePar;
 import com.xian.scooter.beanpar.CustAddPar;
 import com.xian.scooter.beanpar.EventAddPar;
@@ -42,6 +43,7 @@ import com.xian.scooter.utils.UploadPicturesUtils;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.io.File;
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,11 +87,13 @@ public class CoachAddActivity extends BaseActivity {
     private String label;
     private String state;
     private String storeId;
-    private List<CustAddPar.VideosBean> videosList=new ArrayList<>();
+    private List<CustAddPar.VideosBean> videosList = new ArrayList<>();
     private CustAddPar.VideosBean videosBean = new CustAddPar.VideosBean();
     private int uploadType; //上传类型 1 照片 2 视频
     private String videoPath;
-    private boolean isVideo=true;//是否是上传视频， false：缩略图
+    private boolean isVideo = true;//是否是上传视频， false：缩略图
+    private int coachType;//1 新增 2 编辑
+    private CoachBean coachBean;
 
 
     private static class MyHandler extends Handler {
@@ -106,21 +110,21 @@ public class CoachAddActivity extends BaseActivity {
 
             switch (msg.what) {
                 case 1:
-                    if (activity.uploadType==1) {
+                    if (activity.uploadType == 1) {
                         activity.pathList = (List<String>) msg.obj;
                         if (activity.pathList != null && activity.pathList.size() > 0) {
                             activity.logoPath = activity.pathList.get(0);
                             Glide.with(activity).load(activity.pathList.get(0)).into(activity.ivLogo);
                         }
-                    }else if (activity.uploadType==2){
+                    } else if (activity.uploadType == 2) {
                         List<String> pathList = (List<String>) msg.obj;
                         if (activity.isVideo) {
                             if (pathList != null && pathList.size() > 0) {
                                 activity.videosBean.setVideo_url(pathList.get(0));
                             }
                             activity.fileUpload(new File(activity.videoPath));
-                            activity.isVideo=false;
-                        }else {
+                            activity.isVideo = false;
+                        } else {
                             if (pathList != null && pathList.size() > 0) {
                                 activity.videosBean.setVideo_image_url(pathList.get(0));
                                 Glide.with(activity).load(pathList.get(0)).into(activity.ivVideo);
@@ -137,7 +141,12 @@ public class CoachAddActivity extends BaseActivity {
 
     @Override
     protected void handleIntent(Intent intent) {
-        storeId =intent.getStringExtra("storeId");
+        storeId = intent.getStringExtra("storeId");
+        coachType = intent.getIntExtra("coachType", 0);
+        if (coachType == 2) {
+            coachBean = (CoachBean) intent.getSerializableExtra("coachBean");
+
+        }
     }
 
     @Override
@@ -147,27 +156,52 @@ public class CoachAddActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        titleBarView.setTvTitleText("新增教练");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         handler = new MyHandler(CoachAddActivity.this);
+
+        if (coachType == 1) {
+            titleBarView.setTvTitleText("新增教练");
+        } else if (coachType == 2) {
+            titleBarView.setTvTitleText("编辑教练");
+            if (coachBean != null) {
+                etName.setText(coachBean.getName());
+                logoPath = coachBean.getHead_mage_url();
+                Glide.with(mActivity).load(coachBean.getHead_mage_url()).into(ivLogo);
+                content = coachBean.getRemark();
+                tvInfo.setText(coachBean.getRemark());
+                label = coachBean.getUser_tag();
+                tvLabel.setText(coachBean.getUser_tag());
+                etPhone.setText(coachBean.getAccount());
+                etPwd.setText(coachBean.getPassword());
+                state = coachBean.getStore_state();
+                String store_state = coachBean.getStore_state();
+                if ("1".equals(store_state)) {//1 启用 2 禁用
+                    tvState.setText("启用");
+                } else {
+                    tvState.setText("禁用");
+                }
+
+            }
+        }
     }
 
     /**
      * 新增User /教练
-     * @param account 用户账号&手机号码
+     *
+     * @param account       用户账号&手机号码
      * @param head_mage_url 用户头像url
-     * @param name 名称
-     * @param password 密码
-     * @param remark 用户介绍
-     * @param role_state 用户身份标识，0：普通用户，1、门店用户，2、教练用户
-     * @param store_id 所属门店ID
-     * @param store_state 教练门店状态
-     * @param user_tag     用户标签
-     * @param videosList 教练视频
+     * @param name          名称
+     * @param password      密码
+     * @param remark        用户介绍
+     * @param role_state    用户身份标识，0：普通用户，1、门店用户，2、教练用户
+     * @param store_id      所属门店ID
+     * @param store_state   教练门店状态
+     * @param user_tag      用户标签
+     * @param videosList    教练视频
      */
     private void getCustAdd(String account, String head_mage_url, String name, String password,
-                                    String remark, String role_state, String store_id,
-                                    String store_state, String user_tag, List<CustAddPar.VideosBean> videosList) {
+                            String remark, String role_state, String store_id,
+                            String store_state, String user_tag, List<CustAddPar.VideosBean> videosList) {
         CustAddPar par = new CustAddPar();
         par.setAccount(account);
         par.setHead_mage_url(head_mage_url);
@@ -186,8 +220,54 @@ public class CoachAddActivity extends BaseActivity {
                 if (response.isSucceed()) {
                     ToastUtils.showToast("提交成功！");
                     finish();
-                }else {
-                    if (response.failed()!=null){
+                } else {
+                    if (response.failed() != null) {
+                        ToastUtils.showToast(response.failed().getMessage());
+                    }
+                }
+            }
+
+        });
+
+    }
+
+    /**
+     * 编辑User /教练
+     *
+     * @param account       用户账号&手机号码
+     * @param head_mage_url 用户头像url
+     * @param name          名称
+     * @param password      密码
+     * @param remark        用户介绍
+     * @param role_state    用户身份标识，0：普通用户，1、门店用户，2、教练用户
+     * @param store_id      所属门店ID
+     * @param store_state   教练门店状态
+     * @param user_tag      用户标签
+     * @param videosList    教练视频
+     */
+    private void getCustEdit(String account, String head_mage_url, String name, String password,
+                             String remark, String role_state, String store_id,
+                             String store_state, String user_tag, List<CustAddPar.VideosBean> videosList) {
+        CustAddPar par = new CustAddPar();
+        par.setAccount(account);
+        par.setHead_mage_url(head_mage_url);
+        par.setName(name);
+        par.setPassword(password);
+        par.setRemark(remark);
+        par.setRole_state(role_state);
+        par.setStore_id(store_id);
+        par.setStore_state(store_state);
+        par.setUser_tag(user_tag);
+        par.setVideos(videosList);
+        par.setSign();
+        ApiRequest.getInstance().post(HttpURL.CUST_EDIT, par, new DefineCallback<String>() {
+            @Override
+            public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    ToastUtils.showToast("提交成功！");
+                    finish();
+                } else {
+                    if (response.failed() != null) {
                         ToastUtils.showToast(response.failed().getMessage());
                     }
                 }
@@ -201,19 +281,19 @@ public class CoachAddActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_logo:
-                uploadType =1;
+                uploadType = 1;
                 showCameraDialog();
                 break;
             case R.id.tv_info:
                 Intent intent = new Intent(mActivity, AddInfoActivity.class);
-                intent.putExtra("name","教练简介");
-                startActivityForResult(intent,INFO_REQUEST_CODE);
+                intent.putExtra("name", "教练简介");
+                startActivityForResult(intent, INFO_REQUEST_CODE);
                 break;
             case R.id.tv_label:
-                startActivityForResult(new Intent(mActivity,CoachLabelActivity.class),LABEL_REQUEST_CODE);
+                startActivityForResult(new Intent(mActivity, CoachLabelActivity.class), LABEL_REQUEST_CODE);
                 break;
             case R.id.iv_video:
-                uploadType =2;
+                uploadType = 2;
                 showVidoDialog();
                 break;
             case R.id.tv_state:
@@ -223,39 +303,45 @@ public class CoachAddActivity extends BaseActivity {
                 String name = etName.getText().toString().trim();
                 String pwd = etPwd.getText().toString().trim();
                 String account = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(name)){
+                if (TextUtils.isEmpty(name)) {
                     ToastUtils.showToast("姓名不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(pwd)){
+                if (TextUtils.isEmpty(pwd)) {
                     ToastUtils.showToast("密码不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(account)){
+                if (TextUtils.isEmpty(account)) {
                     ToastUtils.showToast("手机号码不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(logoPath)){
+                if (TextUtils.isEmpty(logoPath)) {
                     ToastUtils.showToast("头像不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(content)){
+                if (TextUtils.isEmpty(content)) {
                     ToastUtils.showToast("教练简介不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(state)){
+                if (TextUtils.isEmpty(state)) {
                     ToastUtils.showToast("请选择状态");
                     return;
                 }
-                if (TextUtils.isEmpty(label)){
+                if (TextUtils.isEmpty(label)) {
                     ToastUtils.showToast("请选择标签");
                     return;
                 }
                 videosList.add(videosBean);
-                getCustAdd(account, logoPath,name,pwd, content, "2", storeId, state,label, videosList);
+                if (coachType == 2) {
+                    getCustEdit(account, logoPath, name, pwd, content, "2", storeId, state, label, videosList);
+                } else {
+                    getCustAdd(account, logoPath, name, pwd, content, "2", storeId, state, label, videosList);
+                }
+
                 break;
         }
     }
+
     /**
      * 拍照弹窗
      */
@@ -340,7 +426,7 @@ public class CoachAddActivity extends BaseActivity {
                     TextView tvCancel = inflaterView.findViewById(R.id.tv_dialog_select_cancel);
                     tvCancel.setOnClickListener(v -> dialogBottom.dismiss());
                     listView.setOnItemClickListener((parent, view, position, id) -> {
-                        state = String.valueOf(position+1);
+                        state = String.valueOf(position + 1);
                         tvState.setText(listStr.get(position));
                         dialogBottom.dismiss();
                     });
@@ -356,7 +442,7 @@ public class CoachAddActivity extends BaseActivity {
         if (data != null) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
-                    if (uploadType==1) {
+                    if (uploadType == 1) {
                         // 图片选择
                         selectList = PictureSelector.obtainMultipleResult(data);
                         List<String> pathList = new ArrayList<>();
@@ -377,7 +463,7 @@ public class CoachAddActivity extends BaseActivity {
                         }
                         String path = pathList.get(0);
                         fileUpload(new File(path));
-                    }else if (uploadType==2){
+                    } else if (uploadType == 2) {
                         List<LocalMedia> localMedia = PictureSelector.obtainMultipleResult(data);
                         List<String> pathList = new ArrayList<>();
                         if (localMedia != null && localMedia.size() > 0) {
@@ -407,13 +493,13 @@ public class CoachAddActivity extends BaseActivity {
                     }
                     break;
                 case INFO_REQUEST_CODE:
-                    if (resultCode==RESULT_OK){
+                    if (resultCode == RESULT_OK) {
                         content = data.getStringExtra("content");
                         tvInfo.setText(content);
                     }
                     break;
                 case LABEL_REQUEST_CODE:
-                    if (resultCode==RESULT_OK){
+                    if (resultCode == RESULT_OK) {
                         label = data.getStringExtra("label");
                         tvLabel.setText(label);
                     }
@@ -421,6 +507,7 @@ public class CoachAddActivity extends BaseActivity {
             }
         }
     }
+
     /**
      * 文件上传
      *

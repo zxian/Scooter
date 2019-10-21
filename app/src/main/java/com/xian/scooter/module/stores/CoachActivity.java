@@ -108,6 +108,12 @@ public class CoachActivity extends BaseActivity {
         onMyRefresh();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        onMyRefresh();
+    }
+
     private void initListview() {
         mAdapter = new CommonLvAdapter<CoachBean>(this, R.layout.item_coach, coachList) {
             @Override
@@ -179,44 +185,57 @@ public class CoachActivity extends BaseActivity {
                 item.setTitle("编辑");
                 item.setBackground(R.drawable.horn_alter_20dp);
                 item.setTitleColor(mActivity.getResources().getColor(R.color.white));
-                item.setTitleSize(15);
+                item.setTitleSize(14);
                 menu.addMenuItem(item);
+
+                SwipeMenuItem item1 = new SwipeMenuItem(mActivity);
+                item1.setWidth(dp2px(10));
+                item1.setBackground(R.color.white);
+                menu.addMenuItem(item1);
 
                 SwipeMenuItem itemDelete = new SwipeMenuItem(mActivity);
                 itemDelete.setWidth(dp2px(60));
                 itemDelete.setTitle("删除");
                 itemDelete.setBackground(R.drawable.horn_delete_20dp);
                 itemDelete.setTitleColor(mActivity.getResources().getColor(R.color.white));
-                itemDelete.setTitleSize(15);
+                itemDelete.setTitleSize(14);
                 menu.addMenuItem(itemDelete);
             }
         };
         swipeMenuListview.setMenuCreator(creator);
         swipeMenuListview.setOnMenuItemClickListener((position, menu, index) -> {
 
-            //index 0 修改 ；1 删除
-            if (index == 0) {
-
-            } else {
-                DialogCreate.Builder builder = new DialogCreate.Builder(mActivity);
-                mDialogCreate = builder
-                        .setAddViewId(R.layout.dialog_ok_cancel)
-                        .setIsHasCloseView(false)
-                        .setDialogSetDateInterface(inflaterView -> {
-                            TextView tvTitle = inflaterView.findViewById(R.id.tv_dialog_title);
-                            TextView tvMsg = inflaterView.findViewById(R.id.tv_dialog_msg);
-                            TextView tvCancel = inflaterView.findViewById(R.id.tv_cancel);
-                            TextView tvConfirm = inflaterView.findViewById(R.id.tv_confirm);
-                            tvTitle.setVisibility(View.GONE);
-                            tvMsg.setText("确定删除？");
-                            tvConfirm.setOnClickListener(v -> {
-                                mDialogCreate.dismiss();
+            //index 0 修改 ；2 删除
+            switch (index){
+                case 0:
+                    CoachBean coachBean = coachList.get(position);
+                    Intent intent = new Intent(mActivity, CoachAddActivity.class);
+                    intent.putExtra("coachType",2);//1 新增 2 编辑
+                    intent.putExtra("storeId", storeId);
+                    intent.putExtra("coachBean", coachBean);
+                    startActivity(intent);
+                    break;
+                case 2:
+                    DialogCreate.Builder builder = new DialogCreate.Builder(mActivity);
+                    mDialogCreate = builder
+                            .setAddViewId(R.layout.dialog_ok_cancel)
+                            .setIsHasCloseView(false)
+                            .setDialogSetDateInterface(inflaterView -> {
+                                TextView tvTitle = inflaterView.findViewById(R.id.tv_dialog_title);
+                                TextView tvMsg = inflaterView.findViewById(R.id.tv_dialog_msg);
+                                TextView tvCancel = inflaterView.findViewById(R.id.tv_cancel);
+                                TextView tvConfirm = inflaterView.findViewById(R.id.tv_confirm);
+                                tvTitle.setVisibility(View.GONE);
+                                tvMsg.setText("确定删除？");
+                                tvConfirm.setOnClickListener(v -> {
+                                    mDialogCreate.dismiss();
 //                                getCommunityDocDelete(position);
-                            });
-                            tvCancel.setOnClickListener(v -> mDialogCreate.dismiss());
-                        })
-                        .build();
-                mDialogCreate.showSingle();
+                                });
+                                tvCancel.setOnClickListener(v -> mDialogCreate.dismiss());
+                            })
+                            .build();
+                    mDialogCreate.showSingle();
+                    break;
             }
             return false;
         });
@@ -291,6 +310,7 @@ public class CoachActivity extends BaseActivity {
     @OnClick(R.id.tv_add)
     public void onViewClicked() {
         Intent intent = new Intent(mActivity, CoachAddActivity.class);
+        intent.putExtra("coachType",1);//1 新增 2 编辑
         intent.putExtra("storeId", storeId);
         startActivity(intent);
     }

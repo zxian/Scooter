@@ -41,11 +41,11 @@
         <activity android:name=".module.event.EventAddActivity" />
         <activity android:name=".module.event.EventDetailsActivity" />
         <activity android:name=".module.stores.FinancialActivity" />
-        <activity android:name=".module.stores.PurchaseRecordsActivity" />
+        <activity android:name=".module.stores.CoursePurchaseRecordsActivity" />
         <activity android:name=".module.stores.NewCourseActivity" />
         <activity android:name=".module.stores.CoursePackageActivity" />
         <activity android:name=".module.stores.CoachActivity" />
-        <activity android:name=".module.stores.GivingActivity" />
+        <activity android:name=".module.stores.CourseGivingActivity" />
         <activity android:name=".module.stores.WithdrawalActivity" />
         <activity android:name=".module.activity.RegisteredAgreementActivity" />
         <activity android:name=".module.stores.MembersActivity" />
