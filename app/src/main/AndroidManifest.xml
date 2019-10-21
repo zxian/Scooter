@@ -27,6 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".module.stores.SetUpFeedbackActivity"></activity>
+        <activity android:name=".module.stores.SetUpActivity" />
         <activity android:name=".module.stores.CoachLabelActivity" />
         <activity android:name=".module.stores.StoresInfoActivity" />
         <activity android:name=".module.activity.ForgotPasswordActivity" />
@@ -53,7 +55,7 @@
         <activity android:name=".module.activity.RegisterActivity" />
         <activity android:name=".module.activity.SearchActivity" />
         <activity android:name=".module.activity.LoginActivity" />
-        <activity android:name=".module.activity.MainActivity"/>
+        <activity android:name=".module.activity.MainActivity" />
         <activity android:name=".module.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

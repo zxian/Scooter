@@ -79,6 +79,10 @@ public class StoresFragment extends BaseFragment {
     protected void init(View view) {
         titleBarView.setTvTitleText("门店");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
+        titleBarView.setIvRightImage(R.mipmap.ic_set_up);
+        titleBarView.setRightOnClickListener(view1 -> {
+            startActivity(new Intent(mActivity,SetUpActivity.class));
+        });
 
         TypedArray array = mActivity.getResources().obtainTypedArray(R.array.item_res_img);
 
