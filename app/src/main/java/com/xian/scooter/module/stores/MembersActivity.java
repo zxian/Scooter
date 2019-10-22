@@ -117,7 +117,7 @@ public class MembersActivity extends BaseActivity {
      */
     private void getCustList(int pageNum, int pageSize) {
         MembersPar par=new MembersPar();
-//        par.setRole("1");//用户身份标识，0：普通用户，1、门店用户，2、教练用户
+        par.setRole("1");//用户身份标识，0：普通用户，1、门店用户，2、教练用户
         par.setStore_id(storeId);
         par.setSign();
         ApiRequest.getInstance().post(HttpURL.CUST_LIST.replace("{size}", pageSize + "")

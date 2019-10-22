@@ -91,6 +91,7 @@
     <string name="course_phone">用户手机号码</string>
     <string name="course_type">使用类型</string>
     <string name="course_effective_period">有效期</string>
+    <string name="course_day">天</string>
     <string name="course_select">请选择></string>
     <string name="course_number">课程次数</string>
     <string name="course_time">次</string>
@@ -117,6 +118,8 @@
     <string name="event_info">赛事介绍</string>
     <string name="event_address">赛事区域</string>
     <string name="event_number">人员数量展示</string>
+    <string name="event_results">赛事成绩</string>
+    <string name="event_arrange">赛事安排</string>
     <string name="event_setup">赛事设置</string>
     <string name="event_setup_hint">请进行设置</string>
     <string name="event_setup_add">新增类型</string>
@@ -146,7 +149,7 @@
     <string name="event_yellow">黄色</string>
     <string name="event_black">黑色</string>
     <string name="event_game_certification">比赛认证</string>
-    <string name="event_Sign_certification">签到认证</string>
+    <string name="event_sign_certification">签到认证</string>
 
     <string name="set_up_message">消息免打扰</string>
     <string name="set_up_feedback">意见反馈</string>

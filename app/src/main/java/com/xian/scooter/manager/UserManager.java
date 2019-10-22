@@ -66,6 +66,19 @@ public class UserManager {
     public String getUserId() {
         return PreferenceUtils.get().getString(ConfigPF.USER_ID_KEY);
     }
+    /**
+     * 保存storeId
+     */
+    public void saveStoreId(String storeId) {
+        PreferenceUtils.get().putString(ConfigPF.STORE_ID_KEY, storeId);
+    }
+
+    /**
+     * 获取storeId
+     */
+    public String getStoreId() {
+        return PreferenceUtils.get().getString(ConfigPF.STORE_ID_KEY);
+    }
 
     /**
      * 退出清空用户信息

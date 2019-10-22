@@ -2,12 +2,12 @@ package com.xian.scooter.module.event;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.EventRecordDetailsBean;
-import com.xian.scooter.bean.PageBean;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
@@ -17,6 +17,7 @@ import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EventRecordDetailsActivity extends BaseActivity {
 
@@ -79,9 +80,9 @@ public class EventRecordDetailsActivity extends BaseActivity {
                         tvName.setText(child_name);
 
                         int sex = eventRecordDetailsBean.getChild_sex();
-                        if (sex==1){
+                        if (sex == 1) {
                             tvGender.setText("男");
-                        }else if (sex==2){
+                        } else if (sex == 2) {
                             tvGender.setText("女");
                         }
 
@@ -109,10 +110,13 @@ public class EventRecordDetailsActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.tv_game, R.id.tv_sign})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_game:
+                break;
+            case R.id.tv_sign:
+                break;
+        }
     }
 }

@@ -18,6 +18,7 @@ import com.xian.scooter.base.BaseFragment;
 import com.xian.scooter.bean.EventBean;
 import com.xian.scooter.bean.PageBean;
 import com.xian.scooter.beanpar.EventPar;
+import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.module.adapter.EventAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -129,6 +130,8 @@ public class EventFragment extends BaseFragment {
     private void getCompetitionList(int pageNum, int pageSize) {
         EventPar par = new EventPar();
         par.setIs_app("0");//是否用户端查询：0、否，1、是
+        par.setStore_id(UserManager.getInstance().getStoreId());
+        par.setSign();
         ApiRequest.getInstance().post(HttpURL.COMPETITION_LIST.replace("{size}", pageSize + "")
                 .replace("{current}", pageNum + ""), par, new DefineCallback<PageBean<EventBean>>() {
             @Override

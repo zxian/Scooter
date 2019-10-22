@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -17,10 +16,10 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-import com.xian.scooter.bean.EventAddSetupBean;
 import com.xian.scooter.bean.EventRecordBean;
 import com.xian.scooter.bean.PageBean;
-import com.xian.scooter.module.adapter.EventAddSetupAdapter;
+import com.xian.scooter.beanpar.EventRecordPar;
+import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.module.adapter.EventRecordAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -34,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EventRecordActivity extends BaseActivity {
 
@@ -43,8 +43,8 @@ public class EventRecordActivity extends BaseActivity {
     EditText etSearch;
     @BindView(R.id.btn_clear_search)
     ImageView btnClearSearch;
-    @BindView(R.id.iv_right_text)
-    ImageView ivRightText;
+    @BindView(R.id.iv_screening)
+    ImageView ivScreening;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
 
@@ -56,6 +56,11 @@ public class EventRecordActivity extends BaseActivity {
     private List<EventRecordBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private String competitionId;
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        competitionId = intent.getStringExtra("id");
+    }
 
     @Override
     protected int getLayoutResourceId() {
@@ -86,7 +91,7 @@ public class EventRecordActivity extends BaseActivity {
         onMyRefresh();
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         recyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -96,10 +101,10 @@ public class EventRecordActivity extends BaseActivity {
         recyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (mCurrentCounter < TOTAL_COUNTER){
+                if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
-                    getCompetitionJoin(PAGE_INDEX,PAGE_SIZE);
-                }else {
+                    getCompetitionJoin(PAGE_INDEX, PAGE_SIZE);
+                } else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
             }
@@ -108,60 +113,76 @@ public class EventRecordActivity extends BaseActivity {
         recyclerView.setNestedScrollingEnabled(false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new EventRecordAdapter(mActivity,R.layout.item_event_record,list);
+        adapter = new EventRecordAdapter(mActivity, R.layout.item_event_record, list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mLRecyclerViewAdapter);
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(mActivity,EventRecordDetailsActivity.class);
+                Intent intent = new Intent(mActivity, EventRecordDetailsActivity.class);
                 String msg = adapter.getDatas().get(position).getId();
-                intent.putExtra("data",msg);
+                intent.putExtra("data", msg);
                 startActivity(intent);
             }
         });
 
     }
 
-    private void onMyRefresh(){
+    private void onMyRefresh() {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
-        getCompetitionJoin(PAGE_INDEX,PAGE_SIZE);
+        getCompetitionJoin(PAGE_INDEX, PAGE_SIZE);
     }
 
     /**
-     *
      * 获取用户报名记录分页数据
-     * @param size 每页显示数量
+     *
+     * @param size    每页显示数量
      * @param current 当前页
      */
-    private void getCompetitionJoin(int current ,int size) {
-            ApiRequest.getInstance().post(HttpURL.COMPETITION_JOIN.replace("{size}",
-                    size+"").replace("{current}", current+""), new DefineCallback<PageBean<EventRecordBean>>() {
-                @Override
-                public void onMyResponse(SimpleResponse<PageBean<EventRecordBean>, HttpEntity> response) {
-                    if (response.isSucceed()) {
-                        if (response.succeed() != null) {
-                            TOTAL_COUNTER = response.succeed().getTotal();
-                            List<EventRecordBean> list = response.succeed().getRecords();
-                            addItems(list);
-                        }
-
+    private void getCompetitionJoin(int current, int size) {
+        EventRecordPar par = new EventRecordPar();
+        par.setCompetitionId(competitionId);
+        par.setStoreId(UserManager.getInstance().getStoreId());
+        par.setSign();
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_JOIN.replace("{size}",
+                size + "").replace("{current}", current + ""), par, new DefineCallback<PageBean<EventRecordBean>>() {
+            @Override
+            public void onMyResponse(SimpleResponse<PageBean<EventRecordBean>, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    if (response.succeed() != null) {
+                        TOTAL_COUNTER = response.succeed().getTotal();
+                        List<EventRecordBean> list = response.succeed().getRecords();
+                        addItems(list);
                     }
-                }
 
-                @Override
-                public void onEnd() {
-                    recyclerView.refreshComplete(mCurrentCounter);
                 }
-            });
+            }
+
+            @Override
+            public void onEnd() {
+                recyclerView.refreshComplete(mCurrentCounter);
+            }
+        });
 
     }
-    private void addItems(List<EventRecordBean> list){
-        if (list.size() > 0 && adapter != null){
+
+    private void addItems(List<EventRecordBean> list) {
+        if (list.size() > 0 && adapter != null) {
             mCurrentCounter += list.size();
             adapter.updataItem(list);
+        }
+    }
+
+
+    @OnClick({R.id.tv_results, R.id.tv_arrange})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_results:
+                break;
+            case R.id.tv_arrange:
+                break;
         }
     }
 }

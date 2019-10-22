@@ -158,12 +158,13 @@ public class EventAddActivity extends BaseActivity {
      * @param isDisplay 显示人员数量：0，不显示，1、显示
      * @param officialTime 比赛时间
      * @param postersUrl 赛事海报图
+     * @param remark 赛事介绍
      * @param startTime 开始报名时间
      * @param set 赛事设置,编辑时不传
      */
     private void getCompetitionSave(String address, String name, String type, String endTime,
                                     String finishTime, String isDisplay, String officialTime,
-                                    String postersUrl, String startTime, List<CompetitionSavePar> set) {
+                                    String postersUrl, String remark, String startTime, List<CompetitionSavePar> set) {
         EventAddPar par = new EventAddPar();
         par.setAddress(address);
         par.setCompetition_name(name);
@@ -173,6 +174,7 @@ public class EventAddActivity extends BaseActivity {
         par.setIs_display(isDisplay);
         par.setOfficial_time(officialTime);
         par.setPosters_url(postersUrl);
+        par.setRemark(remark);
         par.setStart_time(startTime);
         par.setSubSets(set);
 
@@ -233,7 +235,7 @@ public class EventAddActivity extends BaseActivity {
                     return;
                 }
                 getCompetitionSave( address, name,"1", endTime, finishTime, isDisplay, time,
-                        logoPath, startTime, competitionSaveList);
+                        logoPath,content, startTime, competitionSaveList);
                 break;
         }
     }

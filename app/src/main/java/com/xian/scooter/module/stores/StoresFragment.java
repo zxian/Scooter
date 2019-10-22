@@ -153,6 +153,7 @@ public class StoresFragment extends BaseFragment {
                         if (succeed.getRecords()!=null&&succeed.getRecords().size()>0){
                             List<StoreListBean> storeList = succeed.getRecords();
                             storeId = storeList.get(0).getId();
+                            UserManager.getInstance().saveStoreId(storeId);
                             getStoreByid(storeId);
                         }
                     }
