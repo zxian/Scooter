@@ -91,7 +91,7 @@ public class EventAddActivity extends BaseActivity {
     private List<String> pathList = new ArrayList<>();
     private String logoPath;
     private String content;
-    private List<CompetitionSavePar> competitionSaveList = new ArrayList<>();
+    private ArrayList<CompetitionSavePar> competitionSaveList = new ArrayList<>();
 
     private static class MyHandler extends Handler {
         private WeakReference<EventAddActivity> mWeakReference;
@@ -220,7 +220,9 @@ public class EventAddActivity extends BaseActivity {
                 startActivityForResult(intent,INFO_REQUEST_CODE);
                 break;
             case R.id.tv_setup:
-                startActivityForResult(new Intent(mActivity,EventAddSetupAddActivity.class),SETUP_REQUEST_CODE);
+                intent = new Intent(mActivity, EventAddSetupActivity.class);
+                intent.putParcelableArrayListExtra("CompetitionSaveParList",competitionSaveList);
+                startActivityForResult(intent,SETUP_REQUEST_CODE);
                 break;
             case R.id.tv_btn:
                 String name = etName.getText().toString().trim();
@@ -369,8 +371,7 @@ public class EventAddActivity extends BaseActivity {
                     break;
                 case SETUP_REQUEST_CODE:
                     if (resultCode==RESULT_OK){
-                        CompetitionSavePar competitionSave = (CompetitionSavePar) data.getSerializableExtra("CompetitionSavePar");
-                        competitionSaveList.add(competitionSave);
+                        competitionSaveList =data.getParcelableArrayListExtra("CompetitionSaveParList");
                         tvSetup.setText("已设置");
                     }
                     break;

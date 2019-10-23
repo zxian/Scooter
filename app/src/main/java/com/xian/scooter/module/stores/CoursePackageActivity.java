@@ -1,9 +1,7 @@
 package com.xian.scooter.module.stores;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
@@ -14,10 +12,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.CoursePackageBean;
-import com.xian.scooter.bean.EventAddSetupBean;
-import com.xian.scooter.bean.EventBean;
 import com.xian.scooter.bean.PageBean;
-import com.xian.scooter.beanpar.EventPar;
 import com.xian.scooter.module.adapter.CoursePackageAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -30,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CoursePackageActivity extends BaseActivity {

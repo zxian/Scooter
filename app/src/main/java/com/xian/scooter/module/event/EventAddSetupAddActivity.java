@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-import com.xian.scooter.bean.EventAddSetupBean;
-import com.xian.scooter.bean.PageBean;
 import com.xian.scooter.beanpar.CompetitionSavePar;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -17,8 +15,6 @@ import com.xian.scooter.net.HttpURL;
 import com.xian.scooter.utils.TitleBarView;
 import com.xian.scooter.utils.ToastUtils;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,10 +38,12 @@ public class EventAddSetupAddActivity extends BaseActivity {
 
 
     private String competition_id;
+    private CompetitionSavePar competitionSave;
 
     @Override
     protected void handleIntent(Intent intent) {
         competition_id=intent.getStringExtra("competition_id");
+        competitionSave = intent.getParcelableExtra("CompetitionSavePar");
     }
 
     @Override
@@ -57,6 +55,14 @@ public class EventAddSetupAddActivity extends BaseActivity {
     protected void init() {
         titleBarView.setTvTitleText("新增类型");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
+        if (competitionSave!=null){
+            etName.setText(competitionSave.getApply_competition_name());
+            etNumber.setText(competitionSave.getLimit());
+            etPrice.setText(competitionSave.getMoney());
+            etAgeMax.setText(competitionSave.getBig_age());
+            etAgeMin.setText(competitionSave.getSmall_age());
+            tvAdd.setText("修改");
+        }
     }
 
     /**

@@ -182,6 +182,9 @@ public class EventRecordActivity extends BaseActivity {
             case R.id.tv_results:
                 break;
             case R.id.tv_arrange:
+                Intent intent = new Intent(mActivity, EventArrangeActivity.class);
+                intent.putExtra("competitionId",competitionId);
+                startActivity(intent);
                 break;
         }
     }

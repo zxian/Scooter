@@ -73,6 +73,12 @@ public class EventFragment extends BaseFragment {
         onMyRefresh();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        onMyRefresh();
+    }
+
     private void initRecyclerView() {
         recyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override

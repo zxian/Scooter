@@ -27,7 +27,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.event.EventArrangeActivity"></activity>
+        <activity android:name=".module.event.EventArrangeTypeActivity"></activity>
+        <activity android:name=".module.event.EventArrangeRulesActivity" />
+        <activity android:name=".module.event.EventArrangeActivity" />
         <activity android:name=".module.stores.SetUpFeedbackActivity" />
         <activity android:name=".module.stores.SetUpActivity" />
         <activity android:name=".module.stores.CoachLabelActivity" />

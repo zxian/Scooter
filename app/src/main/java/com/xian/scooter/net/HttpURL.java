@@ -31,6 +31,7 @@ public class HttpURL {
     public static String COMPETITION_JOIN = "/competitionJoin/page/{size}/{current}";
     public static String COMPETITION_JOIN_BYID= "/competitionJoin/byId/{id}";
     public static String COMPETITION_UPDATE_STATE= "/competition/updateCompetitionState";
+    public static String COMPETITION_PLAN_LIST= "/competitionPlan/list/{setId}";
 
     //课程包
     public static String PACKAGE_PAGE= "/package/page/{size}/{current}";

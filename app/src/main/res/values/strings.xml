@@ -60,10 +60,12 @@
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
     <string name="add">新增</string>
+    <string name="save">保存</string>
     <string name="input">请输入</string>
     <string name="select">请选择</string>
     <string name="money_sign">¥</string>
     <string name="submit">提交</string>
+    <string name="complete">完成</string>
 
     <string name="search_for_keywords">请输入搜索关键字</string>
     <string name="withdrawal">提现</string>
@@ -150,6 +152,18 @@
     <string name="event_black">黑色</string>
     <string name="event_game_certification">比赛认证</string>
     <string name="event_sign_certification">签到认证</string>
+
+    <string name="event_arrange_add">新增规则安排</string>
+    <string name="event_arrange_type">报名类型</string>
+    <string name="event_arrange_name">场次名称</string>
+    <string name="event_arrange_places">优胜名额</string>
+    <string name="event_arrange_time">比赛时间</string>
+    <string name="event_arrange_time_1">检录时间</string>
+    <string name="event_arrange_promotion">是否进阶</string>
+    <string name="event_arrange_number">进阶场次</string>
+    <string name="event_arrange_equipment">物联设备</string>
+    <string name="event_arrange_personnel">场次人员</string>
+    <string name="event_add">添加</string>
 
     <string name="set_up_message">消息免打扰</string>
     <string name="set_up_feedback">意见反馈</string>
