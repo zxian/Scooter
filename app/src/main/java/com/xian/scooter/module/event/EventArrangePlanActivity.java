@@ -1,11 +1,10 @@
 package com.xian.scooter.module.event;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
@@ -13,8 +12,9 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
+import com.xian.scooter.bean.EventPlanBean;
 import com.xian.scooter.bean.EventTypeBean;
-import com.xian.scooter.module.adapter.EventAddSetupAdapter;
+import com.xian.scooter.module.adapter.EventArrangePlanAdapter;
 import com.xian.scooter.module.adapter.EventArrangeTypeAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -27,37 +27,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EventArrangeTypeActivity extends BaseActivity {
+public class EventArrangePlanActivity extends BaseActivity {
 
     @BindView(R.id.title_bar_view)
     TitleBarView titleBarView;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
 
     private static int mCurrentCounter = 0;//已经获取到多少条数据了
-    private EventArrangeTypeAdapter adapter;
-    private List<EventTypeBean> list = new ArrayList<>();
+    private EventArrangePlanAdapter adapter;
+    private List<EventPlanBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
-    private String competitionId;
-    private String typeId;
+    private String setId;
     private String name;
+    private String planName;
+    private String planId;
 
     @Override
     protected void handleIntent(Intent intent) {
-        competitionId = intent.getStringExtra("competitionId");
+        setId = intent.getStringExtra("setId");
+        name = intent.getStringExtra("name");
     }
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_event_arrange_type;
+        return R.layout.activity_event_arrange_plan;
     }
 
     @Override
     protected void init() {
-        titleBarView.setTvTitleText("报名类型");
+        titleBarView.setTvTitleText("进阶场次");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
+        tvTitle.setText(name);
         initRecyclerView();
         onMyRefresh();
     }
@@ -70,7 +76,7 @@ public class EventArrangeTypeActivity extends BaseActivity {
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new EventArrangeTypeAdapter(mActivity, R.layout.item_event_add_setup, list);
+        adapter = new EventArrangePlanAdapter(mActivity, R.layout.item_event_arrange_plan, list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mLRecyclerViewAdapter);
         recyclerView.setLoadMoreEnabled(false);
@@ -78,8 +84,8 @@ public class EventArrangeTypeActivity extends BaseActivity {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                typeId = adapter.getDatas().get(position).getId();
-                name = adapter.getDatas().get(position).getApply_competition_name();
+//                typeId = adapter.getDatas().get(position).getId();
+//                name = adapter.getDatas().get(position).getApply_competition_name();
                 adapter.updataItem(position);
             }
         });
@@ -90,30 +96,29 @@ public class EventArrangeTypeActivity extends BaseActivity {
      */
     private void onMyRefresh() {
         adapter.cleanData();
-        getCompetitionList(competitionId);
+        getCompetitionPlanList(setId);
 
     }
 
-
     /**
-     * 赛事类型设置列表
+     * 赛事场次列表
      *
-     * @param competitionId  赛事ID
+     * @param setId 赛事类型ID
      */
-    private void getCompetitionList(String competitionId) {
-        if (!TextUtils.isEmpty(competitionId)) {
-            ApiRequest.getInstance().post(HttpURL.COMPETITION_SET_LIST.replace("{competitionId}", competitionId), new DefineCallback<List<EventTypeBean>>() {
+    private void getCompetitionPlanList(String setId) {
+        if (!TextUtils.isEmpty(setId)) {
+            ApiRequest.getInstance().post(HttpURL.COMPETITION_PLAN_LIST.replace("{setId}",
+                    setId), new DefineCallback<List<EventPlanBean>>() {
                 @Override
-                public void onMyResponse(SimpleResponse<List<EventTypeBean>, HttpEntity> response) {
+                public void onMyResponse(SimpleResponse<List<EventPlanBean>, HttpEntity> response) {
                     if (response.isSucceed()) {
                         if (response.succeed() != null) {
-                            List<EventTypeBean> list = response.succeed();
+                            List<EventPlanBean> list = response.succeed();
                             addItems(list);
                         }
 
                     }
                 }
-
                 @Override
                 public void onEnd() {
                     super.onEnd();
@@ -123,12 +128,13 @@ public class EventArrangeTypeActivity extends BaseActivity {
         }
     }
 
+
     /**
      * 添加数据到列表
      *
      * @param list 数据列表
      */
-    private void addItems(List<EventTypeBean> list) {
+    private void addItems(List<EventPlanBean> list) {
         if (list.size() > 0 && adapter != null) {
             adapter.updataItem(list);
         }
@@ -137,8 +143,8 @@ public class EventArrangeTypeActivity extends BaseActivity {
     @OnClick(R.id.tv_complete)
     public void onViewClicked() {
         Intent intent = new Intent();
-        intent.putExtra("typeId",typeId);
-        intent.putExtra("name",name);
+        intent.putExtra("planId",planId);
+        intent.putExtra("planName",planName);
         setResult(RESULT_OK,intent);
         finish();
     }

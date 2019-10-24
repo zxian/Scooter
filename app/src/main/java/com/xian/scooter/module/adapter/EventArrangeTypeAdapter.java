@@ -35,7 +35,6 @@ public class EventArrangeTypeAdapter extends CommonRvAdapter<EventTypeBean> {
 
         RelativeLayout rlLayout = holder.getView(R.id.rl_layout);
         ImageView ivSelect = holder.getView(R.id.iv_select);
-        ivSelect.setVisibility(View.VISIBLE);
         if (position == selectPosition) {//判断是否是选择项
             rlLayout.setBackground(mContext.getResources().getDrawable(R.drawable.horn_white_line_theme_20dp));
             ivSelect.setVisibility(View.VISIBLE);
