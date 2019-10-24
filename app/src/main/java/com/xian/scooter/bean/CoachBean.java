@@ -1,8 +1,9 @@
 package com.xian.scooter.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CoachBean {
+public class CoachBean implements Serializable {
         /**
          * store_state : 启用
          * user_tag : 耐心、乐观、阳光、细心、漂亮人好、负责
@@ -59,7 +60,7 @@ public class CoachBean {
         private Object android_registration_id;
         private String account;
         private int status;
-        private List<?> videos;
+
 
         public String getStore_state() {
             return store_state;
@@ -269,11 +270,4 @@ public class CoachBean {
             this.status = status;
         }
 
-        public List<?> getVideos() {
-            return videos;
-        }
-
-        public void setVideos(List<?> videos) {
-            this.videos = videos;
-        }
 }

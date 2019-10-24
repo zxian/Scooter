@@ -1,14 +1,12 @@
 package com.xian.scooter.module.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bit.adapter.rvadapter.CommonRvAdapter;
 import com.bit.adapter.rvadapter.ViewHolderRv;
 import com.bumptech.glide.Glide;
 import com.xian.scooter.R;
-import com.xian.scooter.bean.EventAddSetupBean;
 import com.xian.scooter.bean.EventRecordBean;
 
 import java.util.List;

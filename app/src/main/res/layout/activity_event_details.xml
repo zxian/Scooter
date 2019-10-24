@@ -28,7 +28,8 @@
             <ImageView
                 android:id="@+id/iv_logo"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:scaleType="fitXY"
+                android:layout_height="250dp" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -88,7 +89,7 @@
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:text="介绍" />
+                android:text="赛事介绍" />
 
             <TextView
                 android:id="@+id/tv_content"

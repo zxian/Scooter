@@ -91,7 +91,7 @@ public class EventAddActivity extends BaseActivity {
     private List<String> pathList = new ArrayList<>();
     private String logoPath;
     private String content;
-    private List<CompetitionSavePar> competitionSaveList = new ArrayList<>();
+    private ArrayList<CompetitionSavePar> competitionSaveList = new ArrayList<>();
 
     private static class MyHandler extends Handler {
         private WeakReference<EventAddActivity> mWeakReference;
@@ -158,12 +158,13 @@ public class EventAddActivity extends BaseActivity {
      * @param isDisplay 显示人员数量：0，不显示，1、显示
      * @param officialTime 比赛时间
      * @param postersUrl 赛事海报图
+     * @param remark 赛事介绍
      * @param startTime 开始报名时间
      * @param set 赛事设置,编辑时不传
      */
     private void getCompetitionSave(String address, String name, String type, String endTime,
                                     String finishTime, String isDisplay, String officialTime,
-                                    String postersUrl, String startTime, List<CompetitionSavePar> set) {
+                                    String postersUrl, String remark, String startTime, List<CompetitionSavePar> set) {
         EventAddPar par = new EventAddPar();
         par.setAddress(address);
         par.setCompetition_name(name);
@@ -173,6 +174,7 @@ public class EventAddActivity extends BaseActivity {
         par.setIs_display(isDisplay);
         par.setOfficial_time(officialTime);
         par.setPosters_url(postersUrl);
+        par.setRemark(remark);
         par.setStart_time(startTime);
         par.setSubSets(set);
 
@@ -218,7 +220,9 @@ public class EventAddActivity extends BaseActivity {
                 startActivityForResult(intent,INFO_REQUEST_CODE);
                 break;
             case R.id.tv_setup:
-                startActivityForResult(new Intent(mActivity,EventAddSetupAddActivity.class),SETUP_REQUEST_CODE);
+                intent = new Intent(mActivity, EventAddSetupActivity.class);
+                intent.putParcelableArrayListExtra("CompetitionSaveParList",competitionSaveList);
+                startActivityForResult(intent,SETUP_REQUEST_CODE);
                 break;
             case R.id.tv_btn:
                 String name = etName.getText().toString().trim();
@@ -233,7 +237,7 @@ public class EventAddActivity extends BaseActivity {
                     return;
                 }
                 getCompetitionSave( address, name,"1", endTime, finishTime, isDisplay, time,
-                        logoPath, startTime, competitionSaveList);
+                        logoPath,content, startTime, competitionSaveList);
                 break;
         }
     }
@@ -367,8 +371,7 @@ public class EventAddActivity extends BaseActivity {
                     break;
                 case SETUP_REQUEST_CODE:
                     if (resultCode==RESULT_OK){
-                        CompetitionSavePar competitionSave = (CompetitionSavePar) data.getSerializableExtra("CompetitionSavePar");
-                        competitionSaveList.add(competitionSave);
+                        competitionSaveList =data.getParcelableArrayListExtra("CompetitionSaveParList");
                         tvSetup.setText("已设置");
                     }
                     break;

@@ -107,7 +107,9 @@ public class StoresFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case 1://会员
-                    startActivity(new Intent(mActivity,MembersActivity.class));
+                    intent = new Intent(mActivity, MembersActivity.class);
+                    intent.putExtra("storeId", storeId);
+                    startActivity(intent);
                     break;
                 case 2://课程包
                     startActivity(new Intent(mActivity,CoursePackageActivity.class));
@@ -151,6 +153,7 @@ public class StoresFragment extends BaseFragment {
                         if (succeed.getRecords()!=null&&succeed.getRecords().size()>0){
                             List<StoreListBean> storeList = succeed.getRecords();
                             storeId = storeList.get(0).getId();
+                            UserManager.getInstance().saveStoreId(storeId);
                             getStoreByid(storeId);
                         }
                     }

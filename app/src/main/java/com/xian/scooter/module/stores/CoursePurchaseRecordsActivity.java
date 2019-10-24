@@ -40,8 +40,8 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
     EditText etSearch;
     @BindView(R.id.btn_clear_search)
     ImageView btnClearSearch;
-    @BindView(R.id.tv_right_text)
-    ImageView tvRightText;
+    @BindView(R.id.iv_select)
+    ImageView ivSelect;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
 
@@ -79,17 +79,17 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
 
                 if (mCurrentCounter < TOTAL_COUNTER){
                     PAGE_INDEX++;
+                    getPackagePage(PAGE_SIZE,PAGE_INDEX);
                 }else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
             }
         });
 
-        recyclerView.setNestedScrollingEnabled(false);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter = new CoursePurchaseRecordsAdapter(mActivity,R.layout.item_record,list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
+        recyclerView.setAdapter(mLRecyclerViewAdapter);
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -106,6 +106,7 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
+        getPackagePage(PAGE_SIZE,PAGE_INDEX);
     }
 
     /**

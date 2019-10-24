@@ -7,13 +7,24 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.kzz.dialoglibraries.dialog.DialogCreate;
 import com.xian.scooter.R;
+import com.xian.scooter.app.AppInfo;
 import com.xian.scooter.base.BaseActivity;
+import com.xian.scooter.contant.ConfigPF;
+import com.xian.scooter.manager.ActivityManager;
+import com.xian.scooter.manager.UserManager;
+import com.xian.scooter.module.activity.LoginActivity;
+import com.xian.scooter.utils.PreferenceUtils;
+import com.xian.scooter.utils.TimerTaskUtil;
 import com.xian.scooter.utils.TitleBarView;
+import com.xian.scooter.utils.ToastUtils;
+import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 public class SetUpActivity extends BaseActivity {
 
@@ -36,6 +47,8 @@ public class SetUpActivity extends BaseActivity {
     ImageView ivAbout;
     @BindView(R.id.tv_out)
     TextView tvOut;
+
+    private DialogCreate mDialogCreate;
 
     @Override
     protected int getLayoutResourceId() {
@@ -63,7 +76,47 @@ public class SetUpActivity extends BaseActivity {
                 startActivity(new Intent(mActivity,SetUpAdoutUsActivity.class));
                 break;
             case R.id.tv_out:
+                mDialogCreate = new DialogCreate.Builder(mActivity)
+                        .setAddViewId(R.layout.dialog_ok_cancel)
+                        .setIsHasCloseView(false)
+                        .setDialogSetDateInterface(inflaterView -> {
+                            TextView tvTitle = inflaterView.findViewById(R.id.tv_dialog_title);
+                            TextView tvMsg = inflaterView.findViewById(R.id.tv_dialog_msg);
+                            TextView tvCancel = inflaterView.findViewById(R.id.tv_cancel);
+                            TextView tvConfirm = inflaterView.findViewById(R.id.tv_confirm);
+                            tvTitle.setVisibility(View.GONE);
+                            tvMsg.setText("确定退出登录？");
+                            tvCancel.setOnClickListener(v12 -> mDialogCreate.dismiss());
+                            tvConfirm.setOnClickListener(v12 -> {
+                                singOut();
+                                mDialogCreate.dismiss();
+                            });
+                        })
+                        .build();
+                mDialogCreate.showSingle();
                 break;
         }
     }
+
+    /**
+     * 注销登录
+     */
+    private void singOut() {
+
+        AppInfo appInfo = UserManager.getInstance().getAppInfo();
+        String mobile = "";
+        if (appInfo != null) {
+            mobile = appInfo.getMobile();
+        }
+        ToastUtils.showToast("退出成功");
+        TimerTaskUtil.getInstance().stopAllTime();//停止所有验证码倒计时器
+        UserManager.getInstance().clearUserInfo();
+        PreferenceUtils.get().putBoolean(ConfigPF.USER_IS_LOGIN_KEY, false);
+        JPushInterface.stopPush(mActivity);
+        Intent intent = new Intent(mActivity, LoginActivity.class);
+        intent.putExtra("mobile", mobile);
+        startActivity(intent);
+        ActivityManager.finishAll();
+    }
+
 }

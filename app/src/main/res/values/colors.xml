@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#43bfe3</color>
-    <color name="colorPrimaryDark">#56c5e5</color>
-    <color name="colorAccent">#43bfe3</color>
-    <color name="theme">#43bfe3</color>
+    <color name="colorPrimary">#00a3e8</color>
+    <color name="colorPrimaryDark">#00a3e8</color>
+    <color name="colorAccent">#00a3e8</color>
+    <color name="theme">#00a3e8</color>
     <color name="transparent">#00000000</color>
     <color name="red">#FA0D0D</color>
 
@@ -19,9 +19,9 @@
     <color name="gray_99">#999999</color>
     <color name="gray_66">#666666</color>
 
-    <color name="red_alter">#FFB2B2</color>
-    <color name="red_delete">#FF6666</color>
-    <color name="red_f6">#FF6666</color>
+    <color name="red_alter">#ff9942</color>
+    <color name="red_delete">#ff4242</color>
+    <color name="red_fc">#fc4b41</color>
 
-    <color name="orange_f9">#ff9805</color>
+    <color name="orange_f9">#ffbb00</color>
 </resources>

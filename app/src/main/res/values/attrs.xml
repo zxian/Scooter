@@ -47,10 +47,32 @@
         <item>个人</item>
         <item>企业</item>
     </string-array>
+    <string-array name="number_type">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="promotion_type">
+        <item>否</item>
+        <item>是</item>
+    </string-array>
+    <string-array name="equipment_type">
+        <item>无</item>
+        <item>有</item>
+    </string-array>
     <string-array name="label_type">
         <item>耐心</item>
         <item>乐观</item>
         <item>阳光</item>
         <item>细心</item>
+    </string-array>
+    <string-array name="financial_type">
+        <item>全部</item>
+        <item>赛事报名</item>
+        <item>课程预约</item>
+        <item>课程包购买</item>
+        <item>提现记录</item>
     </string-array>
 </resources>

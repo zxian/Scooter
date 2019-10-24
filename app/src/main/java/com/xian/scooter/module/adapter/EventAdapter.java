@@ -58,11 +58,15 @@ public class EventAdapter extends CommonRvAdapter<EventBean> {
         long start_time = TimeUtils.getStringToDate(eventBean.getStart_time(), "yyyy-MM-dd HH:mm:ss");//报名开始时间
         long end_time = TimeUtils.getStringToDate(eventBean.getEnd_time(), "yyyy-MM-dd HH:mm:ss");//报名结束时间
 
-        String competition_state = eventBean.getCompetition_state();// competition_state 赛事状态：1、待审核，2、审核未通过，3、已通过，4、取消中，5、取消失败，6、已取消
+        String competition_state = eventBean.getCompetition_state();
+        // competition_state 赛事状态：1、待审核，2、审核未通过，3、已通过，4、取消中，5、取消失败，6、已取消
         if (!TextUtils.isEmpty(competition_state)) {
             switch (competition_state) {
+                case "1":
+                    tvStatus.setText("审核中");
+                    break;
                 case "2":
-                    tvStatus.setText("审核未通过");
+                    tvStatus.setText("审核失败");
                     break;
                 case "4":
                     tvStatus.setText("取消中");

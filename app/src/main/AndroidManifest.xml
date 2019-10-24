@@ -27,6 +27,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".module.event.EventArrangePersonActivity"></activity>
+        <activity android:name=".module.event.EventArrangePlanActivity" />
+        <activity android:name=".module.event.EventArrangeTypeActivity" />
+        <activity android:name=".module.event.EventArrangeRulesActivity" />
+        <activity android:name=".module.event.EventArrangeActivity" />
         <activity android:name=".module.stores.SetUpAdoutUsActivity"/>
         <activity android:name=".module.stores.SetCpCommonDetailsActivity" />
         <activity android:name=".module.stores.SetUpCommonActivity" />
@@ -46,11 +51,11 @@
         <activity android:name=".module.event.EventAddActivity" />
         <activity android:name=".module.event.EventDetailsActivity" />
         <activity android:name=".module.stores.FinancialActivity" />
-        <activity android:name=".module.stores.PurchaseRecordsActivity" />
+        <activity android:name=".module.stores.CoursePurchaseRecordsActivity" />
         <activity android:name=".module.stores.NewCourseActivity" />
         <activity android:name=".module.stores.CoursePackageActivity" />
         <activity android:name=".module.stores.CoachActivity" />
-        <activity android:name=".module.stores.GivingActivity" />
+        <activity android:name=".module.stores.CourseGivingActivity" />
         <activity android:name=".module.stores.WithdrawalActivity" />
         <activity android:name=".module.activity.RegisteredAgreementActivity" />
         <activity android:name=".module.stores.MembersActivity" />
