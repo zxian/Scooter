@@ -15,7 +15,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
         android:textColor="@color/black_33"
         android:text="@string/set_up_feedback_content"/>
 

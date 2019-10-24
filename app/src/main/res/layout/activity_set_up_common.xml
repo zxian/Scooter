@@ -5,58 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.stores.SetUpActivity">
+    tools:context=".module.stores.SetUpCommonActivity">
 
     <com.xian.scooter.utils.TitleBarView
         android:id="@+id/title_bar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_message"/>
-
-        <Switch
-            android:id="@+id/switch_set"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_feedback"
+            android:id="@+id/tv_delete"
             android:textSize="14sp"
             android:textColor="@color/black_33"
-            android:text="@string/set_up_feedback"/>
+            android:text="@string/set_up_common_delete"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/iv_feedback"
+            android:id="@+id/iv_delete"
             android:layout_alignParentRight="true"
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
@@ -66,23 +43,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_problem"
+            android:id="@+id/tv_restore"
             android:textSize="14sp"
             android:textColor="@color/black_33"
-            android:text="@string/set_up_problem"/>
+            android:text="@string/set_up_common_restore"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/iv_problem"
+            android:id="@+id/iv_restore"
             android:layout_alignParentRight="true"
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
@@ -92,42 +69,77 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_about"
+            android:id="@+id/tv_reset"
             android:textSize="14sp"
             android:textColor="@color/black_33"
-            android:text="@string/set_up_about"/>
+            android:text="@string/set_up_common_reset"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:id="@+id/iv_about"
+            android:id="@+id/iv_reset"
             android:layout_alignParentRight="true"
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_out"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/set_up_log_out"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="60dp"
-        android:paddingRight="125dp"
-        android:paddingLeft="125dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:gravity="center"
-        android:background="@drawable/horn_theme_20dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_notice"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_common_notice"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/iv_notice"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_into"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_switch"
+            android:textSize="14sp"
+            android:textColor="@color/black_33"
+            android:text="@string/set_up_common_switch"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/iv_switch"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_into"/>
+    </RelativeLayout>
 
 </LinearLayout>

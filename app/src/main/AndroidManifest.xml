@@ -27,7 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.stores.SetUpFeedbackActivity"></activity>
+        <activity android:name=".module.stores.SetUpAdoutUsActivity"/>
+        <activity android:name=".module.stores.SetCpCommonDetailsActivity" />
+        <activity android:name=".module.stores.SetUpCommonActivity" />
+        <activity android:name=".module.stores.SetUpFeedbackActivity" />
         <activity android:name=".module.stores.SetUpActivity" />
         <activity android:name=".module.stores.CoachLabelActivity" />
         <activity android:name=".module.stores.StoresInfoActivity" />

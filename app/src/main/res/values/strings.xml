@@ -158,4 +158,15 @@
     <string name="srt_up_submit_feedback">提交反馈</string>
     <string name="set_up_feedback_describe">请填写10个字以上的问题描述</string>
 
+    <string name="set_up_common_delete">收藏的内容如何删除</string>
+    <string name="set_up_common_restore">已删除信息可以恢复吗</string>
+    <string name="set_up_common_reset">如何重置密码</string>
+    <string name="set_up_common_notice">如何开启或关闭新消息通知</string>
+    <string name="set_up_common_switch">如何切换账号</string>
+
+    <string name="set_up_details_withdrawal">如何提现</string>
+    <string name="set_up_details_prompt">1.账户要有余额</string>
+    <string name="set_up_details_prompt1">2.具体操作如下</string>
+    <string name="set_uo_adoutus_version">当前版本 1.0.2</string>
+
 </resources>

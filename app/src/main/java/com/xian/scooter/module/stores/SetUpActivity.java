@@ -1,5 +1,6 @@
 package com.xian.scooter.module.stores;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,29 +48,19 @@ public class SetUpActivity extends BaseActivity {
         titleBarView.setLeftOnClickListener(view -> finish());
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick({R.id.switch_set, R.id.tv_feedback, R.id.iv_feedback, R.id.tv_problem, R.id.iv_problem, R.id.tv_about, R.id.iv_about, R.id.tv_out})
+    @OnClick({R.id.switch_set, R.id.iv_feedback, R.id.iv_problem, R.id.iv_about, R.id.tv_out})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.switch_set:
                 break;
-            case R.id.tv_feedback:
-                break;
             case R.id.iv_feedback:
-                break;
-            case R.id.tv_problem:
+                startActivity(new Intent(mActivity,SetUpFeedbackActivity.class));
                 break;
             case R.id.iv_problem:
-                break;
-            case R.id.tv_about:
+                startActivity(new Intent(mActivity,SetUpCommonActivity.class));
                 break;
             case R.id.iv_about:
+                startActivity(new Intent(mActivity,SetUpAdoutUsActivity.class));
                 break;
             case R.id.tv_out:
                 break;
