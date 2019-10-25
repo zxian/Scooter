@@ -1,7 +1,11 @@
 package com.xian.scooter.module.stores;
 
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,10 +17,10 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-
 import com.xian.scooter.bean.CoursePurchaseRecordsBean;
 import com.xian.scooter.bean.PageBean;
-
+import com.xian.scooter.beanpar.CoursePurchaseRecordsPar;
+import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.module.adapter.CoursePurchaseRecordsAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -29,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class CoursePurchaseRecordsActivity extends BaseActivity {
@@ -40,8 +46,6 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
     EditText etSearch;
     @BindView(R.id.btn_clear_search)
     ImageView btnClearSearch;
-    @BindView(R.id.iv_select)
-    ImageView ivSelect;
     @BindView(R.id.recycler_view)
     LRecyclerView recyclerView;
 
@@ -52,6 +56,7 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
     private CoursePurchaseRecordsAdapter adapter;
     private List<CoursePurchaseRecordsBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
+    private String name;
 
     @Override
     protected int getLayoutResourceId() {
@@ -64,9 +69,31 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
         titleBarView.setLeftOnClickListener(view -> finish());
         initRecyclerView();
         onMyRefresh();
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                name = etSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    btnClearSearch.setVisibility(View.GONE);
+                } else {
+                    btnClearSearch.setVisibility(View.VISIBLE);
+                }
+                onMyRefresh();
+            }
+        });
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         recyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -77,17 +104,17 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
             @Override
             public void onLoadMore() {
 
-                if (mCurrentCounter < TOTAL_COUNTER){
+                if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
-                    getPackagePage(PAGE_SIZE,PAGE_INDEX);
-                }else {
+                    getPackagePage(PAGE_SIZE, PAGE_INDEX);
+                } else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
             }
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new CoursePurchaseRecordsAdapter(mActivity,R.layout.item_record,list);
+        adapter = new CoursePurchaseRecordsAdapter(mActivity, R.layout.item_record, list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mLRecyclerViewAdapter);
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -102,22 +129,26 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
      * 下拉刷新
      */
 
-    private void onMyRefresh(){
+    private void onMyRefresh() {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
-        getPackagePage(PAGE_SIZE,PAGE_INDEX);
+        getPackagePage(PAGE_SIZE, PAGE_INDEX);
     }
 
     /**
-     *
-     * @param size  每页显示数量
-     * @param current  当前页
+     * @param size    每页显示数量
+     * @param current 当前页
      */
-    private void getPackagePage(int size , int current) {
-
-        ApiRequest.getInstance().post(HttpURL.PACKAGE_PAGE.replace("{size}", size  + "")
-                .replace("{current}", current  + ""), new DefineCallback<PageBean<CoursePurchaseRecordsBean>>() {
+    private void getPackagePage(int size, int current) {
+        CoursePurchaseRecordsPar par = new CoursePurchaseRecordsPar();
+        if (!TextUtils.isEmpty(name)) {
+            par.setName(name);
+        }
+        par.setStore_id(UserManager.getInstance().getStoreId());
+        par.setSign();
+        ApiRequest.getInstance().post(HttpURL.PACKAGE_ORDERPAGE.replace("{size}", size + "")
+                .replace("{current}", current + ""),par, new DefineCallback<PageBean<CoursePurchaseRecordsBean>>() {
             @Override
             public void onMyResponse(SimpleResponse<PageBean<CoursePurchaseRecordsBean>, HttpEntity> response) {
                 if (response.isSucceed()) {
@@ -139,15 +170,18 @@ public class CoursePurchaseRecordsActivity extends BaseActivity {
 
     /**
      * 添加数据到列表
-     *
-     *
      */
 
-    private void addItems(List<CoursePurchaseRecordsBean> list){
-        if (list.size() > 0 && adapter!= null){
+    private void addItems(List<CoursePurchaseRecordsBean> list) {
+        if (list.size() > 0 && adapter != null) {
             mCurrentCounter += list.size();
             adapter.updataItem(list);
         }
     }
 
+
+    @OnClick(R.id.btn_clear_search)
+    public void onViewClicked() {
+        etSearch.setText("");
+    }
 }

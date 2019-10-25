@@ -114,7 +114,7 @@ public class CoursePackageActivity extends BaseActivity {
      * @param size  每页显示数量
      * @param current  当前页
      */
-    private void getPackagePage(int size , int current) {
+    private void getPackagePage( int current,int size ) {
 
         ApiRequest.getInstance().post(HttpURL.PACKAGE_PAGE.replace("{size}", size  + "")
                 .replace("{current}", current  + ""), new DefineCallback<PageBean<CoursePackageBean>>() {
@@ -156,7 +156,7 @@ public class CoursePackageActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_add:
-                startActivity(new Intent(mActivity,NewCourseActivity.class));
+                startActivity(new Intent(mActivity, CourseAddActivity.class));
                 break;
             case R.id.tv_give:
                 startActivity(new Intent(mActivity,CourseGivingActivity.class));

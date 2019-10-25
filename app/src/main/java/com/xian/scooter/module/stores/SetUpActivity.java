@@ -61,18 +61,18 @@ public class SetUpActivity extends BaseActivity {
         titleBarView.setLeftOnClickListener(view -> finish());
     }
 
-    @OnClick({R.id.switch_set, R.id.iv_feedback, R.id.iv_problem, R.id.iv_about, R.id.tv_out})
+    @OnClick({R.id.switch_set, R.id.rl_feedback, R.id.rl_problem, R.id.rl_about, R.id.tv_out})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.switch_set:
                 break;
-            case R.id.iv_feedback:
+            case R.id.rl_feedback:
                 startActivity(new Intent(mActivity,SetUpFeedbackActivity.class));
                 break;
-            case R.id.iv_problem:
+            case R.id.rl_problem:
                 startActivity(new Intent(mActivity,SetUpCommonActivity.class));
                 break;
-            case R.id.iv_about:
+            case R.id.rl_about:
                 startActivity(new Intent(mActivity,SetUpAdoutUsActivity.class));
                 break;
             case R.id.tv_out:

@@ -67,7 +67,7 @@
             android:gravity="center"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:src="@mipmap/ic_close"
+            android:src="@mipmap/ic_screening"
             android:textColor="@color/black_33"
             android:textSize="15sp" />
     </LinearLayout>

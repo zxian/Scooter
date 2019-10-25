@@ -158,6 +158,10 @@ public class LoginActivity extends BaseActivity {
             case R.id.iv_qq:
                 break;
             case R.id.iv_alipay:
+                Intent intent = new Intent(mActivity, RegisterStoresActivity.class);
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
 import com.bit.adapter.lvadapter.CommonLvAdapter;
 import com.bit.adapter.lvadapter.ViewHolderLv;
 import com.bumptech.glide.Glide;
@@ -23,6 +25,7 @@ import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.beanpar.StoreAddPar;
 import com.xian.scooter.contant.Config;
+import com.xian.scooter.module.map.LocationActivity;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
@@ -51,10 +54,8 @@ public class RegisterStoresActivity extends BaseActivity {
     EditText etName;
     @BindView(R.id.iv_logo)
     ImageView ivLogo;
-    //    @BindView(R.id.tv_location)
-//    TextView tvLocation;
-    @BindView(R.id.et_location)
-    EditText etLocation;
+    @BindView(R.id.tv_location)
+    TextView tvLocation;
     @BindView(R.id.et_address)
     EditText etAddress;
     @BindView(R.id.et_introduce)
@@ -87,6 +88,7 @@ public class RegisterStoresActivity extends BaseActivity {
     private String picturePath;
     private int type;
     private String userId;
+    private String area;
 
     private static class MyHandler extends Handler {
         private WeakReference<RegisterStoresActivity> mWeakReference;
@@ -218,7 +220,7 @@ public class RegisterStoresActivity extends BaseActivity {
             @Override
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
                 if (response.isSucceed()) {
-                    startActivity(new Intent(mActivity,MainActivity.class));
+                    startActivity(new Intent(mActivity, MainActivity.class));
                     finish();
                 } else {
                     ToastUtils.showToast(response.failed().getMessage());
@@ -235,6 +237,7 @@ public class RegisterStoresActivity extends BaseActivity {
                 showCameraDialog();
                 break;
             case R.id.rl_location:
+                startActivityForResult(new Intent(mActivity, LocationActivity.class), 1000);
                 break;
             case R.id.rl_type:
                 List<String> typeList = Arrays.asList(getResources().getStringArray(R.array.stores_type));
@@ -254,7 +257,6 @@ public class RegisterStoresActivity extends BaseActivity {
                 break;
             case R.id.tv_apply:
                 String name = etName.getText().toString().trim();
-                String area = etLocation.getText().toString().trim();
                 String address = etAddress.getText().toString().trim();
                 String introduce = etIntroduce.getText().toString().trim();
                 String headName = etHeadName.getText().toString().trim();
@@ -349,7 +351,18 @@ public class RegisterStoresActivity extends BaseActivity {
                     String path = pathList.get(0);
                     fileUpload(new File(path));
                     break;
+                case 1000:
+                    if (resultCode == 2000) {
+                        PoiItem poiItem = data.getParcelableExtra("PoiItem");
+                        if (poiItem != null) {
+                            LatLonPoint latLonPoint = poiItem.getLatLonPoint();
+                            area = latLonPoint.getLatitude()+","+latLonPoint.getLongitude();
+                        }
+                    }
+                    break;
             }
+
+
         }
     }
 

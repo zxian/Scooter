@@ -13,6 +13,7 @@ public class HttpURL {
     public static String STORE_ADD = "/store/add";
     public static String STORE_LIST = "/store/page/{size}/{current}";
     public static String STORE_BYID = "/store/byId/{storeId}";
+    public static String STORE_EDIT = "/store/edit";
     public static String WITHDRAWAL_BILLALL = "/withdrawal/billAll";
     public static String WITHDRAWAL_EXTRACT = "/withdrawal/extract";
 
@@ -37,6 +38,7 @@ public class HttpURL {
 
     //课程包
     public static String PACKAGE_PAGE= "/package/page/{size}/{current}";
+    public static String PACKAGE_ORDERPAGE= "/package/orderPage/{size}/{current}";
     public static String PACKAGE_SAVE= "/package/saveOrUpdate";
 
 

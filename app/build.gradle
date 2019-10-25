@@ -200,4 +200,10 @@ dependencies {
     }
     //选择工具
     implementation 'com.github.addappcn:android-pickers:1.0.3'
+
+    //高德地图
+    implementation 'com.amap.api:3dmap:6.9.4'
+    implementation 'com.amap.api:search:5.0.0'
+    implementation 'com.amap.api:location:4.7.0'
+    compile 'com.amap.api:navi-3dmap:7.0.0_3dmap7.0.0'
 }

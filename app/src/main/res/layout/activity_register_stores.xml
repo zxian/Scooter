@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".module.activity.RegisterStoresActivity">
@@ -116,35 +118,20 @@
                     android:text="@string/register_stores_location"
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_location"
+                <TextView
+                    android:id="@+id/tv_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@null"
-                    android:singleLine="true"
                     android:gravity="end"
                     android:layout_marginStart="12dp"
-                    android:layout_toEndOf="@+id/register_stores_location"
-                    android:hint="@string/register_stores_location_hint"
+                    android:drawablePadding="8dp"
+                    android:text="@string/register_stores_location_hint"
+                    android:drawableEnd="@mipmap/ic_into"
                     android:textColor="@color/black_33"
                     android:textSize="14sp" />
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_location"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentEnd="true"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:background="@null"-->
-                    <!--android:gravity="end"-->
-                    <!--android:layout_marginStart="12dp"-->
-                    <!--android:drawablePadding="8dp"-->
-                    <!--android:text="@string/register_stores_location_hint"-->
-                    <!--android:drawableEnd="@mipmap/ic_into"-->
-                    <!--android:textColor="@color/black_33"-->
-                    <!--android:textSize="14sp" />-->
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

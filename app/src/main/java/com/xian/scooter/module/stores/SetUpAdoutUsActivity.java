@@ -11,7 +11,7 @@ import com.xian.scooter.utils.TitleBarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class SetUpAdoutUsActivity extends BaseActivity {
+public class SetUpAdoutUsActivity extends BaseActivity {
 
 
     @BindView(R.id.title_bar_view)
