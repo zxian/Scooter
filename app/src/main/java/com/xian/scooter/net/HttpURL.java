@@ -9,6 +9,11 @@ public class HttpURL {
     public static String FILE_UPLOAD = "/file/headImgUpload";
     public static String CUST = "/cust/pwd";
 
+    //设置
+    public static String FEEDBACK_ADD = "/feedback/add";
+    public static String ISSUE_LIST = "/issue/page/{size}/{current}";
+    public static String ISSUE_BYID = "/issue/byId/{id}";
+
     //门店
     public static String STORE_ADD = "/store/add";
     public static String STORE_LIST = "/store/page/{size}/{current}";
@@ -40,6 +45,7 @@ public class HttpURL {
     public static String PACKAGE_PAGE= "/package/page/{size}/{current}";
     public static String PACKAGE_ORDERPAGE= "/package/orderPage/{size}/{current}";
     public static String PACKAGE_SAVE= "/package/saveOrUpdate";
+    public static String PACKAGE_SEND= "/package/sendPackage";
 
 
 }

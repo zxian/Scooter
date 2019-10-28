@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".module.stores.SetUpFeedbackActivity">
 
@@ -12,41 +13,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/gray_f6" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
+        android:text="@string/set_up_feedback_content"
         android:textColor="@color/black_33"
-        android:text="@string/set_up_feedback_content"/>
+        android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/et_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:gravity="top"
-        android:hint="@string/set_up_feedback_describe"
         android:background="@color/gray_f6"
-        android:minLines="8"
-        android:textColor="@color/black_33"
-        android:textSize="14sp" />
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="@string/set_up_feedback_describe"
+            android:maxLength="200"
+            android:minHeight="65dp"
+            android:minLines="8"
+            android:textColor="@color/black_33"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_content_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="0/200"
+            android:textColor="@color/gray_66" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/srt_up_submit_feedback"
-        android:textSize="18sp"
-        android:textColor="@color/white"
         android:layout_marginTop="60dp"
-        android:paddingRight="125dp"
+        android:background="@drawable/horn_theme_20dp"
+        android:gravity="center"
         android:paddingLeft="125dp"
         android:paddingTop="14dp"
+        android:paddingRight="125dp"
         android:paddingBottom="14dp"
-        android:gravity="center"
-        android:background="@drawable/horn_theme_20dp"/>
+        android:text="@string/srt_up_submit_feedback"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>

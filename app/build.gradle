@@ -177,9 +177,7 @@ dependencies {
 
     //图库、视频选择器
     implementation('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {
-
         exclude group: 'com.android.support'
-
     }
 
     //上下拉刷新
@@ -205,5 +203,5 @@ dependencies {
     implementation 'com.amap.api:3dmap:6.9.4'
     implementation 'com.amap.api:search:5.0.0'
     implementation 'com.amap.api:location:4.7.0'
-    compile 'com.amap.api:navi-3dmap:7.0.0_3dmap7.0.0'
+//    implementation 'com.amap.api:navi-3dmap:7.0.0_3dmap7.0.0'
 }

@@ -29,6 +29,7 @@ import com.xian.scooter.bean.StoreListBean;
 import com.xian.scooter.beanpar.storeEditPar;
 import com.xian.scooter.contant.Config;
 import com.xian.scooter.manager.UserManager;
+import com.xian.scooter.module.activity.ForgotPasswordActivity;
 import com.xian.scooter.module.map.LocationActivity;
 import com.xian.scooter.module.map.MapLocationPositionActivity;
 import com.xian.scooter.net.ApiRequest;
@@ -122,7 +123,7 @@ public class StoresInfoActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        titleBarView.setTvTitleText("门店信息");
+        titleBarView.setTvTitleText("门店介绍");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         titleBarView.setRightText("保存");
         titleBarView.setRightOnClickListener(view -> {
@@ -249,6 +250,9 @@ public class StoresInfoActivity extends BaseActivity {
                 showCameraDialog();
                 break;
             case R.id.rl_pwd:
+                intent = new Intent(mActivity, ForgotPasswordActivity.class);
+                intent.putExtra("type",2);//1 忘记密码，2 修改密码
+                startActivity(intent);
                 break;
         }
     }

@@ -33,6 +33,17 @@
         <attr name="dividerPaddingRight" format="dimension" />
     </declare-styleable>
 
+    <!--圆角-->
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" />
+        <attr name="type" />
+    </declare-styleable>
+    <attr name="borderRadius" format="dimension" />
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+    </attr>
+
     <string-array name="item_res_img">
         <item>@mipmap/ic_stores_coach</item>
         <item>@mipmap/ic_stores_members</item>

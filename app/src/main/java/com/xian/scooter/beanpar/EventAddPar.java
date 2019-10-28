@@ -17,13 +17,14 @@ public class EventAddPar {
     private String posters_url;
     private String remark;
     private String start_time;
+    private String store_id;
     private List<CompetitionSavePar> subSets;
 
     public void setSign(){
         String sign = "address=" + address + "&competition_name=" + competition_name
                 +"&competition_type=" + competition_type +"&end_time=" + end_time +"&finish_time=" + finish_time
                 +"&is_display=" + is_display +"&official_time=" + official_time +"&posters_url=" + posters_url
-                +"&remark=" + remark  +"&start_time=" + start_time  + "&key="+ Config.KEY;
+                +"&remark=" + remark  +"&start_time=" + start_time +"&store_id=" + store_id  + "&key="+ Config.KEY;
         BaseApplication.getInstance().getKalleConfig()
                 .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));
 
@@ -107,6 +108,14 @@ public class EventAddPar {
 
     public void setStart_time(String start_time) {
         this.start_time = start_time;
+    }
+
+    public String getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
     }
 
     public List<CompetitionSavePar> getSubSets() {

@@ -4,7 +4,7 @@ import com.xian.scooter.app.BaseApplication;
 import com.xian.scooter.contant.Config;
 import com.xian.scooter.utils.SignUtils;
 
-public class NewCoursePas {
+public class CourseAddPar {
     private String num;
     private String package_name;
     private String package_price;

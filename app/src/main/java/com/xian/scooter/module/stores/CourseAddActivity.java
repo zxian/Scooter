@@ -11,7 +11,7 @@ import com.bit.adapter.lvadapter.ViewHolderLv;
 import com.kzz.dialoglibraries.dialog.DialogFragmentBottom;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-import com.xian.scooter.beanpar.NewCoursePas;
+import com.xian.scooter.beanpar.CourseAddPar;
 import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -69,7 +69,7 @@ public class CourseAddActivity extends BaseActivity {
      */
     private void getPackageSaveOrUpdate( String num,String name, String price, String state, String valid_day) {
 
-        NewCoursePas pas = new NewCoursePas();
+        CourseAddPar pas = new CourseAddPar();
         pas.setNum(num);
         pas.setPackage_name(name);
         pas.setPackage_price(price);

@@ -151,17 +151,19 @@ public class LoginActivity extends BaseActivity {
                 login(phone, pwd);
                 break;
             case R.id.tv_forget_pwd:
-                startActivity(new Intent(mActivity,ForgotPasswordActivity.class));
+                Intent intent = new Intent(mActivity, ForgotPasswordActivity.class);
+                intent.putExtra("type",1);//1 忘记密码，2 修改密码
+                startActivity(intent);
                 break;
             case R.id.iv_wechat:
                 break;
             case R.id.iv_qq:
                 break;
             case R.id.iv_alipay:
-                Intent intent = new Intent(mActivity, RegisterStoresActivity.class);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
-                finish();
+//                intent = new Intent(mActivity, RegisterStoresActivity.class);
+//                intent.putExtra("userId",userId);
+//                startActivity(intent);
+//                finish();
                 break;
         }
     }

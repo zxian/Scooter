@@ -1,5 +1,6 @@
 package com.xian.scooter.module.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,6 +45,13 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private CountDownTimerUtils countDownTimerUtils;
 
+    private int type;
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        type = intent.getIntExtra("type", 1);
+    }
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_forgot_passwordctivity;
@@ -53,12 +61,18 @@ public class ForgotPasswordActivity extends BaseActivity {
     protected void init() {
 
         int resetPhoneTime = TimerTaskUtil.getInstance().getmResetPhoneTime();
-        if (resetPhoneTime != 0){
-            countDownTimerUtils = new CountDownTimerUtils(tvGetCode,1000,1000);
+        if (resetPhoneTime != 0) {
+            countDownTimerUtils = new CountDownTimerUtils(tvGetCode, 1000, 1000);
             countDownTimerUtils.start();
         }
 
-        titleBarView.setTvTitleText("忘记密码");
+        //1 忘记密码，2 修改密码
+        if (type == 1) {
+            titleBarView.setTvTitleText("忘记密码");
+        } else {
+            titleBarView.setTvTitleText("忘记密码");
+        }
+
         titleBarView.setLeftOnClickListener(view -> finish());
     }
 
@@ -91,13 +105,11 @@ public class ForgotPasswordActivity extends BaseActivity {
     }
 
     /**
-     *
-     *
-     * @param code 验证码
-     * @param newPassword  新密码
-     * @param hone  手机号码
+     * @param code        验证码
+     * @param newPassword 新密码
+     * @param hone        手机号码
      */
-    private void getCust(String code,String newPassword,String hone) {
+    private void getCust(String code, String newPassword, String hone) {
 
         ForgotPasswordPar par = new ForgotPasswordPar();
         par.setPhone(hone);
@@ -105,7 +117,7 @@ public class ForgotPasswordActivity extends BaseActivity {
         par.setNewPassword(newPassword);
         par.setSign();
 
-        ApiRequest.getInstance().post(HttpURL.CUST,par,new DefineCallback<String>() {
+        ApiRequest.getInstance().post(HttpURL.CUST, par, new DefineCallback<String>() {
 
             @Override
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
@@ -113,9 +125,9 @@ public class ForgotPasswordActivity extends BaseActivity {
                     ToastUtils.showToast("修改成功");
                     finish();
                 } else {
-                    if (response.failed()!=null) {
+                    if (response.failed() != null) {
                         ToastUtils.showToast(response.failed().getMessage());
-                    }else {
+                    } else {
                         ToastUtils.showToast("修改密码失败");
                     }
                 }
@@ -129,14 +141,14 @@ public class ForgotPasswordActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_get_code:
                 String phone = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(phone)){
+                if (TextUtils.isEmpty(phone)) {
                     ToastUtils.showToast("手机号码不能为空！");
                     return;
                 }
 
-                getSms(phone,"2");
+                getSms(phone, "2");
 
-                countDownTimerUtils = new CountDownTimerUtils(tvGetCode,60000,1000);
+                countDownTimerUtils = new CountDownTimerUtils(tvGetCode, 60000, 1000);
                 countDownTimerUtils.start();
                 TimerTaskUtil.getInstance().startResetPhoneTimer(60);
                 break;
@@ -147,27 +159,27 @@ public class ForgotPasswordActivity extends BaseActivity {
                 String repeatpassword = etRepeatPassword.getText().toString().trim();
 
 
-                if (TextUtils.isEmpty(phone1)){
+                if (TextUtils.isEmpty(phone1)) {
                     ToastUtils.showToast("手机号码不能为空！");
                     return;
                 }
-                if (TextUtils.isEmpty(code)){
+                if (TextUtils.isEmpty(code)) {
                     ToastUtils.showToast("验证码不能为空！");
                     return;
                 }
-                if (TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     ToastUtils.showToast("密码不能为空！");
                     return;
                 }
-                if (TextUtils.isEmpty(repeatpassword)){
+                if (TextUtils.isEmpty(repeatpassword)) {
                     ToastUtils.showToast("再次输入密码不能为空！");
                     return;
                 }
-                if (!repeatpassword.equals(password)){
+                if (!repeatpassword.equals(password)) {
                     ToastUtils.showToast("密码与再次输入密码不一致！");
                     return;
                 }
-                getCust(code,password,phone1);
+                getCust(code, password, phone1);
                 break;
         }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".module.stores.SetUpCommonActivity">
 
@@ -12,134 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:layout_height="5dp"
+        android:background="@color/gray_ee" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_delete"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_common_delete"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:id="@+id/iv_delete"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_into"/>
-    </RelativeLayout>
-
-    <RelativeLayout
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_restore"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_common_restore"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:id="@+id/iv_restore"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_into"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_reset"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_common_reset"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:id="@+id/iv_reset"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_into"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_notice"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_common_notice"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:id="@+id/iv_notice"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_into"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_switch"
-            android:textSize="14sp"
-            android:textColor="@color/black_33"
-            android:text="@string/set_up_common_switch"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:id="@+id/iv_switch"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_into"/>
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

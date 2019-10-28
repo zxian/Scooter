@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".module.stores.SetUpActivity">
 
@@ -12,11 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/gray_f6" />
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:orientation="horizontal">
@@ -27,20 +32,29 @@
             android:textSize="14sp"
             android:textColor="@color/black_33"
             android:text="@string/set_up_message"/>
-
         <Switch
             android:id="@+id/switch_set"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:checked="true"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector" />
+    </RelativeLayout>
 
-    </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/gray_f6" />
     <RelativeLayout
         android:id="@+id/rl_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
@@ -62,12 +76,18 @@
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/gray_f6" />
     <RelativeLayout
         android:id="@+id/rl_problem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
@@ -89,12 +109,16 @@
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_f6" />
     <RelativeLayout
         android:id="@+id/rl_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
@@ -116,6 +140,12 @@
             android:src="@mipmap/ic_into"/>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/gray_f6" />
     <TextView
         android:id="@+id/tv_out"
         android:layout_width="wrap_content"

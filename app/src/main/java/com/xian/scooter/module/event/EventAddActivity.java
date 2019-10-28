@@ -27,6 +27,7 @@ import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.beanpar.CompetitionSavePar;
 import com.xian.scooter.beanpar.EventAddPar;
 import com.xian.scooter.contant.Config;
+import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.module.activity.RegisterStoresActivity;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -176,6 +177,7 @@ public class EventAddActivity extends BaseActivity {
         par.setPosters_url(postersUrl);
         par.setRemark(remark);
         par.setStart_time(startTime);
+        par.setStore_id(UserManager.getInstance().getStoreId());
         par.setSubSets(set);
 
         par.setSign();

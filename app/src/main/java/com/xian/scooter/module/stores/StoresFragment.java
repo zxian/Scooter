@@ -34,6 +34,7 @@ import com.xian.scooter.net.HttpURL;
 import com.xian.scooter.utils.SignUtils;
 import com.xian.scooter.utils.TitleBarView;
 import com.xian.scooter.utils.ToastUtils;
+import com.xian.scooter.view.CustomRoundImageView;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class StoresFragment extends BaseFragment {
     @BindView(R.id.iv_picture)
     ImageView ivPicture;
     @BindView(R.id.iv_logo)
-    ImageView ivLogo;
+    CustomRoundImageView ivLogo;
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_star)

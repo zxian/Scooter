@@ -112,13 +112,6 @@ public class POISearchActivity extends BaseActivity implements PoiSearch.OnPoiSe
         inputtips.requestInputtipsAsyn();//输入查询提示的异步接口实现
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
 
     @OnClick({R.id.tv_cancel})
     public void onViewClicked(View view) {
