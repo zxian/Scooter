@@ -15,8 +15,10 @@ public class StoreAddPar {
     private String create_user_id;
     private String id;
     private String id_card;
+    private String latitude;
     private String level;
     private String logo;
+    private String longitude;
     private String manage_name;
     private String name;
     private String remark;
@@ -103,6 +105,14 @@ public class StoreAddPar {
         this.id_card = id_card;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
     public String getLevel() {
         return level;
     }
@@ -117,6 +127,14 @@ public class StoreAddPar {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getManage_name() {
@@ -162,7 +180,7 @@ public class StoreAddPar {
         String sign = "address=" + address + "&area=" + area +"&backdrop_url=" + backdrop_url +
                 "&business_license=" + business_license + "&card_national=" + card_national +
                 "&card_portrait=" + card_portrait + "&code=" + code + "&create_user_id=" + create_user_id +
-                "&id=" + id + "&id_card=" + id_card + "&level=" + level + "&logo=" + logo +
+                "&id=" + id + "&id_card=" + id_card + "&latitude=" + latitude +"&level=" + level + "&logo=" + logo +"&longitude=" + longitude +
                 "&manage_name=" + manage_name + "&name=" + name + "&phone=" + phone + "&remark=" + remark + "&type=" + type + "&key="+ Config.KEY;
         BaseApplication.getInstance().getKalleConfig()
                 .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));

@@ -42,6 +42,7 @@ public class CoursePackageAdapter extends CommonRvAdapter<CoursePackageBean> {
         holder.setText(R.id.tv_price,prices);
 
         Switch aSwitch = holder.getView(R.id.sw_select);
+        aSwitch.setVisibility(View.VISIBLE);
         int state = coursePackageBean.getPackage_state();
         if (state==0){ //是否启用：0、未启用，1、已启用
            aSwitch.setChecked(false);

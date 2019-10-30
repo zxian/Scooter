@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">滑步车</string>
+    <string name="app_name">小车神门店端</string>
     <string name="main_check_update_app_err">找不到版本号</string>
 
     <string name="login">登录</string>
@@ -125,11 +125,13 @@
     <string name="event_setup">赛事设置</string>
     <string name="event_setup_hint">请进行设置</string>
     <string name="event_setup_add">新增类型</string>
-    <string name="event_setup_type_name">名称</string>
-    <string name="event_setup_type_number">人数(人)</string>
-    <string name="event_setup_type_price">报名费用(元)</string>
-    <string name="event_setup_type_age_max">最大年龄(岁)</string>
-    <string name="event_setup_type_age_min">最小年龄(岁)</string>
+    <string name="event_setup_type_name">报名类型</string>
+    <string name="event_setup_type_name_hint">请输入类型名称</string>
+    <string name="event_setup_type_number">限制人员</string>
+    <string name="event_setup_type_number_hint">请输入限制人数</string>
+    <string name="event_setup_type_price">报名费用</string>
+    <string name="event_setup_type_price_hint">请输入金额</string>
+    <string name="event_setup_type_age">年龄区间</string>
     <string name="event_cancel_cause">取消原因</string>
     <string name="event_cancel_cause_hint">请填写10个字以上的问题描述</string>
     <string name="event_cancel_submit">提交申请</string>

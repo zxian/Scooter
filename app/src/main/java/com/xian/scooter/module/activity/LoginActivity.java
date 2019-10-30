@@ -1,5 +1,6 @@
 package com.xian.scooter.module.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
 import com.xian.scooter.net.HttpURL;
+import com.xian.scooter.utils.PermissionsUtils;
 import com.xian.scooter.utils.PreferenceUtils;
 import com.xian.scooter.utils.ToastUtils;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
@@ -42,12 +44,13 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init() {
-
-//        AppInfo appInfo = UserManager.getInstance().getAppInfo();
-//        if (appInfo != null) {
-//            etUser.setText(appInfo.getMobile());
-//            etPwd.setText(appInfo.getPwd());
-//        }
+        //申请权限
+        PermissionsUtils.getInstance().requestPermissions(LoginActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.REORDER_TASKS);
     }
 
 
@@ -160,10 +163,10 @@ public class LoginActivity extends BaseActivity {
             case R.id.iv_qq:
                 break;
             case R.id.iv_alipay:
-//                intent = new Intent(mActivity, RegisterStoresActivity.class);
-//                intent.putExtra("userId",userId);
-//                startActivity(intent);
-//                finish();
+                intent = new Intent(mActivity, RegisterStoresActivity.class);
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+//
                 break;
         }
     }

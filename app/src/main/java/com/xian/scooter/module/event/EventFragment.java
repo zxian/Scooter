@@ -37,6 +37,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.app.Activity.RESULT_OK;
+
 public class EventFragment extends BaseFragment {
 
     @BindView(R.id.title_bar_view)
@@ -54,6 +56,7 @@ public class EventFragment extends BaseFragment {
     private List<EventBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private long time;
+    private static int REQUEST_CODE_ADD = 100;
 
     public static EventFragment newInstance() {
         return new EventFragment();
@@ -70,12 +73,6 @@ public class EventFragment extends BaseFragment {
         titleBarView.setTvTitleText("赛事");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
         initRecyclerView();
-        onMyRefresh();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         onMyRefresh();
     }
 
@@ -110,7 +107,7 @@ public class EventFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(mActivity, EventDetailsActivity.class);
                 intent.putExtra("id", adapter.getDatas().get(position).getId());
-                intent.putExtra("time",time);
+                intent.putExtra("time", time);
                 startActivity(intent);
             }
         });
@@ -176,6 +173,19 @@ public class EventFragment extends BaseFragment {
 
     @OnClick(R.id.fab_add)
     public void onViewClicked() {
-        startActivity(new Intent(mActivity,EventAddActivity.class));
+        startActivityForResult(new Intent(mActivity, EventAddActivity.class), REQUEST_CODE_ADD);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == REQUEST_CODE_ADD) {
+                if (resultCode == RESULT_OK) {
+                  onMyRefresh();
+                }
+            }
+
+        }
     }
 }

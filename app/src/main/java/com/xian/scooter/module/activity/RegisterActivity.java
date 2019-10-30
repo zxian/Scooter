@@ -120,6 +120,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
                 if (response.isSucceed()) {
+                    ToastUtils.showToast("注册成功！");
                     finish();
                 } else {
                     ToastUtils.showToast(response.failed().getMessage());

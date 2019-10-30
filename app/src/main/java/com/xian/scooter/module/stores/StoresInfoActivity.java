@@ -181,13 +181,14 @@ public class StoresInfoActivity extends BaseActivity {
 
                         navInfo = new NavBean();
 
-                        String area = storeIfo.getArea();
-                        if (area.contains(",")) {
-                            String[] split = area.split(",");
-                            navInfo.setLatitude(Double.parseDouble(split[0]));
-                            navInfo.setLatitude(Double.parseDouble(split[2]));
+                        String latitude = storeIfo.getLatitude();
+                        if (!TextUtils.isEmpty(latitude)){
+                            navInfo.setLatitude(Double.parseDouble(latitude));
                         }
-
+                        String longitude = storeIfo.getLongitude();
+                        if (!TextUtils.isEmpty(longitude)){
+                            navInfo.setLongitude(Double.parseDouble(longitude));
+                        }
                         navInfo.setAddress(storeIfo.getAddress());
                     }
                 } else {

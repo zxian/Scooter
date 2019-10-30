@@ -186,6 +186,8 @@ public class EventAddActivity extends BaseActivity {
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
                 if (response.isSucceed()) {
                     ToastUtils.showToast("提交成功！");
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK,intent);
                     finish();
                 }else {
                     if (response.failed()!=null){

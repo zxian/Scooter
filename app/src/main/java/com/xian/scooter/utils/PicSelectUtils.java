@@ -72,6 +72,17 @@ public class PicSelectUtils {
      *  开启相机
      * @param context 上下文
      * @param isCompress 是否压缩
+     */
+    public static void startCamera(Activity context,boolean isCompress){
+        PictureSelector.create(context)
+                .openCamera(PictureMimeType.ofImage())
+                .compress(isCompress)
+                .forResult(PictureConfig.CHOOSE_REQUEST);
+    }
+    /**
+     *  开启相机
+     * @param context 上下文
+     * @param isCompress 是否压缩
      * @param list 传入已经选择的图片
      */
     public static void startCamera(Activity context,boolean isCompress,List<LocalMedia> list){
@@ -89,7 +100,7 @@ public class PicSelectUtils {
      * @param selMode 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
      * @param isCrop 是否裁剪 true or false
      */
-    public static void startPhoto(Activity context, int maxSel, int selMode,boolean isCrop,int requestCode){
+    public static void startPhoto(Activity context, int maxSel, int selMode,boolean isCrop){
         PictureSelector.create(context)
                 .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
 //                .theme(R.style.picture_QQ_style)//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
@@ -126,7 +137,7 @@ public class PicSelectUtils {
 //                .videoQuality()// 视频录制质量 0 or 1 int
 //                .videoSecond()// 显示多少秒以内的视频or音频也可适用 int
 //                .recordVideoSecond()//视频秒数录制 默认60s int
-                .forResult(requestCode);//结果回调onActivityResult code
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
     /**

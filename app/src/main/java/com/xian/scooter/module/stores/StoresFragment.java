@@ -86,7 +86,7 @@ public class StoresFragment extends BaseFragment {
         });
 
         TypedArray array = mActivity.getResources().obtainTypedArray(R.array.item_res_img);
-
+        list.clear();
         for (int i=0,len=8; i<len; i++){
             int resourceId = array.getResourceId(i,0);
             list.add(resourceId);
@@ -156,12 +156,18 @@ public class StoresFragment extends BaseFragment {
                             storeId = storeList.get(0).getId();
                             UserManager.getInstance().saveStoreId(storeId);
                             getStoreByid(storeId);
+                        }else {
+                            Intent intent = new Intent(mActivity, RegisterStoresActivity.class);
+                            intent.putExtra("userId",userId);
+                            startActivity(intent);
+                            mActivity.finish();
                         }
                     }
                 } else {
                     ToastUtils.showToast(response.failed().getMessage());
                 }
             }
+
         });
     }
 
@@ -182,6 +188,7 @@ public class StoresFragment extends BaseFragment {
                         Glide.with(mActivity)
                                 .load(backdrop_url)
                                 .into(ivPicture);
+
 
                         RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
                         options.bitmapTransform(new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -12,87 +12,100 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_picture"
-            android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="150dp" />
-
-        <com.xian.scooter.view.CustomRoundImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignBottom="@+id/iv_picture"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="-40dp"
-            android:background="@color/white"
-            android:src="@mipmap/ic_login_logo"
-            app:type="circle"
-            android:padding="2dp"/>
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_logo"
-            android:layout_marginStart="12dp"
-            android:layout_toEndOf="@+id/iv_logo"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            tools:text="商店" />
-
-        <TextView
-            android:id="@+id/tv_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_logo"
-            android:drawableStart="@mipmap/ic_star"
-            android:drawablePadding="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="12dp"
-            android:textColor="@color/theme"
-            android:textSize="12sp"
-            android:text="0" />
-
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/iv_logo"
-            android:ellipsize="end"
-            android:lines="1"
-            android:textColor="@color/gray_99"
-            android:textSize="14sp"
-            tools:text="商店介绍" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/tv_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            android:background="@color/gray_ee" />
-    </RelativeLayout>
-
-    <com.bit.commonView.CustomGridView
-        android:id="@+id/gv_item"
-        android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
-        android:cacheColorHint="@android:color/transparent"
-        android:fadingEdge="none"
-        android:horizontalSpacing="10dp"
-        android:listSelector="@android:color/transparent"
-        android:numColumns="4"
-        android:paddingBottom="20dp"
-        android:scrollbars="none"
-        android:verticalSpacing="20dp" />
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitXY" />
+
+                <com.xian.scooter.view.CustomRoundImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignBottom="@+id/iv_picture"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="-40dp"
+                    android:background="@color/white"
+                    android:padding="2dp"
+                    android:src="@mipmap/ic_login_logo"
+                    app:type="circle" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_logo"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="商店" />
+
+                <TextView
+                    android:id="@+id/tv_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_logo"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@mipmap/ic_star"
+                    android:drawablePadding="8dp"
+                    android:text="0"
+                    android:textColor="@color/theme"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/iv_logo"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/gray_99"
+                    android:textSize="14sp"
+                    tools:text="商店介绍" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@color/gray_ee" />
+            </RelativeLayout>
+
+            <com.bit.commonView.CustomGridView
+                android:id="@+id/gv_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="none"
+                android:horizontalSpacing="10dp"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="4"
+                android:paddingBottom="20dp"
+                android:scrollbars="none"
+                android:verticalSpacing="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

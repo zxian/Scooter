@@ -80,7 +80,6 @@ public class RegisterStoresActivity extends BaseActivity {
     private DialogFragmentBottom dialogBottom;
     private int selectPosition = 0;
 
-    private List<LocalMedia> selectList = new ArrayList<>();
     private int isUpLoad = 0;//1 上传log，2 身份证人像面， 3 身份证国徽面 4 营业执照
     private String logoPath;
     private String portraitPath;
@@ -89,6 +88,8 @@ public class RegisterStoresActivity extends BaseActivity {
     private int type;
     private String userId;
     private String area;
+    private double latitude;
+    private double longitude;
 
     private static class MyHandler extends Handler {
         private WeakReference<RegisterStoresActivity> mWeakReference;
@@ -185,8 +186,10 @@ public class RegisterStoresActivity extends BaseActivity {
      * @param create_user_id   门店创建人ID
      *                         //     * @param id               门店id
      * @param id_card          负责人身份证号码
+     * @param latitude         纬度
      * @param level            等级
      * @param logo             logo
+     * @param longitude        经度
      * @param manage_name      负责人姓名
      * @param name             名称
      * @param phone            手机
@@ -195,7 +198,7 @@ public class RegisterStoresActivity extends BaseActivity {
      */
     private void storeAdd(String address, String area, String backdrop_url, String business_license,
                           String card_national, String card_portrait, String code,
-                          String create_user_id, String id_card, String level, String logo,
+                          String create_user_id, String id_card,String latitude, String level, String logo, String longitude,
                           String manage_name, String name, String phone, String remark, String type) {
         StoreAddPar par = new StoreAddPar();
         par.setAddress(address);
@@ -207,8 +210,10 @@ public class RegisterStoresActivity extends BaseActivity {
         par.setCode(code);
         par.setCreate_user_id(create_user_id);
         par.setId_card(id_card);
+        par.setLatitude(latitude);
         par.setLevel(level);
         par.setLogo(logo);
+        par.setLongitude(longitude);
         par.setManage_name(manage_name);
         par.setName(name);
         par.setPhone(phone);
@@ -265,7 +270,7 @@ public class RegisterStoresActivity extends BaseActivity {
 
                 storeAdd(address, area, "", picturePath,
                         emblemPath, portraitPath, code,
-                        userId, headNumber, "", logoPath,
+                        userId, headNumber, latitude+"","", logoPath,longitude+"",
                         headName, name, "", introduce, type + "");
                 break;
         }
@@ -312,9 +317,9 @@ public class RegisterStoresActivity extends BaseActivity {
                     tvCancel.setOnClickListener(v -> dialogBottom.dismiss());
                     listView.setOnItemClickListener((parent, view, position, id) -> {
                         if (position == 0) {//拍照
-                            PicSelectUtils.startCamera(mActivity, true, selectList);
+                            PicSelectUtils.startCamera(mActivity, true);
                         } else if (position == 1) {//从相册上传
-                            PicSelectUtils.startPhoto(mActivity, Config.maxSel, PictureConfig.MULTIPLE, true, false, selectList);
+                            PicSelectUtils.startPhoto(mActivity, Config.maxSel, PictureConfig.MULTIPLE, false);
                         }
                         dialogBottom.dismiss();
                     });
@@ -331,7 +336,7 @@ public class RegisterStoresActivity extends BaseActivity {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择
-                    selectList = PictureSelector.obtainMultipleResult(data);
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     List<String> pathList = new ArrayList<>();
                     if (selectList != null && selectList.size() > 0) {
                         //上传图片
@@ -356,7 +361,15 @@ public class RegisterStoresActivity extends BaseActivity {
                         PoiItem poiItem = data.getParcelableExtra("PoiItem");
                         if (poiItem != null) {
                             LatLonPoint latLonPoint = poiItem.getLatLonPoint();
-                            area = latLonPoint.getLatitude()+","+latLonPoint.getLongitude();
+                            latitude = latLonPoint.getLatitude();
+                            longitude = latLonPoint.getLongitude();
+
+                            String provinceStr = poiItem.getProvinceName();
+                            String cityStr = poiItem.getCityName();
+                            String areaStr = poiItem.getAdName();
+                            String address = provinceStr + cityStr + areaStr;
+                            area = address;
+                            tvLocation.setText(area);
                         }
                     }
                     break;

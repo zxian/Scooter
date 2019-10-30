@@ -104,7 +104,6 @@ public class CoursePackageActivity extends BaseActivity {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
-
         getPackagePage(PAGE_INDEX,PAGE_SIZE);
     }
 
