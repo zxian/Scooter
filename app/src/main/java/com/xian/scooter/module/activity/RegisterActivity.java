@@ -93,7 +93,11 @@ public class RegisterActivity extends BaseActivity {
                 if (response.isSucceed()) {
                     ToastUtils.showToast("验证码已发送，请耐心等待！");
                 } else {
-                    ToastUtils.showToast("获取验证码失败，请稍后试试");
+                    if (response.failed()!=null){
+                        ToastUtils.showToast(response.failed().getMessage());
+                    }else {
+                        ToastUtils.showToast("获取验证码失败，请稍后试试");
+                    }
                     TimerTaskUtil.getInstance().stopResetPhoneTimer();
                     countDownTimerUtils.onFinish();
                 }
@@ -123,7 +127,12 @@ public class RegisterActivity extends BaseActivity {
                     ToastUtils.showToast("注册成功！");
                     finish();
                 } else {
-                    ToastUtils.showToast(response.failed().getMessage());
+                    if (response.failed()!=null){
+                        ToastUtils.showToast(response.failed().getMessage());
+                    }else {
+                        ToastUtils.showToast("注册失败");
+                    }
+
                 }
             }
         });

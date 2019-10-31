@@ -32,10 +32,13 @@ public class EventRecordAdapter extends CommonRvAdapter<EventRecordBean> {
 
         ImageView ivLogo = holder.getView(R.id.iv_logo);
         String logo = eventRecordBean.getChild_face_url();
-        Glide.with(mContext).load(logo).load(ivLogo);
+        Glide.with(mContext)
+                .load(logo)
+                .into(ivLogo);
 
         String child_name = eventRecordBean.getChild_name();
         holder.setText(R.id.tv_name,child_name);
+        holder.setText(R.id.tv_name_hint,eventRecordBean.getCompetition_set_name());
 
         ImageView ivGender = holder.getView(R.id.iv_gender);
         int sex = eventRecordBean.getChild_sex();

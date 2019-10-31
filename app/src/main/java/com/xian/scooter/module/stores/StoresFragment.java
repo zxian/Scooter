@@ -189,12 +189,8 @@ public class StoresFragment extends BaseFragment {
                                 .load(backdrop_url)
                                 .into(ivPicture);
 
-
-                        RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
-                        options.bitmapTransform(new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL));
                         Glide.with(mActivity)
                                 .load(logo)
-                                .apply(options)
                                 .into(ivLogo);
                         tvName.setText(storeIfo.getName());
                         tvContent.setText(storeIfo.getRemark());

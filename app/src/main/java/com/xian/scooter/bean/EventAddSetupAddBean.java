@@ -2,7 +2,7 @@ package com.xian.scooter.bean;
 
 import java.util.List;
 
-public class EventAddSetupAddBean<T> {
+public class EventAddSetupAddBean {
     /**
      * type : 4
      * name : 多选框
@@ -13,7 +13,8 @@ public class EventAddSetupAddBean<T> {
     private String type;
     private String name;
     private boolean checked;
-    private T select;
+    private String input;
+    private List<SelectBean> select;
 
     public String getType() {
         return type;
@@ -39,11 +40,19 @@ public class EventAddSetupAddBean<T> {
         this.checked = checked;
     }
 
-    public T getSelect() {
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public List<SelectBean> getSelect() {
         return select;
     }
 
-    public void setSelect(T select) {
+    public void setSelect(List<SelectBean> select) {
         this.select = select;
     }
 

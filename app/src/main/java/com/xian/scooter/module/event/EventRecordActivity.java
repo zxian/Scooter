@@ -2,12 +2,14 @@ package com.xian.scooter.module.event;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -25,6 +27,7 @@ import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
 import com.xian.scooter.net.HttpURL;
+import com.xian.scooter.utils.BasePopupView;
 import com.xian.scooter.utils.TitleBarView;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
 
@@ -176,9 +179,12 @@ public class EventRecordActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_results, R.id.tv_arrange})
+    @OnClick({R.id.iv_screening,R.id.tv_results, R.id.tv_arrange})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_screening:
+
+                break;
             case R.id.tv_results:
                 break;
             case R.id.tv_arrange:
@@ -187,5 +193,27 @@ public class EventRecordActivity extends BaseActivity {
                 startActivity(intent);
                 break;
         }
+    }
+
+    /**
+     * 弹窗筛选框
+     *
+     * @param typeList       item数据
+     * @param selectPosition 当前选择position
+     * @param type           弹窗类型
+     */
+    private void showAllType(List<String> typeList, final int selectPosition, int type, TextView view) {
+        BasePopupView popupWindow = new BasePopupView(mActivity, view, typeList, selectPosition,
+                new Handler(msg -> {
+                    switch (msg.what) {
+                        case 2:
+                            Bundle bundle = msg.getData();
+                            int position = bundle.getInt("selectPosition");
+
+                            break;
+                    }
+                    return false;
+                }));
+        popupWindow.create();
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,9 +19,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -28,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/theme"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:text="少年组" />
 
             <TextView
@@ -37,13 +35,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:textColor="@color/black_33"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:text="2019-06-21" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:layout_marginTop="12dp"
             android:background="@color/gray_ee" />
 
@@ -53,14 +51,15 @@
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.xian.scooter.view.CustomRoundImageView
                 android:id="@+id/iv_logo"
                 android:layout_width="60dp"
-                android:layout_height="60dp" />
+                android:layout_height="60dp"
+                app:type="circle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -72,9 +71,9 @@
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="12dp"
                         android:textColor="@color/black_33"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         tools:text="王大锤" />
 
                     <ImageView
@@ -90,13 +89,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/black_33"
+                        android:textSize="14sp"
                         tools:text="9岁" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_name_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"
+                    tools:text="天河区" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -104,7 +113,7 @@
                         android:id="@+id/tv_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="13sp"
                         tools:text="天河区" />
 
                     <TextView
@@ -112,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:textSize="18sp"
+                        android:textSize="13sp"
                         tools:text="13800038000" />
                 </LinearLayout>
             </LinearLayout>

@@ -116,7 +116,6 @@ public class LoginActivity extends BaseActivity {
                             Intent intent = new Intent(mActivity, RegisterStoresActivity.class);
                             intent.putExtra("userId",userId);
                             startActivity(intent);
-                            finish();
                         }
                     }else {
                         ToastUtils.showToast("登录成功");

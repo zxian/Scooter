@@ -15,6 +15,7 @@ public class CompetitionSavePar implements Parcelable {
     private String competition_id;
     private String limit;
     private String money;
+    private String remark;
     private String small_age;
 
     public CompetitionSavePar(){
@@ -27,6 +28,7 @@ public class CompetitionSavePar implements Parcelable {
         competition_id = in.readString();
         limit = in.readString();
         money = in.readString();
+        remark = in.readString();
         small_age = in.readString();
     }
 
@@ -44,7 +46,7 @@ public class CompetitionSavePar implements Parcelable {
 
     public void setSign(){
         String sign = "apply_competition_name=" + apply_competition_name + "&big_age=" + big_age
-                +"&competition_id=" + competition_id +"&limit=" + limit +"&money=" + money +"&small_age=" + small_age + "&key="+ Config.KEY;
+                +"&competition_id=" + competition_id +"&limit=" + limit +"&money=" + money +"&remark=" + remark +"&small_age=" + small_age + "&key="+ Config.KEY;
         BaseApplication.getInstance().getKalleConfig()
                 .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));
 
@@ -89,6 +91,14 @@ public class CompetitionSavePar implements Parcelable {
         this.money = money;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public String getSmall_age() {
         return small_age;
     }
@@ -109,6 +119,7 @@ public class CompetitionSavePar implements Parcelable {
         parcel.writeString(competition_id);
         parcel.writeString(limit);
         parcel.writeString(money);
+        parcel.writeString(remark);
         parcel.writeString(small_age);
     }
 }

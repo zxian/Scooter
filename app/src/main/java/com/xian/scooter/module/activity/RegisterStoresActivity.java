@@ -25,6 +25,7 @@ import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.beanpar.StoreAddPar;
 import com.xian.scooter.contant.Config;
+import com.xian.scooter.manager.ActivityManager;
 import com.xian.scooter.module.map.LocationActivity;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -225,8 +226,7 @@ public class RegisterStoresActivity extends BaseActivity {
             @Override
             public void onMyResponse(SimpleResponse<String, HttpEntity> response) {
                 if (response.isSucceed()) {
-                    startActivity(new Intent(mActivity, MainActivity.class));
-                    finish();
+                    ActivityManager.finishUpActivity("MainActivity");
                 } else {
                     ToastUtils.showToast(response.failed().getMessage());
                 }

@@ -26,6 +26,11 @@
             android:layout_alignParentEnd="true"
             android:autoLink="all"
             android:padding="12dp"
+            android:lines="1"
+            android:gravity="end"
+            android:layout_toEndOf="@+id/tv_title"
+            android:ellipsize="end"
+            android:layout_marginStart="12dp"
             android:textColor="@color/theme"
             android:textSize="14sp"
             tools:text="单行文本" />

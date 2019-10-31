@@ -16,11 +16,6 @@ import com.xian.scooter.adapter.SelectAdapter;
 
 import java.util.List;
 
-/**
- * author : jiacan.zhou
- * time   : 2019/05/07
- * desc   : 普通PopupView
- */
 
 public class BasePopupView extends PopupWindowBase {
 
@@ -35,7 +30,7 @@ public class BasePopupView extends PopupWindowBase {
 
 
     public BasePopupView(Context mContext, View parentView, List<String> groupList, int selectPosition, Handler handler) {
-        super(mContext, parentView, R.layout.popu_task_select);
+        super(mContext, parentView, R.layout.popu_select);
         this.mContext = mContext;
         this.groupList = groupList;
         this.selectPosition = selectPosition;
