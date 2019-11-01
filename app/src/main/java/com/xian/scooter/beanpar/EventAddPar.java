@@ -9,6 +9,7 @@ import java.util.List;
 public class EventAddPar {
     private String address;
     private String competition_name;
+    private String competition_price;
     private String competition_type;
     private String end_time;
     private String finish_time;
@@ -22,7 +23,7 @@ public class EventAddPar {
     private List<CompetitionSavePar> subSets;
 
     public void setSign(){
-        String sign = "address=" + address + "&competition_name=" + competition_name
+        String sign = "address=" + address + "&competition_name=" + competition_name+ "&competition_price=" + competition_price
                 +"&competition_type=" + competition_type +"&end_time=" + end_time +"&finish_time=" + finish_time
                 +"&is_display=" + is_display +"&official_time=" + official_time +"&posters_url=" + posters_url
                 +"&remark=" + remark  +"&start_time=" + start_time +"&store_id=" + store_id  +"&store_name=" + store_name  + "&key="+ Config.KEY;
@@ -45,6 +46,14 @@ public class EventAddPar {
 
     public void setCompetition_name(String competition_name) {
         this.competition_name = competition_name;
+    }
+
+    public String getCompetition_price() {
+        return competition_price;
+    }
+
+    public void setCompetition_price(String competition_price) {
+        this.competition_price = competition_price;
     }
 
     public String getCompetition_type() {

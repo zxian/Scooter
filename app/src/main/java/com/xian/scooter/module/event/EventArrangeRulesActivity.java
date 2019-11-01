@@ -7,16 +7,26 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bit.commonView.CustomRecyclerView;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.bit.adapter.lvadapter.CommonLvAdapter;
+import com.bit.adapter.lvadapter.ViewHolderLv;
+import com.bumptech.glide.Glide;
+import com.kzz.dialoglibraries.dialog.DialogCreate;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-import com.xian.scooter.bean.EventBean;
+import com.xian.scooter.bean.EventPlanBean;
+import com.xian.scooter.bean.EventRecordBean;
 import com.xian.scooter.bean.PageBean;
-import com.xian.scooter.beanpar.CompetitionSavePar;
+import com.xian.scooter.bean.PlanPageBean;
 import com.xian.scooter.beanpar.EventPlanPagePar;
 import com.xian.scooter.beanpar.EventPlanSavePar;
+import com.xian.scooter.beanpar.EventRecordPar;
 import com.xian.scooter.manager.UserManager;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
@@ -34,9 +44,10 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.addapp.pickers.picker.DateTimePicker;
+
+import static com.xian.scooter.utils.UISizeUtils.dp2px;
 
 public class EventArrangeRulesActivity extends BaseActivity {
     @BindView(R.id.title_bar_view)
@@ -59,8 +70,8 @@ public class EventArrangeRulesActivity extends BaseActivity {
     TextView tvEquipment;
     @BindView(R.id.tv_add)
     TextView tvAdd;
-    @BindView(R.id.recycler_view)
-    CustomRecyclerView recyclerView;
+    @BindView(R.id.swipe_menu_list_view)
+    SwipeMenuListView swipeMenuListview;
     @BindView(R.id.tv_btn)
     TextView tvBtn;
 
@@ -80,10 +91,21 @@ public class EventArrangeRulesActivity extends BaseActivity {
     private List<String> addJoinsList = new ArrayList<>();
     private List<String> cancelJoinsList = new ArrayList<>();
     private String id;
+    private CommonLvAdapter<EventRecordBean> mAdapter;
+    private List<EventRecordBean> eventPersonList = new ArrayList<>();
+    private DialogCreate mDialogCreate;
+    private int type;
+    private EventPlanBean eventPlanBean;
+    private List<PlanPageBean> planPageList;
 
     @Override
     protected void handleIntent(Intent intent) {
         competitionId = intent.getStringExtra("competitionId");
+
+        type = intent.getIntExtra("type", 1);//1 新增 2 修改
+        if (type == 2) {
+            eventPlanBean = (EventPlanBean) intent.getSerializableExtra("eventPlanBean");
+        }
     }
 
     @Override
@@ -95,6 +117,129 @@ public class EventArrangeRulesActivity extends BaseActivity {
     protected void init() {
         titleBarView.setTvTitleText("规则安排");
         titleBarView.setLeftOnClickListener(view1 -> mActivity.finish());
+        initListview();
+        if (type == 2) {
+            if (eventPlanBean != null) {
+                id = eventPlanBean.getId();
+                typeId = eventPlanBean.getCompetition_set_id();
+                typeName = eventPlanBean.getCompetition_set_name();
+                tvType.setText(typeName);
+
+                etName.setText(eventPlanBean.getName());
+
+                typePlaces = eventPlanBean.getWin_number();
+                tvPlaces.setText(typePlaces + "");
+
+                officialTime = eventPlanBean.getOfficial_time();
+                tvTime.setText(officialTime);
+
+                checkTime = eventPlanBean.getCheck_time();
+                tvTime1.setText(checkTime);
+
+                typePromotion = eventPlanBean.getUpgrade();
+                if (typePromotion == 1) {//是否进阶：0、否，1、是
+                    tvPromotion.setText("是");
+
+                    planId = eventPlanBean.getUpgrade_id();
+                    planName = eventPlanBean.getUpgrade_name();
+                    tvNumber.setText(planName);
+
+                } else {
+                    tvPromotion.setText("否");
+                }
+
+                typeEquipment = Integer.parseInt(eventPlanBean.getEquipment());
+                if (typeEquipment == 1) {//物联设备：0、无，1、有
+                    tvEquipment.setText("有");
+                } else {
+                    tvEquipment.setText("无");
+                }
+
+                getCompetitionPlanPage(1, 1000);
+            }
+        }
+    }
+
+
+    private void initListview() {
+        mAdapter = new CommonLvAdapter<EventRecordBean>(this, R.layout.item_event_arrange_rules_person, eventPersonList) {
+            @Override
+            protected void convert(final ViewHolderLv holder, EventRecordBean bean, final int position) {
+                ImageView ivLogo = holder.getView(R.id.iv_logo);
+                String logo = bean.getChild_face_url();
+                Glide.with(mContext)
+                        .load(logo)
+                        .into(ivLogo);
+                holder.setText(R.id.tv_name, bean.getChild_name());
+
+                ImageView ivGender = holder.getView(R.id.iv_gender);
+                int sex = bean.getChild_sex();
+                if (sex == 1) {//性别：1、男，2、女
+                    ivGender.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.ic_male));
+                } else if (sex == 2) {
+                    ivGender.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.ic_male));
+                }
+
+                int age = bean.getChild_age();
+                String s = age + "岁";
+                holder.setText(R.id.tv_age, s);
+
+                String phone = bean.getCust_user_phone();
+                holder.setText(R.id.tv_phone, phone);
+            }
+        };
+
+        swipeMenuListview.setAdapter(mAdapter);
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                switch (menu.getViewType()) {
+                    case 0:
+                        createMenu(menu);
+                        break;
+                }
+            }
+
+            /**
+             * 特别说明：源码坑会导致字体颜色有色差
+             *setBackground方法在源码里面有进行了转换颜色，使用的是mContext.getResources().getColor
+             * 而setTitleColor方法在源码中是没有进行转换颜色的，所以要手动转换颜色。调用mContext.getResources().getColor
+             * @param menu SwipeMenu
+             */
+            private void createMenu(SwipeMenu menu) {
+                SwipeMenuItem itemDelete = new SwipeMenuItem(mActivity);
+                itemDelete.setWidth(dp2px(60));
+                itemDelete.setTitle("删除");
+                itemDelete.setBackground(R.drawable.horn_delete_20dp);
+                itemDelete.setTitleColor(mActivity.getResources().getColor(R.color.white));
+                itemDelete.setTitleSize(14);
+                menu.addMenuItem(itemDelete);
+            }
+        };
+        swipeMenuListview.setMenuCreator(creator);
+        swipeMenuListview.setOnMenuItemClickListener((position, menu, index) -> {
+            DialogCreate.Builder builder = new DialogCreate.Builder(mActivity);
+            mDialogCreate = builder
+                    .setAddViewId(R.layout.dialog_ok_cancel)
+                    .setIsHasCloseView(false)
+                    .setDialogSetDateInterface(inflaterView -> {
+                        TextView tvTitle = inflaterView.findViewById(R.id.tv_dialog_title);
+                        TextView tvMsg = inflaterView.findViewById(R.id.tv_dialog_msg);
+                        TextView tvCancel = inflaterView.findViewById(R.id.tv_cancel);
+                        TextView tvConfirm = inflaterView.findViewById(R.id.tv_confirm);
+                        tvTitle.setVisibility(View.GONE);
+                        tvMsg.setText("确定删除？");
+                        tvConfirm.setOnClickListener(v -> {
+                            mDialogCreate.dismiss();
+                            eventPersonList.remove(position);
+                            mAdapter.notifyDataSetChanged();
+                        });
+                        tvCancel.setOnClickListener(v -> mDialogCreate.dismiss());
+                    })
+                    .build();
+            mDialogCreate.showSingle();
+            return false;
+        });
     }
 
     /**
@@ -152,6 +297,48 @@ public class EventArrangeRulesActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+
+    /**
+     * 赛事场次参与人员列表
+     *
+     * @param size    每页显示数量
+     * @param current 当前页
+     */
+    private void getCompetitionPlanPage(int current, int size) {
+        EventPlanPagePar par = new EventPlanPagePar();
+        par.setCompetition_id(competitionId);
+        par.setPlan_id(id);
+        par.setSign();
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_PLAN_PAGE.replace("{size}",
+                size + "").replace("{current}", current + ""), par, new DefineCallback<PageBean<PlanPageBean>>() {
+            @Override
+            public void onMyResponse(SimpleResponse<PageBean<PlanPageBean>, HttpEntity> response) {
+                if (response.isSucceed()) {
+                    if (response.succeed() != null) {
+
+                        planPageList = response.succeed().getRecords();
+                        if (planPageList != null && planPageList.size() > 0) {
+                            for (int i = 0; i < planPageList.size(); i++) {
+                                EventRecordBean eventRecordBean = new EventRecordBean();
+                                eventRecordBean.setId(planPageList.get(i).getId());
+                                eventRecordBean.setChild_face_url(planPageList.get(i).getFull_face_url());
+                                eventRecordBean.setChild_name(planPageList.get(i).getChild_name());
+                                eventRecordBean.setChild_sex(planPageList.get(i).getChild_sex());
+                                eventRecordBean.setChild_age(planPageList.get(i).getChild_age());
+                                eventRecordBean.setCust_user_phone(planPageList.get(i).getCust_user_phone());
+                                eventPersonList.add(eventRecordBean);
+                            }
+                        }
+                        mAdapter.setmDatas(eventPersonList);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                }
+            }
+        });
+
     }
 
     @OnClick({R.id.tv_type, R.id.tv_places, R.id.tv_time, R.id.tv_time_1, R.id.tv_promotion, R.id.tv_number, R.id.tv_equipment, R.id.tv_add, R.id.tv_btn})
@@ -229,6 +416,47 @@ public class EventArrangeRulesActivity extends BaseActivity {
                     ToastUtils.showToast("请选择物联设备");
                     return;
                 }
+
+                //添加人员
+                if (eventPersonList != null && eventPersonList.size() > 0) {
+                    for (int i = 0; i < eventPersonList.size(); i++) {
+                        addJoinsList.add(eventPersonList.get(i).getId());
+                    }
+                }
+
+
+                //删除人员
+                if (planPageList != null && planPageList.size() > 0) {
+                    for (int i = 0; i < planPageList.size(); i++) {
+                        String id = planPageList.get(i).getId();
+                        boolean isOld=false;
+                        if (addJoinsList != null && addJoinsList.size() > 0) {
+                            for (int j = 0; j < addJoinsList.size(); j++) {
+                                if (id.equals(addJoinsList.get(j))) {//新增和原来的对比
+                                  isOld=true;
+                                }
+                            }
+                            if (!isOld){
+                                cancelJoinsList.add(id);//不相同说明要删除人员
+                            }
+                        }
+                    }
+                }
+                //去掉重复添加项
+                if (addJoinsList != null && addJoinsList.size() > 0) {
+                    for (int i = 0; i < addJoinsList.size(); i++) {
+                        String id = addJoinsList.get(i);
+                        if (planPageList != null && planPageList.size() > 0) {
+                            for (int j = 0; j < planPageList.size(); j++) {
+                                if (id.equals(planPageList.get(j).getId())) {//新增和原来的对比
+                                    addJoinsList.remove(i);//相同不用添加
+                                }
+                            }
+                        }
+                    }
+                }
+
+
                 getCompetitionPlanPage(addJoinsList, cancelJoinsList,
                         checkTime, typeId, typeEquipment + "", id,
                         name, officialTime, typePromotion + "",
@@ -254,6 +482,14 @@ public class EventArrangeRulesActivity extends BaseActivity {
                         planId = data.getStringExtra("planId");
                         planName = data.getStringExtra("planName");
                         tvNumber.setText(planName);
+                    }
+                    break;
+                case PERSON_TYPE_REQUEST_CODE:
+                    if (resultCode == RESULT_OK) {
+                        EventRecordBean eventRecordBean = (EventRecordBean) data.getSerializableExtra("eventRecordBean");
+                        eventPersonList.add(eventRecordBean);
+                        mAdapter.setmDatas(eventPersonList);
+                        mAdapter.notifyDataSetChanged();
                     }
                     break;
             }

@@ -112,6 +112,7 @@
 
     <string name="event_logo">赛事海报图</string>
     <string name="event_name">赛事名称</string>
+    <string name="event_money">赛事指导价</string>
     <string name="event_input">请填写</string>
     <string name="event_time">比赛时间</string>
     <string name="event_finish_time">比赛结束时间</string>

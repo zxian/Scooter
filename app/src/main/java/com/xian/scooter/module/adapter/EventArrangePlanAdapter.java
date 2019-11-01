@@ -29,15 +29,15 @@ public class EventArrangePlanAdapter extends CommonRvAdapter<EventPlanBean> {
 
     @Override
     public void convert(ViewHolderRv holder, EventPlanBean eventBean, int position) {
-//        holder.setText(R.id.tv_name, eventBean.getApply_competition_name());
-//        holder.setText(R.id.tv_time, eventBean.getLimit());
-//
-//        ImageView ivSelect = holder.getView(R.id.iv_select);
-//        if (position == selectPosition) {//判断是否是选择项
-//            ivSelect.setVisibility(View.VISIBLE);
-//        }else {
-//            ivSelect.setVisibility(View.GONE);
-//        }
+        holder.setText(R.id.tv_name, eventBean.getName());
+        holder.setText(R.id.tv_time, eventBean.getOfficial_time());
+
+        ImageView ivSelect = holder.getView(R.id.iv_select);
+        if (position == selectPosition) {//判断是否是选择项
+            ivSelect.setVisibility(View.VISIBLE);
+        }else {
+            ivSelect.setVisibility(View.GONE);
+        }
     }
 
     public void updataItem(int selectPosition) {

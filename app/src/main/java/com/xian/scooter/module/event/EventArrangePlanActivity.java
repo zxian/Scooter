@@ -84,8 +84,8 @@ public class EventArrangePlanActivity extends BaseActivity {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                typeId = adapter.getDatas().get(position).getId();
-//                name = adapter.getDatas().get(position).getApply_competition_name();
+                planId = adapter.getDatas().get(position).getId();
+                planName = adapter.getDatas().get(position).getName();
                 adapter.updataItem(position);
             }
         });

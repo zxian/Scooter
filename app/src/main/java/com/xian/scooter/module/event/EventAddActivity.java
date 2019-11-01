@@ -59,6 +59,8 @@ public class EventAddActivity extends BaseActivity {
     ImageView ivLogo;
     @BindView(R.id.et_name)
     EditText etName;
+    @BindView(R.id.et_money)
+    EditText etMoney;
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.tv_finish_time)
@@ -153,6 +155,7 @@ public class EventAddActivity extends BaseActivity {
      * 新增OR编辑赛事类型设置信息
      * @param address 举办地址
      * @param name 赛事名称
+     * @param moeny 赛事报名最低价格
      * @param type 赛事类型：1、门店赛事 ，2、平台赛事
      * @param endTime 结束报名时间
      * @param finishTime 比赛结束时间
@@ -163,12 +166,13 @@ public class EventAddActivity extends BaseActivity {
      * @param startTime 开始报名时间
      * @param set 赛事设置,编辑时不传
      */
-    private void getCompetitionSave(String address, String name, String type, String endTime,
+    private void getCompetitionSave(String address, String name, String moeny, String type, String endTime,
                                     String finishTime, String isDisplay, String officialTime,
                                     String postersUrl, String remark, String startTime, List<CompetitionSavePar> set) {
         EventAddPar par = new EventAddPar();
         par.setAddress(address);
         par.setCompetition_name(name);
+        par.setCompetition_price(moeny);
         par.setCompetition_type(type);
         par.setEnd_time(endTime);
         par.setFinish_time(finishTime);
@@ -230,17 +234,22 @@ public class EventAddActivity extends BaseActivity {
                 break;
             case R.id.tv_btn:
                 String name = etName.getText().toString().trim();
+                String moeny = etMoney.getText().toString().trim();
                 String address = etAddress.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name)) {
                     ToastUtils.showToast("赛事名称不能为空！");
                     return;
                 }
+                if (TextUtils.isEmpty(moeny)) {
+                    ToastUtils.showToast("赛事报名价格不能为空！");
+                    return;
+                }
                 if (TextUtils.isEmpty(address)) {
                     ToastUtils.showToast("赛事区域不能为空！");
                     return;
                 }
-                getCompetitionSave( address, name,"1", endTime, finishTime, isDisplay, time,
+                getCompetitionSave( address, name,moeny,"1", endTime, finishTime, isDisplay, time,
                         logoPath,content, startTime, competitionSaveList);
                 break;
         }

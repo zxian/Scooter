@@ -1,6 +1,8 @@
 package com.xian.scooter.bean;
 
-public class EventRecordBean {
+import java.io.Serializable;
+
+public class EventRecordBean implements Serializable {
 
     /**
      * id : 514e2683-058f-4bb5-bb76-5819c3459d0f

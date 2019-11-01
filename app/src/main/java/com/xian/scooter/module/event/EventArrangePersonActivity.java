@@ -13,13 +13,11 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
-import com.xian.scooter.bean.EventBean;
-import com.xian.scooter.bean.EventPlanBean;
+import com.xian.scooter.bean.EventRecordBean;
 import com.xian.scooter.bean.PageBean;
-import com.xian.scooter.beanpar.EventPar;
-import com.xian.scooter.beanpar.EventPlanPagePar;
+import com.xian.scooter.beanpar.EventRecordPar;
 import com.xian.scooter.manager.UserManager;
-import com.xian.scooter.module.adapter.EventArrangePlanAdapter;
+import com.xian.scooter.module.adapter.EventArrangePersonAdapter;
 import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
@@ -31,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+
 
 public class EventArrangePersonActivity extends BaseActivity {
 
@@ -44,13 +42,10 @@ public class EventArrangePersonActivity extends BaseActivity {
     private static int PAGE_INDEX = 1;//当前第几页
     private static final int PAGE_SIZE = 10;//每一页展示多少条数据
     private static int mCurrentCounter = 0;//已经获取到多少条数据了
-    private EventArrangePlanAdapter adapter;
-    private List<EventPlanBean> list = new ArrayList<>();
+    private EventArrangePersonAdapter adapter;
+    private List<EventRecordBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private String competitionId;
-    private String planName;
-    private String planId;
-
     @Override
     protected void handleIntent(Intent intent) {
         competitionId = intent.getStringExtra("competitionId");
@@ -81,7 +76,7 @@ public class EventArrangePersonActivity extends BaseActivity {
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     PAGE_INDEX++;
                     //网络请求获取列表数据
-                    getCompetitionPlanPage(PAGE_INDEX, PAGE_SIZE);
+                    getCompetitionJoin(PAGE_INDEX, PAGE_SIZE);
                 } else {
                     recyclerView.refreshComplete(mCurrentCounter);
                 }
@@ -89,7 +84,7 @@ public class EventArrangePersonActivity extends BaseActivity {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        adapter = new EventArrangePlanAdapter(mActivity, R.layout.item_event_arrange_plan, list);
+        adapter = new EventArrangePersonAdapter(mActivity, R.layout.item_event_arrange_person, list);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(mLRecyclerViewAdapter);
         recyclerView.setLoadMoreEnabled(false);
@@ -97,9 +92,13 @@ public class EventArrangePersonActivity extends BaseActivity {
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                typeId = adapter.getDatas().get(position).getId();
-//                name = adapter.getDatas().get(position).getApply_competition_name();
-                adapter.updataItem(position);
+                String personId = adapter.getDatas().get(position).getId();
+                String personName = adapter.getDatas().get(position).getChild_name();
+                EventRecordBean eventRecordBean = adapter.getDatas().get(position);
+                Intent intent = new Intent();
+                intent.putExtra("eventRecordBean",eventRecordBean);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }
@@ -111,29 +110,29 @@ public class EventArrangePersonActivity extends BaseActivity {
         adapter.cleanData();
         mCurrentCounter = 0;
         PAGE_INDEX = 1;
-        getCompetitionPlanPage(PAGE_INDEX, PAGE_SIZE);
+        getCompetitionJoin(PAGE_INDEX, PAGE_SIZE);
 
     }
-
     /**
-     * 赛事场次参与人员列表
+     * 获取用户报名记录分页数据
      *
-     * @param pageNum  页码
-     * @param pageSize 查询数量
+     * @param size    每页显示数量
+     * @param current 当前页
      */
-    private void getCompetitionPlanPage(int pageNum, int pageSize) {
-        EventPlanPagePar par = new EventPlanPagePar();
-        par.setCompetition_id(competitionId);
+    private void getCompetitionJoin(int current, int size) {
+        EventRecordPar par = new EventRecordPar();
+        par.setCompetitionId(competitionId);
+        par.setStoreId(UserManager.getInstance().getStoreId());
         par.setSign();
-        ApiRequest.getInstance().post(HttpURL.COMPETITION_PLAN_PAGE.replace("{size}", pageSize + "")
-                .replace("{current}", pageNum + ""), par, new DefineCallback<PageBean<EventBean>>() {
+        ApiRequest.getInstance().post(HttpURL.COMPETITION_JOIN.replace("{size}",
+                size + "").replace("{current}", current + ""), par, new DefineCallback<PageBean<EventRecordBean>>() {
             @Override
-            public void onMyResponse(SimpleResponse<PageBean<EventBean>, HttpEntity> response) {
+            public void onMyResponse(SimpleResponse<PageBean<EventRecordBean>, HttpEntity> response) {
                 if (response.isSucceed()) {
                     if (response.succeed() != null) {
                         TOTAL_COUNTER = response.succeed().getTotal();
-//                        List<EventBean> list = response.succeed().getRecords();
-//                        addItems(list);
+                        List<EventRecordBean> list = response.succeed().getRecords();
+                        addItems(list);
                     }
 
                 }
@@ -144,27 +143,14 @@ public class EventArrangePersonActivity extends BaseActivity {
                 recyclerView.refreshComplete(mCurrentCounter);
             }
         });
+
     }
 
 
-    /**
-     * 添加数据到列表
-     *
-     * @param list 数据列表
-     */
-    private void addItems(List<EventPlanBean> list) {
+    private void addItems(List<EventRecordBean> list) {
         if (list.size() > 0 && adapter != null) {
             mCurrentCounter += list.size();
             adapter.updataItem(list);
         }
-    }
-
-    @OnClick(R.id.tv_complete)
-    public void onViewClicked() {
-        Intent intent = new Intent();
-        intent.putExtra("planId",planId);
-        intent.putExtra("planName",planName);
-        setResult(RESULT_OK,intent);
-        finish();
     }
 }

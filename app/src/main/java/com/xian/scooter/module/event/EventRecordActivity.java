@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.xian.scooter.R;
 import com.xian.scooter.base.BaseActivity;
 import com.xian.scooter.bean.EventRecordBean;
+import com.xian.scooter.bean.EventTypeBean;
 import com.xian.scooter.bean.PageBean;
 import com.xian.scooter.beanpar.EventRecordPar;
 import com.xian.scooter.manager.UserManager;
@@ -27,6 +29,7 @@ import com.xian.scooter.net.ApiRequest;
 import com.xian.scooter.net.DefineCallback;
 import com.xian.scooter.net.HttpEntity;
 import com.xian.scooter.net.HttpURL;
+import com.xian.scooter.utils.BaseMultiPopupView;
 import com.xian.scooter.utils.BasePopupView;
 import com.xian.scooter.utils.TitleBarView;
 import com.yanzhenjie.kalle.simple.SimpleResponse;
@@ -59,6 +62,8 @@ public class EventRecordActivity extends BaseActivity {
     private List<EventRecordBean> list = new ArrayList<>();
     private LRecyclerViewAdapter mLRecyclerViewAdapter;
     private String competitionId;
+    private List<EventTypeBean> eventTypeList=new ArrayList<>();
+    private String searchPhone;
 
     @Override
     protected void handleIntent(Intent intent) {
@@ -86,12 +91,13 @@ public class EventRecordActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String search = etSearch.getText().toString().trim();
-
+                searchPhone = etSearch.getText().toString().trim();
+                onMyRefresh();
             }
         });
         initRecyclerView();
         onMyRefresh();
+        getCompetitionList(competitionId);
     }
 
     private void initRecyclerView() {
@@ -139,6 +145,33 @@ public class EventRecordActivity extends BaseActivity {
     }
 
     /**
+     * 赛事类型设置列表
+     *
+     * @param competitionId  赛事ID
+     */
+    private void getCompetitionList(String competitionId) {
+        if (!TextUtils.isEmpty(competitionId)) {
+            ApiRequest.getInstance().post(HttpURL.COMPETITION_SET_LIST.replace("{competitionId}", competitionId), new DefineCallback<List<EventTypeBean>>() {
+                @Override
+                public void onMyResponse(SimpleResponse<List<EventTypeBean>, HttpEntity> response) {
+                    if (response.isSucceed()) {
+                        if (response.succeed() != null) {
+                            eventTypeList = response.succeed();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onEnd() {
+                    super.onEnd();
+                    recyclerView.refreshComplete(mCurrentCounter);
+                }
+            });
+        }
+    }
+
+    /**
      * 获取用户报名记录分页数据
      *
      * @param size    每页显示数量
@@ -147,6 +180,9 @@ public class EventRecordActivity extends BaseActivity {
     private void getCompetitionJoin(int current, int size) {
         EventRecordPar par = new EventRecordPar();
         par.setCompetitionId(competitionId);
+        if (!TextUtils.isEmpty(searchPhone)) {
+            par.setPhone(searchPhone);
+        }
         par.setStoreId(UserManager.getInstance().getStoreId());
         par.setSign();
         ApiRequest.getInstance().post(HttpURL.COMPETITION_JOIN.replace("{size}",
@@ -183,12 +219,15 @@ public class EventRecordActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_screening:
-
+                showScreening();
                 break;
             case R.id.tv_results:
+                Intent intent = new Intent(mActivity, EventResultsActivity.class);
+                intent.putExtra("competitionId",competitionId);
+                startActivity(intent);
                 break;
             case R.id.tv_arrange:
-                Intent intent = new Intent(mActivity, EventArrangeActivity.class);
+                intent = new Intent(mActivity, EventArrangeActivity.class);
                 intent.putExtra("competitionId",competitionId);
                 startActivity(intent);
                 break;
@@ -197,18 +236,18 @@ public class EventRecordActivity extends BaseActivity {
 
     /**
      * 弹窗筛选框
-     *
-     * @param typeList       item数据
-     * @param selectPosition 当前选择position
-     * @param type           弹窗类型
      */
-    private void showAllType(List<String> typeList, final int selectPosition, int type, TextView view) {
-        BasePopupView popupWindow = new BasePopupView(mActivity, view, typeList, selectPosition,
+    private void showScreening() {
+        BaseMultiPopupView popupWindow = new BaseMultiPopupView(mActivity, ivScreening,eventTypeList,
                 new Handler(msg -> {
                     switch (msg.what) {
                         case 2:
                             Bundle bundle = msg.getData();
-                            int position = bundle.getInt("selectPosition");
+                            ArrayList<String> teamList = bundle.getStringArrayList("list");
+                            if (teamList !=null && teamList.size()>0){
+
+//                                onMyRefresh();
+                            }
 
                             break;
                     }

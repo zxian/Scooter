@@ -53,8 +53,9 @@ public class EventArrangeEAdapter extends BaseExpandableListAdapter {
         if (arg3 == null) {
             childrenView = new HolderView();
             // 获取子视图的布局文件
-//            arg3 = mInflater.inflate(R.layout.item_select_enterprise_detail_children, arg4, false);
-//            childrenView.rlLayout = (RelativeLayout) arg3.findViewById(R.id.rl_layout);
+            arg3 = mInflater.inflate(R.layout.item_event_arrange_children, arg4, false);
+            childrenView.tvName = (TextView) arg3.findViewById(R.id.tv_name);
+            childrenView.tvDate = (TextView) arg3.findViewById(R.id.tv_date);
             // 这个函数是用来将holderview设置标签,相当于缓存在view当中
             arg3.setTag(childrenView);
         } else {
@@ -65,7 +66,8 @@ public class EventArrangeEAdapter extends BaseExpandableListAdapter {
          * 设置相应控件的内容
          */
         // 设置标题上的文本信息
-//        childrenView.titleView.setText(data_list.get(arg0).getList().get(arg1).getTitle());
+        childrenView.tvName.setText(data_list.get(arg0).getList().get(arg1).getName());
+        childrenView.tvDate.setText(data_list.get(arg0).getList().get(arg1).getOfficial_time());
         return arg3;
     }
 
@@ -73,9 +75,8 @@ public class EventArrangeEAdapter extends BaseExpandableListAdapter {
 
     // 保存二级列表的视图类
     private class HolderView {
-        RelativeLayout rlLayout;
-        TextView titleView;
-        ImageView ivSelect;
+        TextView tvName;
+        TextView tvDate;
     }
 
     // 获取二级列表的数量
@@ -108,24 +109,18 @@ public class EventArrangeEAdapter extends BaseExpandableListAdapter {
         HodlerViewFather hodlerViewFather;
         if (arg2 == null) {
             hodlerViewFather = new HodlerViewFather();
-//            arg2 = mInflater.inflate(R.layout.item_select_enterprise_detail_father, arg3, false);
-//            hodlerViewFather.titlev = (TextView) arg2.findViewById(R.id.tv_title);
+            arg2 = mInflater.inflate(R.layout.item_event_arrange_father, arg3, false);
+            hodlerViewFather.titlev = (TextView) arg2.findViewById(R.id.tv_title);
             arg2.setTag(hodlerViewFather);
         } else {
             hodlerViewFather = (HodlerViewFather) arg2.getTag();
         }
-//        // 一级列表右侧判断箭头显示方向
-//        if (arg1) {
-//            hodlerViewFather.group_state.setImageResource(R.drawable.group_down);
-//        } else {
-//            hodlerViewFather.group_state.setImageResource(R.drawable.group_up);
-//        }
 
         /**
          * 设置相应控件的内容
          */
         // 设置标题上的文本信息
-//        hodlerViewFather.titlev.setText(data_list.get(arg0).getTitle());
+        hodlerViewFather.titlev.setText(data_list.get(arg0).getApply_competition_name());
 
         // 返回一个布局对象
         return arg2;

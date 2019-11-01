@@ -17,6 +17,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
+        android:layout_below="@+id/title_bar_view"
         android:background="@color/gray_ee" />
 
     <ScrollView
@@ -351,10 +352,11 @@
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <com.bit.commonView.CustomRecyclerView
-                android:id="@+id/recycler_view"
+            <com.xian.scooter.view.CustomSwipeMenuListView
+                android:id="@+id/swipe_menu_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:divider="@null" />
         </LinearLayout>
     </ScrollView>
 

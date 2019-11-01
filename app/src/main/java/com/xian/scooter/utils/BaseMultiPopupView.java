@@ -78,7 +78,7 @@ public class BaseMultiPopupView extends PopupWindowBase {
                 R.layout.dialog_multiselect_event_type_item, groupList, selectList) {
             @Override
             protected void converts(ViewHolderRv viewHolder, EventTypeBean item) {
-                viewHolder.setText(R.id.tv_dialog_select_item, item.getApply_competition_name());
+                viewHolder.setText(R.id.tv_content, item.getApply_competition_name());
             }
         };
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
@@ -129,9 +129,9 @@ public class BaseMultiPopupView extends PopupWindowBase {
         }
         Message msg = new Message();
         Bundle bundle = new Bundle();
-        bundle.putStringArrayList("teamList", list);
+        bundle.putStringArrayList("list", list);
         if (list.size() == 1) {
-            bundle.putString("teamName", groupList.get(selectList.get(0)).getApply_competition_name());
+            bundle.putString("name", groupList.get(selectList.get(0)).getApply_competition_name());
         }
         msg.what = 2;
         msg.setData(bundle);

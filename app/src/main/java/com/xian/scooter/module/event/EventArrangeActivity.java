@@ -2,7 +2,9 @@ package com.xian.scooter.module.event;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.xian.scooter.R;
@@ -51,6 +53,27 @@ public class EventArrangeActivity extends BaseActivity {
         titleBarView.setLeftOnClickListener(view1 -> finish());
         eAdapter = new EventArrangeEAdapter(mActivity, list);
         eListView.setAdapter(eAdapter);
+        // 设置二级item点击的监听器，同时在Adapter中设置isChildSelectable返回值true，同时二级列表布局中控件不能设置点击效果
+        eListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView arg0, View arg1, int arg2, int arg3, long arg4) {
+                EventPlanBean eventPlanBean = list.get(arg2).getList().get(arg3);
+
+                Intent intent = new Intent(mActivity, EventArrangeRulesActivity.class);
+                intent.putExtra("competitionId",competitionId);
+                intent.putExtra("type",2);//1 新增 2 修改
+                intent.putExtra("eventPlanBean",eventPlanBean);
+                startActivity(intent);
+                return false;
+            }
+        });
+
+        onMyRefresh();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
         onMyRefresh();
     }
 
@@ -58,6 +81,7 @@ public class EventArrangeActivity extends BaseActivity {
      * 下拉刷新
      */
     private void onMyRefresh() {
+        list.clear();
         getCompetitionSetList(competitionId);
     }
 
@@ -75,8 +99,10 @@ public class EventArrangeActivity extends BaseActivity {
                     if (response.isSucceed()) {
                         if (response.succeed() != null && response.succeed().size() > 0) {
                             List<EventTypeBean> eventTypeList = response.succeed();
-                            eventTypeList.get(0).getId();
-                            getCompetitionPlanList(eventTypeList.get(0).getId());
+                            for (int i=0;i<eventTypeList.size();i++) {
+                                EventTypeBean eventTypeBean = eventTypeList.get(i);
+                                getCompetitionPlanList(eventTypeBean);
+                            }
                         }
 
                     }
@@ -88,17 +114,29 @@ public class EventArrangeActivity extends BaseActivity {
     /**
      * 赛事场次列表
      *
-     * @param setId 赛事类型ID
+     * @param eventTypeBean 赛事类型
      */
-    private void getCompetitionPlanList(String setId) {
-        if (!TextUtils.isEmpty(competitionId)) {
+    private void getCompetitionPlanList(EventTypeBean eventTypeBean) {
+        String setId = eventTypeBean.getId();
+        if (!TextUtils.isEmpty(setId)) {
             ApiRequest.getInstance().post(HttpURL.COMPETITION_PLAN_LIST.replace("{setId}",
-                    competitionId), new DefineCallback<List<EventPlanBean>>() {
+                    setId), new DefineCallback<List<EventPlanBean>>() {
                 @Override
                 public void onMyResponse(SimpleResponse<List<EventPlanBean>, HttpEntity> response) {
                     if (response.isSucceed()) {
                         if (response.succeed() != null && response.succeed().size() > 0) {
-                            List<EventPlanBean> eventTypeList = response.succeed();
+                            List<EventPlanBean> eventPlanList = response.succeed();
+                            EventArrangeBean eventArrangeBean=new EventArrangeBean();
+                            eventArrangeBean.setId(eventTypeBean.getId());
+                            eventArrangeBean.setApply_competition_name(eventTypeBean.getApply_competition_name());
+                            eventArrangeBean.setCompetition_id(eventTypeBean.getCompetition_id());
+                            eventArrangeBean.setList(eventPlanList);
+                            list.add(eventArrangeBean);
+                            eAdapter.updataData(list);
+                            //遍历所有group,将所有项设置成默认展开
+                            for (int i = 0; i < list.size(); i++) {
+                                eListView.expandGroup(i);
+                            }
 
                         }
 
@@ -112,6 +150,7 @@ public class EventArrangeActivity extends BaseActivity {
     public void onViewClicked() {
         Intent intent = new Intent(mActivity, EventArrangeRulesActivity.class);
         intent.putExtra("competitionId",competitionId);
+        intent.putExtra("type",2);//1 新增 2 修改
         startActivity(intent);
     }
 }

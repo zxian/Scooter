@@ -68,23 +68,23 @@ android {
             }
         }
     }
-    //渠道配置
+
     productFlavors {
-        // 开发环境
+
         xianDevelop {
-            manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",//极光包名
-                                    JPUSH_APPKEY : "f627660c5c4413338c49f79d", //JPush上注册的包名对应的AppKey.
-                                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+            manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",
+                                    JPUSH_APPKEY : "f627660c5c4413338c49f79d",
+                                    JPUSH_CHANNEL: "developer-default",
             ]
             buildConfigField "String", "BASEAPI_SERVER_URL", DEVELOP_BIT_BASEAPI_SERVER_URL
             buildConfigField "String", "MSG_BASEAPI_URL", DEVELOP_MSG_BASEAPI_URL
             buildConfigField "boolean", "IS_RELEASE_SERVER", RELEASE_SERVER_FALSE
         }
-        // 测试环境
+
         xianTest {
-            manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",//极光包名
-                                    JPUSH_APPKEY : "f627660c5c4413338c49f79d", //JPush上注册的包名对应的AppKey.
-                                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+            manifestPlaceholders = [JPUSH_PKGNAME: "com.xian.scooter",
+                                    JPUSH_APPKEY : "f627660c5c4413338c49f79d",
+                                    JPUSH_CHANNEL: "developer-default",
             ]
             buildConfigField "String", "BASEAPI_SERVER_URL", TEST_BIT_BASEAPI_SERVER_URL
             buildConfigField "String", "MSG_BASEAPI_URL", TEST_MSG_BASEAPI_URL
@@ -92,7 +92,7 @@ android {
         }
     }
 
-    //打包命名
+
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def newName
@@ -121,7 +121,7 @@ android {
     }
 }
 
-//获得时间
+
 static def getDate() {
     def date = new Date()
     def formattedDate = date.format('yyyyMMdd')

@@ -6,10 +6,11 @@ import com.xian.scooter.utils.SignUtils;
 
 public class EventRecordPar {
     private String competitionId;
+    private String phone;
     private String storeId;
 
     public void setSign(){
-        String sign = "competitionId=" + competitionId + "&storeId=" + storeId + "&key="+ Config.KEY;
+        String sign = "competitionId=" + competitionId + "&phone=" + phone+ "&storeId=" + storeId + "&key="+ Config.KEY;
         BaseApplication.getInstance().getKalleConfig()
                 .setHeader("sign", SignUtils.getInstance().getMd5Value(sign));
 
@@ -21,6 +22,14 @@ public class EventRecordPar {
 
     public void setCompetitionId(String competitionId) {
         this.competitionId = competitionId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getStoreId() {

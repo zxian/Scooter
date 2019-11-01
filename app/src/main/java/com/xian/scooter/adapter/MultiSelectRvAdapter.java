@@ -33,11 +33,15 @@ public abstract class MultiSelectRvAdapter<T> extends MultiItemTypeAdapter<T> {
             @Override
             public void convert(ViewHolderRv holder, T t, int position) {
                 converts(holder, t);
-                holder.setTextColorRes(R.id.tv_content,R.color.gray_66);
+                holder.setTextColorRes(R.id.tv_content,R.color.black_33);
+                holder.setBackgroundRes(R.id.tv_content,R.drawable.horn_gray_f2_20dp);
                 for (Integer selectPosition : selectList) {
                     if (position == selectPosition) {//判断是否是选择项
                         holder.setTextColorRes(R.id.tv_content,R.color.theme);
-
+                        holder.setBackgroundRes(R.id.tv_content,R.drawable.horn_blue_ec_line_theme_20dp);
+                    }else {
+                        holder.setTextColorRes(R.id.tv_content,R.color.black_33);
+                        holder.setBackgroundRes(R.id.tv_content,R.drawable.horn_gray_f2_20dp);
                     }
                 }
             }
